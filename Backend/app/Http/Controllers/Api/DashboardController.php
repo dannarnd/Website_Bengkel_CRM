@@ -8,10 +8,12 @@ use App\Models\Pelanggan;
 class DashboardController extends Controller {
     public function index() {
         return response()->json([
-            'total_service' => Service::count(),
-            'total_pelanggan' => Pelanggan::count(),
-            'total_pendapatan' => Service::where('status', 'Selesai')->sum('total_biaya'),
-            'sparepart_kritis' => Sparepart::whereRaw('stok <= batas_minimum')->get()
+            'data' => [
+                'total_servis' => Service::count(),
+                'total_pelanggan' => Pelanggan::count(),
+                'total_sparepart' => Sparepart::count(),
+                'critical_stok' => Sparepart::whereRaw('stok <= batas_minimum')->select('nama_barang', 'stok as stok_sekarang', 'batas_minimum')->get()
+            ]
         ]);
     }
 }

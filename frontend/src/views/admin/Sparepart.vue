@@ -51,21 +51,21 @@
             <tr v-else-if="filteredItems.length === 0">
               <td colspan="6" class="px-6 py-8 text-center text-slate-500">Barang tidak ditemukan.</td>
             </tr>
-            <tr v-for="item in filteredItems" :key="item.kode_barang_pelanggan" class="hover:bg-slate-50">
+            <tr v-for="item in filteredItems" :key="item.kode_barang" class="hover:bg-slate-50">
               <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-teal-600">{{ item.kode_barang }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-800">{{ item.nama_barang }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">Rp{{
                 parseInt(item.harga).toLocaleString('id-ID') }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm">
                 <span
-                  :class="['px-2 py-1 rounded-full text-xs font-bold', item.stok_sekarang <= item.batas_minimum ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700']">
-                  {{ item.stok_sekarang }}
+                  :class="['px-2 py-1 rounded-full text-xs font-bold', item.stok <= item.batas_minimum ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700']">
+                  {{ item.stok }}
                 </span>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{{ item.batas_minimum }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <button @click="openEditModal(item)" class="text-teal-600 hover:text-teal-900 mr-3">Edit</button>
-                <button @click="deleteItem(item.kode_barang_pelanggan)" class="text-red-600 hover:text-red-900">Hapus</button>
+                <button @click="deleteItem(item.kode_barang)" class="text-red-600 hover:text-red-900">Hapus</button>
               </td>
             </tr>
           </tbody>
@@ -86,7 +86,7 @@
             </svg>
           </button>
         </div>
-        <form @submit.prevent="saveItem" class="p-6 space-y-4">
+        <form @submit.prevent="saveItem" class="p-6 space-y-4 max-h-[75vh] overflow-y-auto">
           <!-- Area Kode Barang -->
           <div v-if="!isEdit" class="p-4 bg-teal-50 rounded-xl border border-teal-100 space-y-3 relative">
             <div class="flex justify-between items-center">
@@ -188,6 +188,11 @@
               class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none">
           </div>
           <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-1">Stok Awal/Sekarang</label>
+              <input v-model="form.stok" type="number" required
+                class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none">
+            </div>
             <div>
               <label class="block text-sm font-semibold text-slate-700 mb-1">Batas Minimum Stok</label>
               <input v-model="form.batas_minimum" type="number" required
@@ -334,7 +339,7 @@ const form = reactive({
   kode_barang: '',
   nama_barang: '',
   harga: 0,
-  stok_sekarang: 0,
+  stok: 0,
   batas_minimum: 0
 });
 
@@ -433,7 +438,7 @@ const exportPDF = () => {
       item.kode_barang,
       item.nama_barang,
       `Rp${parseInt(item.harga).toLocaleString('id-ID')}`,
-      item.stok_sekarang.toString(),
+      item.stok.toString(),
       item.batas_minimum.toString()
     ]);
   });
@@ -465,11 +470,11 @@ const exportPDF = () => {
 
 const openEditModal = (item) => {
   isEdit.value = true;
-  editId.value = item.kode_barang_pelanggan;
+  editId.value = item.kode_barang;
   form.kode_barang = item.kode_barang;
   form.nama_barang = item.nama_barang;
   form.harga = item.harga;
-  form.stok_sekarang = item.stok_sekarang;
+  form.stok = item.stok;
   form.batas_minimum = item.batas_minimum;
   isModalOpen.value = true;
 };
