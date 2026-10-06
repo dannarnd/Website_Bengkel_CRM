@@ -433,12 +433,12 @@ const searchKeluar = ref('');
 const onSelectMasuk = (index) => {
   const item = formMasuk.items[index];
   const selected = spareparts.value.find(sp => `[${sp.kode_barang}] ${sp.nama_barang}` === item.searchMasuk);
-  item.kode_barang = selected ? selected.id : '';
+  item.kode_barang = selected ? selected.kode_barang : '';
 };
 
 const onSelectKeluar = () => {
   const selected = spareparts.value.find(sp => `[${sp.kode_barang}] ${sp.nama_barang}` === searchKeluar.value);
-  formKeluar.kode_barang = selected ? selected.id : '';
+  formKeluar.kode_barang = selected ? selected.kode_barang : '';
 };
 
 const filteredHistories = computed(() => {
