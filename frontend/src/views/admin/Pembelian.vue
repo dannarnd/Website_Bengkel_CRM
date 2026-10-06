@@ -125,15 +125,13 @@
           </button>
         </div>
         <div>
-          <label class="block text-sm font-semibold text-slate-700 mb-2">Keterangan / Sumber</label>
-          <textarea v-model="formMasuk.keterangan" rows="3" required
-            placeholder="Contoh: Pembelian dari Supplier A nota #123"
-            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none"></textarea>
-        </div>
-        <div>
-          <label class="block text-sm font-semibold text-slate-700 mb-2">Bukti Nota / Barang (Opsional)</label>
-          <input type="file" accept="image/*,.heic,.heif" @change="handleFileUpload"
-            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-teal-100 file:text-teal-700 hover:file:bg-teal-200 transition-colors">
+          <label class="block text-sm font-semibold text-slate-700 mb-2">Distributor / Supplier</label>
+          <select v-model="formMasuk.id_distributor" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none text-sm">
+            <option value="" disabled>Pilih Distributor...</option>
+            <option v-for="d in distributors" :key="d.id_distributor" :value="d.id_distributor">
+              {{ d.nama_distributor }} ({{ d.no_hp }})
+            </option>
+          </select>
         </div>
         <div class="pt-2">
           <button type="submit" :disabled="isSubmitting"
@@ -180,10 +178,10 @@
             class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none">
         </div>
         <div>
-          <label class="block text-sm font-semibold text-slate-700 mb-2">Keterangan / Alasan</label>
-          <textarea v-model="formKeluar.keterangan" rows="3" required
-            placeholder="Contoh: Pembelian eceran di luar nota servis"
-            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none"></textarea>
+          <label class="block text-sm font-semibold text-slate-700 mb-2">Nama Pembeli (Umum)</label>
+          <input v-model="formKeluar.nama_pembeli_umum" type="text" required
+            placeholder="Contoh: Budi (Beli Eceran)"
+            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none">
         </div>
         <div class="pt-2">
           <button type="submit" :disabled="isSubmitting"
@@ -522,12 +520,12 @@ const exportPDF = async () => {
   }
 };
 
+const distributors = ref([]);
 const formMasuk = reactive({
+  id_distributor: '',
   items: [
     { kode_barang: '', qty: 1, harga_modal: '', searchMasuk: '' }
-  ],
-  keterangan: '',
-  bukti_foto: null
+  ]
 });
 
 const addItem = () => {
@@ -550,8 +548,17 @@ const viewPhoto = (path) => {
 const formKeluar = reactive({
   kode_barang: '',
   qty: 1,
-  keterangan: ''
+  nama_pembeli_umum: ''
 });
+
+const fetchDistributors = async () => {
+  try {
+    const res = await api.get('/distributor');
+    distributors.value = res.data;
+  } catch (err) {
+    console.error("Gagal memuat distributor", err);
+  }
+};
 
 const fetchSpareparts = async () => {
   try {
@@ -565,7 +572,7 @@ const fetchSpareparts = async () => {
 const fetchHistories = async () => {
   isFetchingHistory.value = true;
   try {
-    const res = await api.get('/stock-adjustments');
+    const res = await api.get('/mutasi');
     histories.value = res.data;
   } catch (err) {
     console.error("Gagal memuat riwayat", err);
@@ -583,10 +590,12 @@ watch(activeTab, (newTab) => {
 
 onMounted(() => {
   fetchSpareparts();
+  fetchDistributors();
 });
 
 onActivated(() => {
   fetchSpareparts();
+  fetchDistributors();
   if (activeTab.value === 'riwayat') {
     fetchHistories();
   }
@@ -603,48 +612,51 @@ const submitAdjustment = async (type) => {
   }
 
   try {
-    const endpoint = isMasuk ? '/stock-adjustments/in' : '/stock-adjustments';
-
+    const endpoint = isMasuk ? '/pembelian' : '/penjualan';
     let payload;
     let config = {};
 
+    // Ambil user auth dari localstorage (sama seperti service)
+    const userStr = localStorage.getItem('user');
+    const user = userStr ? JSON.parse(userStr) : null;
+    const id_karyawan = user ? (user.id_karyawan || user.id) : 'K001';
+
     if (isMasuk) {
-      payload = new FormData();
-      // Prepare items as JSON string, excluding searchMasuk to keep it clean
-      const itemsToSubmit = formMasuk.items.map(i => ({
-        kode_barang: i.kode_barang,
-        qty: i.qty,
-        harga_modal: i.harga_modal
-      }));
-      payload.append('items', JSON.stringify(itemsToSubmit));
-      payload.append('keterangan', formMasuk.keterangan);
-      if (formMasuk.bukti_foto) {
-        payload.append('bukti_foto', formMasuk.bukti_foto);
-      }
-      config = { headers: { 'Content-Type': 'multipart/form-data' } };
+      payload = {
+        id_distributor: formMasuk.id_distributor,
+        id_karyawan: id_karyawan,
+        details: formMasuk.items.map(i => ({
+          kode_barang: i.kode_barang,
+          qty_masuk: i.qty,
+          harga_beli: i.harga_modal
+        }))
+      };
     } else {
-      payload = formKeluar;
+      payload = {
+        id_karyawan: id_karyawan,
+        nama_pembeli_umum: formKeluar.nama_pembeli_umum,
+        details: [{
+          kode_barang: formKeluar.kode_barang,
+          qty: formKeluar.qty
+        }]
+      };
     }
 
     const res = await api.post(endpoint, payload, config);
 
     if (isMasuk) {
       isSuccessMasuk.value = true;
-      alertMessageMasuk.value = res.data.message;
+      alertMessageMasuk.value = res.data.message || 'Barang masuk berhasil dicatat';
       formMasuk.items = [{ kode_barang: '', qty: 1, harga_modal: '', searchMasuk: '' }];
-      formMasuk.keterangan = '';
-      formMasuk.bukti_foto = null;
-      // Reset input file via DOM is a bit tricky, but this helps the logic reset
-      const fileInput = document.querySelector('input[type="file"]');
-      if (fileInput) fileInput.value = '';
+      formMasuk.id_distributor = '';
     } else {
       isSuccessKeluar.value = true;
-      let msg = res.data.message;
+      let msg = res.data.message || 'Barang keluar berhasil dicatat';
       if (res.data.alert) msg += " " + res.data.alert;
       alertMessageKeluar.value = msg;
       formKeluar.kode_barang = '';
       formKeluar.qty = 1;
-      formKeluar.keterangan = '';
+      formKeluar.nama_pembeli_umum = '';
       searchKeluar.value = '';
     }
 

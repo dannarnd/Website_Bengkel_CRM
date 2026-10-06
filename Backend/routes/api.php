@@ -38,5 +38,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/pembelian', [PembelianController::class, 'index']);
     Route::post('/pembelian', [PembelianController::class, 'store']);
     
+    Route::get('/distributor', [App\Http\Controllers\Api\DistributorController::class, 'index']);
+    Route::post('/distributor', [App\Http\Controllers\Api\DistributorController::class, 'store']);
+    
+    Route::get('/penjualan', [App\Http\Controllers\Api\PenjualanController::class, 'index']);
+    Route::post('/penjualan', [App\Http\Controllers\Api\PenjualanController::class, 'store']);
+    
+    Route::get('/mutasi', [App\Http\Controllers\Api\MutasiController::class, 'index']);
+    
     Route::apiResource('chatbot-rule', ChatbotRuleController::class);
 });
