@@ -7,13 +7,26 @@ use Illuminate\Http\Request;
 class SparepartController extends Controller {
     public function index() { return Sparepart::all(); }
     public function store(Request $request) {
-        $request->validate(['nama_barang' => 'required', 'harga' => 'required|numeric', 'stok' => 'required|numeric', 'batas_minimum' => 'required|numeric']);
-        return response()->json(Sparepart::create($request->all()), 201);
+        $request->validate([
+            'kode_barang' => 'required|unique:sparepart',
+            'nama_barang' => 'required', 
+            'harga' => 'required|numeric', 
+            'batas_minimum' => 'required|numeric'
+        ]);
+        
+        $data = $request->all();
+        $data['stok'] = 0; // Master barang selalu mulai dari 0
+
+        return response()->json(Sparepart::create($data), 201);
     }
     public function show($id) { return Sparepart::findOrFail($id); }
     public function update(Request $request, $id) {
         $sparepart = Sparepart::findOrFail($id);
-        $sparepart->update($request->all());
+        
+        // Mencegah perubahan stok secara manual melalui edit master barang
+        $data = $request->except('stok'); 
+        
+        $sparepart->update($data);
         return response()->json($sparepart);
     }
     public function destroy($id) {

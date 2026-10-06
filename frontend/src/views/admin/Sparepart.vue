@@ -189,9 +189,11 @@
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-semibold text-slate-700 mb-1">Stok Awal/Sekarang</label>
-              <input v-model="form.stok" type="number" required
-                class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none">
+              <label class="block text-sm font-semibold text-slate-700 mb-1">Stok Saat Ini</label>
+              <input v-model="form.stok" type="number" readonly
+                class="w-full px-4 py-2 bg-slate-200 border border-slate-300 rounded-xl text-slate-600 font-bold focus:outline-none cursor-not-allowed">
+              <p v-if="!isEdit" class="text-[10px] text-teal-600 mt-1 font-bold">Terisi otomatis 0. Isi stok via Pembelian.</p>
+              <p v-else class="text-[10px] text-teal-600 mt-1 font-bold">Stok tidak bisa diedit manual.</p>
             </div>
             <div>
               <label class="block text-sm font-semibold text-slate-700 mb-1">Batas Minimum Stok</label>
@@ -405,7 +407,7 @@ const openAddModal = () => {
   isEdit.value = false;
   isManualCode.value = false;
   Object.assign(codeParams, { jenis: 'R', kategori: 'U', merk: 'T' });
-  Object.assign(form, { kode_barang: '', nama_barang: '', harga: '', batas_minimum: 5 });
+  Object.assign(form, { kode_barang: '', nama_barang: '', harga: '', stok: 0, batas_minimum: 5 });
   isModalOpen.value = true;
 };
 
