@@ -1,0 +1,752 @@
+<table border='1'>
+<tr>
+    <th>No</th>
+    <th>Kategori / Nama Barang</th>
+    <th>Harga (Rp)</th>
+    <th>Stok Saat Ini</th>
+    <th>Batas Minimum</th>
+</tr><tr>
+        <td>1</td>
+        <td>Upertank Avanza</td>
+        <td>350000</td>
+        <td>2</td>
+        <td>3</td>
+    </tr><tr>
+        <td>2</td>
+        <td>Upertank Vios</td>
+        <td>350000</td>
+        <td>10</td>
+        <td>3</td>
+    </tr><tr>
+        <td>3</td>
+        <td>Coolant Prestone Merah 4L</td>
+        <td>125000</td>
+        <td>50</td>
+        <td>5</td>
+    </tr><tr>
+        <td>4</td>
+        <td>Coolant Prestone Hijau 4L</td>
+        <td>125000</td>
+        <td>45</td>
+        <td>5</td>
+    </tr><tr>
+        <td>5</td>
+        <td>Coolant Top1 Merah 1L</td>
+        <td>35000</td>
+        <td>100</td>
+        <td>5</td>
+    </tr><tr>
+        <td>6</td>
+        <td>Coolant Megacools Hijau 1L</td>
+        <td>25000</td>
+        <td>120</td>
+        <td>5</td>
+    </tr><tr>
+        <td>7</td>
+        <td>Air Radiator Biasa (Galon)</td>
+        <td>15000</td>
+        <td>80</td>
+        <td>5</td>
+    </tr><tr>
+        <td>8</td>
+        <td>Upper Tank Avanza/Xenia Lama</td>
+        <td>150000</td>
+        <td>15</td>
+        <td>5</td>
+    </tr><tr>
+        <td>9</td>
+        <td>Upper Tank Avanza/Xenia Baru (Dual VVT-i)</td>
+        <td>180000</td>
+        <td>12</td>
+        <td>5</td>
+    </tr><tr>
+        <td>10</td>
+        <td>Upper Tank Innova Bensin</td>
+        <td>250000</td>
+        <td>10</td>
+        <td>5</td>
+    </tr><tr>
+        <td>11</td>
+        <td>Upper Tank Innova Diesel</td>
+        <td>275000</td>
+        <td>8</td>
+        <td>5</td>
+    </tr><tr>
+        <td>12</td>
+        <td>Upper Tank Honda Jazz GD3/GE8</td>
+        <td>200000</td>
+        <td>14</td>
+        <td>5</td>
+    </tr><tr>
+        <td>13</td>
+        <td>Upper Tank Honda CRV Gen 3</td>
+        <td>280000</td>
+        <td>6</td>
+        <td>5</td>
+    </tr><tr>
+        <td>14</td>
+        <td>Upper Tank Suzuki Ertiga</td>
+        <td>175000</td>
+        <td>10</td>
+        <td>5</td>
+    </tr><tr>
+        <td>15</td>
+        <td>Upper Tank Mitsubishi Xpander</td>
+        <td>190000</td>
+        <td>9</td>
+        <td>5</td>
+    </tr><tr>
+        <td>16</td>
+        <td>Upper Tank Toyota Rush / Terios</td>
+        <td>160000</td>
+        <td>11</td>
+        <td>5</td>
+    </tr><tr>
+        <td>17</td>
+        <td>Lower Tank Avanza/Xenia Lama</td>
+        <td>150000</td>
+        <td>12</td>
+        <td>5</td>
+    </tr><tr>
+        <td>18</td>
+        <td>Lower Tank Innova Bensin</td>
+        <td>250000</td>
+        <td>7</td>
+        <td>5</td>
+    </tr><tr>
+        <td>19</td>
+        <td>Lower Tank Honda Jazz</td>
+        <td>200000</td>
+        <td>8</td>
+        <td>5</td>
+    </tr><tr>
+        <td>20</td>
+        <td>Lower Tank Pajero Sport</td>
+        <td>300000</td>
+        <td>5</td>
+        <td>5</td>
+    </tr><tr>
+        <td>21</td>
+        <td>Lower Tank Toyota Fortuner</td>
+        <td>300000</td>
+        <td>6</td>
+        <td>5</td>
+    </tr><tr>
+        <td>22</td>
+        <td>Tutup Radiator (Radiator Cap) Denso 0.9</td>
+        <td>85000</td>
+        <td>30</td>
+        <td>5</td>
+    </tr><tr>
+        <td>23</td>
+        <td>Tutup Radiator (Radiator Cap) Denso 1.1</td>
+        <td>85000</td>
+        <td>25</td>
+        <td>5</td>
+    </tr><tr>
+        <td>24</td>
+        <td>Motor Fan Radiator Avanza</td>
+        <td>450000</td>
+        <td>3</td>
+        <td>2</td>
+    </tr><tr>
+        <td>25</td>
+        <td>Motor Fan Radiator Innova</td>
+        <td>600000</td>
+        <td>4</td>
+        <td>2</td>
+    </tr><tr>
+        <td>26</td>
+        <td>Thermostat Toyota</td>
+        <td>250000</td>
+        <td>15</td>
+        <td>2</td>
+    </tr><tr>
+        <td>27</td>
+        <td>Thermostat Honda</td>
+        <td>275000</td>
+        <td>12</td>
+        <td>2</td>
+    </tr><tr>
+        <td>28</td>
+        <td>Selang Radiator Atas (Avanza)</td>
+        <td>75000</td>
+        <td>20</td>
+        <td>5</td>
+    </tr><tr>
+        <td>29</td>
+        <td>Selang Radiator Bawah (Avanza)</td>
+        <td>80000</td>
+        <td>18</td>
+        <td>5</td>
+    </tr><tr>
+        <td>30</td>
+        <td>Freon R134a Klea (Per Tabung)</td>
+        <td>350000</td>
+        <td>8</td>
+        <td>2</td>
+    </tr><tr>
+        <td>31</td>
+        <td>Isi Freon AC (Jasa + Freon R134a)</td>
+        <td>200000</td>
+        <td>999</td>
+        <td>0</td>
+    </tr><tr>
+        <td>32</td>
+        <td>Oli Kompresor AC ND8 100ml</td>
+        <td>75000</td>
+        <td>40</td>
+        <td>5</td>
+    </tr><tr>
+        <td>33</td>
+        <td>Filter Kabin (Filter AC) Avanza</td>
+        <td>65000</td>
+        <td>35</td>
+        <td>5</td>
+    </tr><tr>
+        <td>34</td>
+        <td>Filter Kabin (Filter AC) Innova</td>
+        <td>85000</td>
+        <td>20</td>
+        <td>5</td>
+    </tr><tr>
+        <td>35</td>
+        <td>Magnetic Clutch Kompresor Avanza</td>
+        <td>450000</td>
+        <td>3</td>
+        <td>1</td>
+    </tr><tr>
+        <td>36</td>
+        <td>Evaporator AC Depan Avanza</td>
+        <td>850000</td>
+        <td>2</td>
+        <td>1</td>
+    </tr><tr>
+        <td>37</td>
+        <td>Kondensor AC Universal</td>
+        <td>600000</td>
+        <td>4</td>
+        <td>2</td>
+    </tr><tr>
+        <td>38</td>
+        <td>Expansi Valve AC</td>
+        <td>150000</td>
+        <td>10</td>
+        <td>2</td>
+    </tr><tr>
+        <td>39</td>
+        <td>IC Regulator Alternator Denso</td>
+        <td>250000</td>
+        <td>15</td>
+        <td>2</td>
+    </tr><tr>
+        <td>40</td>
+        <td>Carbon Brush (Kul Dinamo) Starter</td>
+        <td>45000</td>
+        <td>50</td>
+        <td>5</td>
+    </tr><tr>
+        <td>41</td>
+        <td>Carbon Brush (Kul Dinamo) Alternator</td>
+        <td>40000</td>
+        <td>45</td>
+        <td>5</td>
+    </tr><tr>
+        <td>42</td>
+        <td>Bendik Dinamo Starter (Avanza)</td>
+        <td>180000</td>
+        <td>8</td>
+        <td>2</td>
+    </tr><tr>
+        <td>43</td>
+        <td>Bendik Dinamo Starter (Innova)</td>
+        <td>220000</td>
+        <td>5</td>
+        <td>2</td>
+    </tr><tr>
+        <td>44</td>
+        <td>Armature Dinamo Starter</td>
+        <td>350000</td>
+        <td>3</td>
+        <td>1</td>
+    </tr><tr>
+        <td>45</td>
+        <td>Bearing Alternator 6202</td>
+        <td>35000</td>
+        <td>60</td>
+        <td>10</td>
+    </tr><tr>
+        <td>46</td>
+        <td>Bearing Alternator 6303</td>
+        <td>45000</td>
+        <td>55</td>
+        <td>10</td>
+    </tr><tr>
+        <td>47</td>
+        <td>Jasa Korok Radiator Mobil Kecil</td>
+        <td>150000</td>
+        <td>999</td>
+        <td>0</td>
+    </tr><tr>
+        <td>48</td>
+        <td>Jasa Korok Radiator Mobil Besar</td>
+        <td>200000</td>
+        <td>999</td>
+        <td>0</td>
+    </tr><tr>
+        <td>49</td>
+        <td>Jasa Las Kuningan / Titik</td>
+        <td>50000</td>
+        <td>999</td>
+        <td>0</td>
+    </tr><tr>
+        <td>50</td>
+        <td>Jasa Las Aluminium / Titik</td>
+        <td>75000</td>
+        <td>999</td>
+        <td>0</td>
+    </tr><tr>
+        <td>51</td>
+        <td>Jasa Ganti Upper/Lower Tank</td>
+        <td>100000</td>
+        <td>998</td>
+        <td>0</td>
+    </tr><tr>
+        <td>52</td>
+        <td>Jasa Servis Kompresor AC</td>
+        <td>350000</td>
+        <td>999</td>
+        <td>0</td>
+    </tr><tr>
+        <td>53</td>
+        <td>Jasa Bongkar Pasang Dinamo Starter</td>
+        <td>150000</td>
+        <td>999</td>
+        <td>0</td>
+    </tr><tr>
+        <td>54</td>
+        <td>Jasa Bongkar Pasang Alternator</td>
+        <td>150000</td>
+        <td>999</td>
+        <td>0</td>
+    </tr><tr>
+        <td>55</td>
+        <td>Upper Tank Avanza/Xenia VVT-i Lama</td>
+        <td>150000</td>
+        <td>15</td>
+        <td>5</td>
+    </tr><tr>
+        <td>56</td>
+        <td>Lower Tank Avanza/Xenia VVT-i Lama</td>
+        <td>150000</td>
+        <td>12</td>
+        <td>5</td>
+    </tr><tr>
+        <td>57</td>
+        <td>Upper Tank Avanza/Xenia Dual VVT-i</td>
+        <td>180000</td>
+        <td>12</td>
+        <td>5</td>
+    </tr><tr>
+        <td>58</td>
+        <td>Lower Tank Avanza/Xenia Dual VVT-i</td>
+        <td>180000</td>
+        <td>10</td>
+        <td>5</td>
+    </tr><tr>
+        <td>59</td>
+        <td>Upper Tank Innova Bensin 2.0</td>
+        <td>250000</td>
+        <td>10</td>
+        <td>5</td>
+    </tr><tr>
+        <td>60</td>
+        <td>Lower Tank Innova Bensin 2.0</td>
+        <td>250000</td>
+        <td>7</td>
+        <td>5</td>
+    </tr><tr>
+        <td>61</td>
+        <td>Upper Tank Innova Diesel 2.5</td>
+        <td>275000</td>
+        <td>8</td>
+        <td>5</td>
+    </tr><tr>
+        <td>62</td>
+        <td>Lower Tank Innova Diesel 2.5</td>
+        <td>275000</td>
+        <td>6</td>
+        <td>5</td>
+    </tr><tr>
+        <td>63</td>
+        <td>Upper Tank Innova Reborn</td>
+        <td>350000</td>
+        <td>5</td>
+        <td>5</td>
+    </tr><tr>
+        <td>64</td>
+        <td>Lower Tank Innova Reborn</td>
+        <td>350000</td>
+        <td>5</td>
+        <td>5</td>
+    </tr><tr>
+        <td>65</td>
+        <td>Upper Tank Fortuner VNT / Hilux</td>
+        <td>300000</td>
+        <td>6</td>
+        <td>5</td>
+    </tr><tr>
+        <td>66</td>
+        <td>Lower Tank Fortuner VNT / Hilux</td>
+        <td>300000</td>
+        <td>6</td>
+        <td>5</td>
+    </tr><tr>
+        <td>67</td>
+        <td>Upper Tank Toyota Agya / Ayla 1.0</td>
+        <td>130000</td>
+        <td>15</td>
+        <td>5</td>
+    </tr><tr>
+        <td>68</td>
+        <td>Lower Tank Toyota Agya / Ayla 1.0</td>
+        <td>130000</td>
+        <td>12</td>
+        <td>5</td>
+    </tr><tr>
+        <td>69</td>
+        <td>Upper Tank Toyota Calya / Sigra 1.2</td>
+        <td>140000</td>
+        <td>14</td>
+        <td>5</td>
+    </tr><tr>
+        <td>70</td>
+        <td>Lower Tank Toyota Calya / Sigra 1.2</td>
+        <td>140000</td>
+        <td>11</td>
+        <td>5</td>
+    </tr><tr>
+        <td>71</td>
+        <td>Upper Tank Toyota Yaris / Vios Lama</td>
+        <td>220000</td>
+        <td>8</td>
+        <td>5</td>
+    </tr><tr>
+        <td>72</td>
+        <td>Lower Tank Toyota Yaris / Vios Lama</td>
+        <td>220000</td>
+        <td>7</td>
+        <td>5</td>
+    </tr><tr>
+        <td>73</td>
+        <td>Upper Tank Toyota Yaris Bakpao</td>
+        <td>230000</td>
+        <td>6</td>
+        <td>5</td>
+    </tr><tr>
+        <td>74</td>
+        <td>Upper Tank Toyota Camry / Altis</td>
+        <td>350000</td>
+        <td>4</td>
+        <td>3</td>
+    </tr><tr>
+        <td>75</td>
+        <td>Lower Tank Toyota Camry / Altis</td>
+        <td>350000</td>
+        <td>4</td>
+        <td>3</td>
+    </tr><tr>
+        <td>76</td>
+        <td>Upper Tank Toyota Alphard / Vellfire</td>
+        <td>500000</td>
+        <td>3</td>
+        <td>2</td>
+    </tr><tr>
+        <td>77</td>
+        <td>Lower Tank Toyota Alphard / Vellfire</td>
+        <td>500000</td>
+        <td>3</td>
+        <td>2</td>
+    </tr><tr>
+        <td>78</td>
+        <td>Upper Tank Kijang Kapsul 1.8</td>
+        <td>200000</td>
+        <td>9</td>
+        <td>5</td>
+    </tr><tr>
+        <td>79</td>
+        <td>Lower Tank Kijang Kapsul 1.8</td>
+        <td>200000</td>
+        <td>8</td>
+        <td>5</td>
+    </tr><tr>
+        <td>80</td>
+        <td>Upper Tank Honda Jazz GD3 (Lama)</td>
+        <td>200000</td>
+        <td>14</td>
+        <td>5</td>
+    </tr><tr>
+        <td>81</td>
+        <td>Lower Tank Honda Jazz GD3 (Lama)</td>
+        <td>200000</td>
+        <td>8</td>
+        <td>5</td>
+    </tr><tr>
+        <td>82</td>
+        <td>Upper Tank Honda Jazz GE8 / GK5</td>
+        <td>220000</td>
+        <td>12</td>
+        <td>5</td>
+    </tr><tr>
+        <td>83</td>
+        <td>Lower Tank Honda Jazz GE8 / GK5</td>
+        <td>220000</td>
+        <td>10</td>
+        <td>5</td>
+    </tr><tr>
+        <td>84</td>
+        <td>Upper Tank Honda Brio / Mobilio / BRV</td>
+        <td>190000</td>
+        <td>18</td>
+        <td>5</td>
+    </tr><tr>
+        <td>85</td>
+        <td>Lower Tank Honda Brio / Mobilio / BRV</td>
+        <td>190000</td>
+        <td>15</td>
+        <td>5</td>
+    </tr><tr>
+        <td>86</td>
+        <td>Upper Tank Honda CRV Gen 2 (RD)</td>
+        <td>250000</td>
+        <td>5</td>
+        <td>3</td>
+    </tr><tr>
+        <td>87</td>
+        <td>Lower Tank Honda CRV Gen 2 (RD)</td>
+        <td>250000</td>
+        <td>4</td>
+        <td>3</td>
+    </tr><tr>
+        <td>88</td>
+        <td>Upper Tank Honda CRV Gen 3 (RE)</td>
+        <td>280000</td>
+        <td>6</td>
+        <td>3</td>
+    </tr><tr>
+        <td>89</td>
+        <td>Lower Tank Honda CRV Gen 3 (RE)</td>
+        <td>280000</td>
+        <td>5</td>
+        <td>3</td>
+    </tr><tr>
+        <td>90</td>
+        <td>Upper Tank Honda HRV 1.5</td>
+        <td>240000</td>
+        <td>8</td>
+        <td>4</td>
+    </tr><tr>
+        <td>91</td>
+        <td>Lower Tank Honda HRV 1.5</td>
+        <td>240000</td>
+        <td>7</td>
+        <td>4</td>
+    </tr><tr>
+        <td>92</td>
+        <td>Upper Tank Honda Civic FD (Batman)</td>
+        <td>260000</td>
+        <td>5</td>
+        <td>3</td>
+    </tr><tr>
+        <td>93</td>
+        <td>Lower Tank Honda Civic FD (Batman)</td>
+        <td>260000</td>
+        <td>4</td>
+        <td>3</td>
+    </tr><tr>
+        <td>94</td>
+        <td>Upper Tank Honda Freed</td>
+        <td>210000</td>
+        <td>7</td>
+        <td>5</td>
+    </tr><tr>
+        <td>95</td>
+        <td>Lower Tank Honda Freed</td>
+        <td>210000</td>
+        <td>6</td>
+        <td>5</td>
+    </tr><tr>
+        <td>96</td>
+        <td>Upper Tank Daihatsu Gran Max / Luxio</td>
+        <td>180000</td>
+        <td>20</td>
+        <td>5</td>
+    </tr><tr>
+        <td>97</td>
+        <td>Lower Tank Daihatsu Gran Max / Luxio</td>
+        <td>180000</td>
+        <td>18</td>
+        <td>5</td>
+    </tr><tr>
+        <td>98</td>
+        <td>Upper Tank Daihatsu Taruna / Feroza</td>
+        <td>170000</td>
+        <td>6</td>
+        <td>5</td>
+    </tr><tr>
+        <td>99</td>
+        <td>Lower Tank Daihatsu Taruna / Feroza</td>
+        <td>170000</td>
+        <td>5</td>
+        <td>5</td>
+    </tr><tr>
+        <td>100</td>
+        <td>Upper Tank Suzuki Carry / Futura</td>
+        <td>140000</td>
+        <td>25</td>
+        <td>5</td>
+    </tr><tr>
+        <td>101</td>
+        <td>Lower Tank Suzuki Carry / Futura</td>
+        <td>140000</td>
+        <td>20</td>
+        <td>5</td>
+    </tr><tr>
+        <td>102</td>
+        <td>Upper Tank Suzuki APV</td>
+        <td>160000</td>
+        <td>12</td>
+        <td>5</td>
+    </tr><tr>
+        <td>103</td>
+        <td>Lower Tank Suzuki APV</td>
+        <td>160000</td>
+        <td>10</td>
+        <td>5</td>
+    </tr><tr>
+        <td>104</td>
+        <td>Upper Tank Suzuki Ertiga Lama</td>
+        <td>175000</td>
+        <td>10</td>
+        <td>5</td>
+    </tr><tr>
+        <td>105</td>
+        <td>Lower Tank Suzuki Ertiga Lama</td>
+        <td>175000</td>
+        <td>9</td>
+        <td>5</td>
+    </tr><tr>
+        <td>106</td>
+        <td>Upper Tank Suzuki SX4 X-Over</td>
+        <td>190000</td>
+        <td>4</td>
+        <td>3</td>
+    </tr><tr>
+        <td>107</td>
+        <td>Upper Tank Suzuki Grand Vitara</td>
+        <td>240000</td>
+        <td>3</td>
+        <td>3</td>
+    </tr><tr>
+        <td>108</td>
+        <td>Lower Tank Mitsubishi Xpander</td>
+        <td>190000</td>
+        <td>8</td>
+        <td>5</td>
+    </tr><tr>
+        <td>109</td>
+        <td>Upper Tank Mitsubishi L300 Diesel</td>
+        <td>210000</td>
+        <td>15</td>
+        <td>5</td>
+    </tr><tr>
+        <td>110</td>
+        <td>Lower Tank Mitsubishi L300 Diesel</td>
+        <td>210000</td>
+        <td>12</td>
+        <td>5</td>
+    </tr><tr>
+        <td>111</td>
+        <td>Upper Tank Mitsubishi Pajero Sport Lama</td>
+        <td>280000</td>
+        <td>6</td>
+        <td>5</td>
+    </tr><tr>
+        <td>112</td>
+        <td>Lower Tank Mitsubishi Pajero Sport Lama</td>
+        <td>280000</td>
+        <td>5</td>
+        <td>5</td>
+    </tr><tr>
+        <td>113</td>
+        <td>Upper Tank Nissan Grand Livina</td>
+        <td>200000</td>
+        <td>11</td>
+        <td>5</td>
+    </tr><tr>
+        <td>114</td>
+        <td>Lower Tank Nissan Grand Livina</td>
+        <td>200000</td>
+        <td>9</td>
+        <td>5</td>
+    </tr><tr>
+        <td>115</td>
+        <td>Upper Tank Nissan March / Datsun GO</td>
+        <td>150000</td>
+        <td>10</td>
+        <td>5</td>
+    </tr><tr>
+        <td>116</td>
+        <td>Lower Tank Nissan March / Datsun GO</td>
+        <td>150000</td>
+        <td>8</td>
+        <td>5</td>
+    </tr><tr>
+        <td>117</td>
+        <td>Upper Tank Nissan X-Trail T30/T31</td>
+        <td>250000</td>
+        <td>4</td>
+        <td>3</td>
+    </tr><tr>
+        <td>118</td>
+        <td>Lower Tank Nissan X-Trail T30/T31</td>
+        <td>250000</td>
+        <td>4</td>
+        <td>3</td>
+    </tr><tr>
+        <td>119</td>
+        <td>Upper Tank Hino Dutro / Toyota Dyna</td>
+        <td>350000</td>
+        <td>7</td>
+        <td>5</td>
+    </tr><tr>
+        <td>120</td>
+        <td>Lower Tank Hino Dutro / Toyota Dyna</td>
+        <td>350000</td>
+        <td>7</td>
+        <td>5</td>
+    </tr><tr>
+        <td>121</td>
+        <td>Upper Tank Isuzu Panther / Elf</td>
+        <td>280000</td>
+        <td>8</td>
+        <td>5</td>
+    </tr><tr>
+        <td>122</td>
+        <td>Lower Tank Isuzu Panther / Elf</td>
+        <td>280000</td>
+        <td>7</td>
+        <td>5</td>
+    </tr><tr>
+        <td>123</td>
+        <td>Selang Radiator Atas Universal</td>
+        <td>75000</td>
+        <td>20</td>
+        <td>5</td>
+    </tr><tr>
+        <td>124</td>
+        <td>Selang Radiator Bawah Universal</td>
+        <td>80000</td>
+        <td>18</td>
+        <td>5</td>
+    </tr></table>

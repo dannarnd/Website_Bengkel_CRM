@@ -1,0 +1,52 @@
+
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+<meta charset='utf-8'>
+<title>Penjelasan Database</title>
+<style>
+body { font-family: 'Arial', sans-serif; font-size: 11pt; line-height: 1.5; }
+h1 { color: #2c3e50; font-size: 16pt; text-align: center; }
+h2 { color: #34495e; font-size: 14pt; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+h3 { color: #16a085; font-size: 12pt; margin-top: 15px; }
+ul { margin-top: 0; margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h1>Dokumentasi Teknis Kode Program: Smart Workshop (Dari Awal Hingga Selesai)</h1><br><br>Dokumen ini berisi penjelasan teknis yang komprehensif mengenai bagaimana kode program sistem Smart Workshop ini dirakit dari nol. Dokumen ini sangat berguna untuk menjawab pertanyaan dosen penguji seputar "Arsitektur Perangkat Lunak" (Software Architecture) dan "Alur Program" (Program Flow).<br><br>---<br><br><h2>1. Arsitektur Sistem (Gaya Bangunan)</h2><br><br>Sistem ini tidak dibangun menggunakan cara tradisional (monolitik), melainkan menggunakan arsitektur <b>Decoupled (Terpisah)</b> modern yang disebut <b>SPA (Single Page Application) dengan REST API</b>.<br><br>*   <b>Backend (Otak & Database):</b> Dibangun menggunakan <b>Laravel 13</b> (PHP). Bertugas murni untuk mengelola database, memvalidasi keamanan, dan mengirimkan data mentah dalam bentuk JSON (REST API).
+*   <b>Frontend (Wajah & Interaksi):</b> Dibangun menggunakan <b>Vue.js 3</b> dan <b>Vite</b> (JavaScript/Node.js). Bertugas murni mengatur tampilan antarmuka (UI), animasi, dan menerima interaksi klik dari pengguna.
+<i>   <b>Komunikasi:</b> Keduanya berkomunikasi menggunakan perantara bernama <b>Axios</b>, yang saling mengirim dan menerima paket data JSON.<br><br>> <b>Jawaban Sidang:</b> Jika dosen bertanya mengapa dipisah antara backend dan frontend? </i>"Agar sistem ini <i>Scalable</i> (mudah dikembangkan). Ke depannya, jika kami ingin membuat Aplikasi Android/iOS untuk Smart Workshop, kami tidak perlu merombak ulang database dan backend-nya. Aplikasi mobile tinggal 'menarik' data API yang sudah ada."<i><br><br>---<br><br><h2>2. Fase 1: Merakit Backend (Laravel)</h2><br><br>Pembangunan dimulai dari sisi </i>Back-End* (Server). Berikut adalah urutan pengerjaannya:<br><br><h3>A. Database Migrations & Models</h3>
+Kode pertama yang dibuat adalah <i>Migrations</i> (blueprint tabel database) dan <i>Models</i> (penghubung ke tabel).
+<i>   <b>Contoh:</b> Model <code style="background:#eee;padding:2px;">App\Models\Service.php</code> dirakit menggunakan </i>Eloquent ORM* untuk menciptakan relasi.
+<i>   </i>Lihat Dokumen Penjelasan Database untuk detailnya.*<br><br><h3>B. Otomasi Latar Belakang (Observers)</h3>
+Kita menyuntikkan kode cerdas agar aplikasi bisa berjalan sendiri tanpa perlu di-klik admin. Kita membuat <b><code style="background:#eee;padding:2px;">ServiceObserver.php</code></b>.
+<i>   <b>Logika Kode:</b> Saat ada perubahan (</i>Updated<i>) pada tabel servis, sistem akan mengecek: </i>Apakah statusnya baru saja berubah menjadi "Selesai"?*
+<i>   Jika <b>YA</b>, baris kode observer akan otomatis "melahirkan" satu baris garansi di tabel <code style="background:#eee;padding:2px;">warranties</code> (30 hari sejak hari itu) dan memotong stok </i>sparepart* secara matematis di tabel <code style="background:#eee;padding:2px;">spareparts</code>.<br><br><h3>C. Pembuatan Controllers (Pusat Logika)</h3>
+Selanjutnya, kita membuat Controller di folder <code style="background:#eee;padding:2px;">app/Http/Controllers/Api/</code> untuk menangani logika permintaan (CRUD).
+*   <b><code style="background:#eee;padding:2px;">ServiceController.php</code></b>: Menangani pendaftaran servis baru, mengubah status, dan upload foto.
+<i>   <b><code style="background:#eee;padding:2px;">ChatbotController.php</code></b>: Berisi kode algoritma kecerdasan buatan (</i>Fuzzy Logic*) sederhana. 
+    <i>   </i>Alur Kodenya:<i> Sistem menangkap teks pesan WA/Web dari pengguna, memecahnya menjadi kata perkata (</i>Stop-words removal*), menghapus karakter aneh (tanda baca), lalu mencocokkannya menggunakan perintah SQL <code style="background:#eee;padding:2px;">LIKE</code> ke tabel <code style="background:#eee;padding:2px;">chatbot_rules</code> dan <code style="background:#eee;padding:2px;">spareparts</code> untuk mencari harga.<br><br><h3>D. Keamanan Akses (Routing & Sanctum)</h3>
+Setelah logika selesai, kita membuat "Pintu Masuk" (<i>Routes</i>) di file <code style="background:#eee;padding:2px;">routes/api.php</code>.
+*   Semua pintu masuk kita gembok menggunakan <b>Laravel Sanctum</b> (<code style="background:#eee;padding:2px;">middleware('auth:sanctum')</code>). 
+<i>   Artinya, tidak ada satupun </i>hacker<i> yang bisa mengambil data bengkel atau mengubah stok tanpa membawa "Kunci Token" (</i>Bearer Token<i>) yang valid hasil dari </i>Login*.<br><br>---<br><br><h2>3. Fase 2: Merakit Frontend (Vue 3 + Tailwind)</h2><br><br>Setelah mesin (Backend) menyala, kita membangun wajahnya (Frontend).<br><br><h3>A. Konfigurasi Dasar & UI Framework</h3>
+*   Kita menggunakan <b>Vite</b> sebagai mesin kompilasi (karena 10x lebih cepat dari Webpack lama).
+<i>   Desain antarmuka (UI) dirakit menggunakan <b>Tailwind CSS</b>. Kenapa Tailwind? Agar kode CSS tidak berantakan (</i>Utility-first*). Semua desain premium (bayangan, gradasi warna teal/slate, sudut melengkung) langsung ditulis di dalam tag HTML Vue.<br><br><h3>B. State Management (Pinia)</h3>
+Untuk menyimpan memori sementara (seperti Data User yang sedang login), kita menggunakan <b>Pinia</b>.
+<i>   <b><code style="background:#eee;padding:2px;">src/stores/auth.js</code></b>: Kode di sini bertugas menyimpan </i>Token Login* di dalam brankas browser lokal (<code style="background:#eee;padding:2px;">localStorage</code>). Saat user me-refresh halaman, mereka tidak perlu login ulang selama tokennya belum kedaluwarsa.<br><br><h3>C. Penghubung Jaringan (Axios Interceptors)</h3>
+Bagaimana caranya Frontend bisa melewati gembok "Sanctum" di Backend?
+*   Kita membuat file <b><code style="background:#eee;padding:2px;">src/utils/axios.js</code></b>. Di sini terdapat kode <b>Request Interceptor</b>.
+<i>   Setiap kali halaman Vue ingin meminta data ke Laravel, </i>Interceptor<i> akan mencegat permintaan tersebut, mengambil </i>Token<i> dari </i>localStorage<i>, lalu menyuntikkan token tersebut ke dalam amplop </i>Header Authorization* secara diam-diam.<br><br><h3>D. Pembuatan Halaman Halaman Utama (Views)</h3>
+Kode HTML dan JavaScript (Composition API Vue 3) digabung menjadi file berekstensi <code style="background:#eee;padding:2px;">.vue</code> di dalam <code style="background:#eee;padding:2px;">src/views/admin/</code>.<br><br>1. <b><code style="background:#eee;padding:2px;">ServiceManage.vue</code> (Layar Kerja Mekanik):</b>
+   <i>   Menggunakan teknik <b>Optimistic UI Update</b>. Saat mekanik memencet tombol "Ubah Status", layar seketika langsung berubah warna (tanpa jeda </i>loading* 0 detik), sementara kodenya memanggil <code style="background:#eee;padding:2px;">api.put()</code> secara diam-diam di latar belakang. Ini membuat web terasa secepat kilat.
+   <i>   Mendukung </i>Client-Side Image Conversion<i>: Menggunakan </i>library<i> <code style="background:#eee;padding:2px;">heic2any</code>. Jika mekanik mengunggah foto langsung dari iPhone (Format HEIC yang tidak dikenali web), kode JavaScript akan mengubahnya menjadi JPG di dalam browser </i>sebelum* dikirim ke server.<br><br>2. <b><code style="background:#eee;padding:2px;">ChatbotRule.vue</code> & Modul Chat:</b>
+   <i>   Antarmuka untuk melatih AI (Menambah kata kunci dan balasan).<br><br>---<br><br><h2>4. Kesimpulan Alur Program (Dari Klik Hingga Tersimpan)</h2><br><br>Jika penguji meminta Anda mendemonstrasikan </i>"Coba jelaskan alur kodenya saat saya menekan tombol Simpan Pelanggan!"*<br><br><b>Jawab dengan kronologi berikut:</b>
+1. Di layar <b>Vue (<code style="background:#eee;padding:2px;">PelangganManage.vue</code>)</b>, pengguna menekan tombol "Simpan".
+2. Kode Javascript <code style="background:#eee;padding:2px;">saveData()</code> dijalankan. Vue mengemas data yang diketik ke dalam bentuk JSON.
+3. Mesin <b>Axios (<code style="background:#eee;padding:2px;">axios.js</code>)</b> menyisipkan kunci gembok (<i>Bearer Token</i>) ke data JSON tersebut, lalu mengirimkannya lewat jalur internet (HTTP POST) ke alamat <code style="background:#eee;padding:2px;">127.0.0.1:8000/api/pelanggan</code>.
+4. Di pintu server <b>Laravel (<code style="background:#eee;padding:2px;">routes/api.php</code>)</b>, petugas keamanan (Sanctum) memeriksa Token. Karena token cocok, pintu dibuka.
+5. Permintaan diteruskan ke <b><code style="background:#eee;padding:2px;">PelangganController.php</code></b>. Kode controller memvalidasi (memastikan nomor HP tidak kosong dan formatnya benar).
+6. Data disimpan ke dalam MySQL menggunakan instruksi <i>Eloquent</i> <code style="background:#eee;padding:2px;">Pelanggan::create()</code>.
+7. Laravel mengirimkan balasan JSON <i>"Berhasil"</i>.
+8. Vue menerima balasan, memunculkan kotak notifikasi melayang cantik (<b>vue3-toastify</b>), lalu me-refresh tabel tanpa me-reload halaman (<i>Single Page Application</i>).<br><br>Semua itu terjadi hanya dalam kurun waktu kurang dari 0.1 detik.
+
+</body>
+</html>

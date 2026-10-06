@@ -1,0 +1,74 @@
+
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+<meta charset='utf-8'>
+<title>Penjelasan Database</title>
+<style>
+body { font-family: 'Arial', sans-serif; font-size: 11pt; line-height: 1.5; }
+h1 { color: #2c3e50; font-size: 16pt; text-align: center; }
+h2 { color: #34495e; font-size: 14pt; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+h3 { color: #16a085; font-size: 12pt; margin-top: 15px; }
+ul { margin-top: 0; margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h1>Dokumentasi & Penjelasan Lengkap Database Smart Workshop</h1><br><br>Dokumen ini adalah "senjata utama" Anda untuk menghadapi pertanyaan penguji terkait database. Di dalamnya terdapat penjelasan logis mengapa database dirancang seperti ini, fungsi masing-masing tabel, dan bagaimana semuanya saling berhubungan (Relasi).<br><br>---<br><br><h2>A. Gambaran Umum (Arsitektur Database)</h2>
+Sistem <b>Smart Workshop</b> menggunakan tipe database Relasional (RDBMS) dengan MySQL. Struktur tabelnya dirancang menggunakan metode <b>Normalisasi</b> agar tidak ada data yang redundan (berulang sia-sia) dan menjaga integritas data (konsistensi).<br><br>Total terdapat <b>10 Tabel Utama</b> yang bisa dibagi ke dalam tiga kelompok:
+1. <b>Kelompok Master Data:</b> Data inti yang sifatnya menetap (Users, Pelanggans, Kendaraans, Spareparts, Chatbot Rules).
+2. <b>Kelompok Transaksi:</b> Data operasional sehari-hari (Services, Service Details, Stock Adjustments).
+3. <b>Kelompok Ekstensi/Fitur:</b> Data turunan hasil transaksi (Warranties, Service Photos).<br><br>---<br><br><h2>B. Penjelasan Detail Setiap Tabel & Fungsinya</h2><br><br><h3>1. Tabel <code style="background:#eee;padding:2px;">users</code> (Akses & Otorisasi)</h3>
+Menyimpan data pegawai bengkel (Mekanik & Admin).
+<ul><li><b>Fungsi:</b> Mengatur siapa saja yang berhak <i>login</i> dan mengoperasikan sistem.</li></ul>
+<ul><li><b>Kolom Penting:</b></li></ul>
+  - <code style="background:#eee;padding:2px;">role</code>: Bertipe <i>Enum</i> (<code style="background:#eee;padding:2px;">admin</code>, <code style="background:#eee;padding:2px;">mekanik</code>). Berfungsi sebagai "hak akses". Mekanik tidak bisa menghapus/mengubah data penting, sedangkan admin memiliki akses penuh.<br><br><h3>2. Tabel <code style="background:#eee;padding:2px;">pelanggans</code> (Buku Tamu Bengkel)</h3>
+Menyimpan identitas orang yang membawa mobil ke bengkel.
+<ul><li><b>Fungsi:</b> Sebagai <i>database</i> pelanggan E-CRM.</li></ul>
+<ul><li><b>Kolom Penting:</b></li></ul>
+  - <code style="background:#eee;padding:2px;">nomor_hp</code>: Sangat krusial karena digunakan sebagai "PIN / Password" saat pelanggan ingin mengecek status servis secara <i>online</i> di portal E-CRM.<br><br><h3>3. Tabel <code style="background:#eee;padding:2px;">kendaraans</code> (Data Objek Servis)</h3>
+Menyimpan data mobil yang didaftarkan.
+<ul><li><b>Fungsi:</b> Memisahkan data mobil dari orangnya. Kenapa? Karena 1 Pelanggan bisa saja punya 2 atau 3 mobil. Jika disatukan di tabel Pelanggan, datanya akan berulang (melanggar aturan normalisasi).</li></ul>
+<ul><li><b>Kolom Penting:</b></li></ul>
+  - <code style="background:#eee;padding:2px;">nomor_polisi</code>: Sebagai <i>Primary Key</i> dan pengenal unik. Digunakan pelanggan sebagai "Username" saat <i>login</i> ke portal cek servis.
+  - <code style="background:#eee;padding:2px;">pelanggan_id</code>: <i>Foreign Key</i> (Jembatan) ke tabel <code style="background:#eee;padding:2px;">pelanggans</code>. (Relasi: 1 Pelanggan memiliki Banyak Kendaraan).<br><br><h3>4. Tabel <code style="background:#eee;padding:2px;">spareparts</code> (Gudang Digital)</h3>
+Menyimpan data master suku cadang (radiator, dinamo, oli, dll).
+<ul><li><b>Fungsi:</b> Sebagai master katalog barang.</li></ul>
+<ul><li><b>Kolom Penting:</b></li></ul>
+  - <code style="background:#eee;padding:2px;">batas_minimum</code>: Parameter untuk memicu sistem <i>Early Warning</i> jika stok hampir habis, admin harus segera <i>restock</i>.<br><br><h3>5. Tabel <code style="background:#eee;padding:2px;">service</code> (Jantung Transaksi)</h3>
+Menyimpan nota atau lembar pendaftaran servis.
+<ul><li><b>Fungsi:</b> Melacak proses perbaikan sebuah mobil dari awal masuk sampai selesai.</li></ul>
+<ul><li><b>Kolom Penting:</b></li></ul>
+  - <code style="background:#eee;padding:2px;">nomor_polisi</code>: <i>Foreign Key</i> ke <code style="background:#eee;padding:2px;">kendaraans</code>.
+  - <code style="background:#eee;padding:2px;">user_id</code>: <i>Foreign Key</i> ke <code style="background:#eee;padding:2px;">users</code>. Untuk melacak siapa mekanik yang mengerjakan.
+  - <code style="background:#eee;padding:2px;">status</code>: Bertipe <i>Enum</i> (<code style="background:#eee;padding:2px;">Menunggu</code>, <code style="background:#eee;padding:2px;">Dikerjakan</code>, <code style="background:#eee;padding:2px;">Selesai</code>, <code style="background:#eee;padding:2px;">Batal</code>).<br><br><h3>6. Tabel <code style="background:#eee;padding:2px;">service_details</code> (Rincian Belanja Nota)</h3>
+Menyimpan daftar <i>sparepart</i> apa saja yang dipakai pada satu nota servis.
+<ul><li><b>Fungsi:</b> Karena satu mobil bisa diganti banyak <i>sparepart</i>, kita butuh tabel perantara (<i>Many-to-Many</i> antara Service dan Sparepart).</li></ul>
+<ul><li><b>Logika:</b> Jika status servis diset "Selesai", sistem akan melihat tabel ini dan secara otomatis memotong stok barang di tabel <code style="background:#eee;padding:2px;">spareparts</code>.</li></ul><br><br><h3>7. Tabel <code style="background:#eee;padding:2px;">stock_adjustments</code> (Buku Besar/Audit Trail)</h3>
+Mencatat sejarah pergerakan barang (Masuk & Keluar).
+<ul><li><b>Fungsi:</b> Jika dosen bertanya, <i>"Kenapa repot-repot buat tabel ini, bukannya stok sudah bisa dikurangi langsung di tabel sparepart?"</i></li></ul>
+<ul><li><b>Jawaban Jawara:</b> <i>"Tabel <code style="background:#eee;padding:2px;">spareparts</code> hanya mencatat <b>Saldo Akhir</b>. Jika ada kehilangan barang, kami tidak tahu hilangnya kapan dan karena apa. Tabel <code style="background:#eee;padding:2px;">stock_adjustments</code> berfungsi sebagai <b>Audit Trail</b>. Setiap barang yang bertambah (kulakan) atau berkurang (dipakai servis), tercatat rapi beserta tanggal dan alasannya."</i></li></ul><br><br><h3>8. Tabel <code style="background:#eee;padding:2px;">warranties</code> (Sistem Garansi Otomatis)</h3>
+Menyimpan data masa perlindungan garansi.
+<ul><li><b>Fungsi:</b> Tabel ini diisi secara otomatis oleh sistem (menggunakan <i>Laravel Observers</i>) sesaat setelah status <code style="background:#eee;padding:2px;">service</code> berubah menjadi "Selesai".</li></ul>
+<ul><li><b>Kolom Penting:</b> <code style="background:#eee;padding:2px;">tanggal_berakhir</code> dihitung otomatis (biasanya +30 hari dari tanggal selesai servis).</li></ul><br><br><h3>9. Tabel <code style="background:#eee;padding:2px;">service_photos</code> (Bukti Transparansi E-CRM)</h3>
+Menyimpan foto mesin mobil sebelum dan sesudah perbaikan.
+<ul><li><b>Fungsi:</b> Sebagai pendukung fitur E-CRM agar pelanggan percaya bahwa radiator/komponen mereka benar-benar sudah diganti (bisa dicek pelanggan secara <i>online</i> dari rumah).</li></ul><br><br><h3>10. Tabel <code style="background:#eee;padding:2px;">chatbot_rules</code> (Otak AI Sederhana)</h3>
+Menyimpan kosa kata dan aturan balasan untuk Chatbot WhatsApp/Web.
+<ul><li><b>Fungsi:</b> Membuat <i>Customer Service</i> digital.</li></ul>
+<ul><li><b>Kolom Penting:</b></li></ul>
+  - <code style="background:#eee;padding:2px;">keyword</code>: Kata pemicu (contoh: "bocor", "harga", "alamat").
+  - <code style="background:#eee;padding:2px;">action_type</code>: Bisa teks biasa, atau <i>script</i> untuk mencari data ke tabel lain (contoh: mengecek harga dari tabel <code style="background:#eee;padding:2px;">spareparts</code>).<br><br>---<br><br><h2>C. Pemetaan Relasi (Entity Relationship)</h2><br><br>Berikut adalah cara menjelaskan hubungan antar tabelnya:<br><br>1. <b>Kendaraan & Pelanggan (Many-to-One)</b>
+   - 1 Pelanggan bisa punya banyak Kendaraan. Tapi 1 Kendaraan hanya dimiliki oleh 1 Pelanggan.
+   - Dihubungkan lewat <code style="background:#eee;padding:2px;">pelanggan_id</code> di tabel Kendaraan.<br><br>2. <b>Service & Kendaraan (Many-to-One)</b>
+   - 1 Kendaraan bisa diservis berkali-kali (bulan ini, tahun depan, dll).
+   - Dihubungkan lewat <code style="background:#eee;padding:2px;">nomor_polisi</code> di tabel Service.<br><br>3. <b>Service & Service Details (One-to-Many)</b>
+   - 1 Lembar Pendaftaran Servis bisa berisi 5 jenis <i>sparepart</i> yang diganti.
+   - Dihubungkan lewat <code style="background:#eee;padding:2px;">service_id</code> di tabel Service Details.<br><br>4. <b>Service & Warranty (One-to-One)</b>
+   - 1 Proses Perbaikan menghasilkan tepat 1 Surat Garansi. Keduanya berjalan beriringan.
+   - Dihubungkan lewat <code style="background:#eee;padding:2px;">service_id</code> di tabel Warranty.<br><br>5. <b>Service & Service Photos (One-to-One)</b>
+   - 1 Proses Perbaikan memiliki tepat 1 Set Foto (Sebelum & Sesudah).
+   - Dihubungkan lewat <code style="background:#eee;padding:2px;">service_id</code> di tabel Service Photos.<br><br>---<br><br><h2>D. Tips & Trik Menghadapi Dosen Penguji</h2><br><br>1. <b>Jika ditanya soal Keamanan Data (Integritas):</b> 
+   Sebutkan bahwa semua relasi <i>Foreign Key</i> dilengkapi dengan <b>Cascading Rules</b>. Artinya, jika data Pelanggan dihapus, maka data Kendaraan miliknya, Riwayat Servisnya, hingga Garansinya akan otomatis terhapus dengan bersih, mencegah terjadinya <i>Orphaned Data</i> (Data sampah / hantu).<br><br>2. <b>Jika ditanya soal Efisiensi:</b>
+   Sebutkan bahwa Anda menggunakan tipe data yang presisi. <code style="background:#eee;padding:2px;">Enum</code> digunakan untuk status yang pasti (seperti Menunggu/Selesai) sehingga menghemat memori (<i>storage</i>) dibanding memakai <code style="background:#eee;padding:2px;">Varchar</code>.<br><br>3. <b>Jika ditanya mengapa repot-repot memisahkan banyak tabel (Normalisasi):</b>
+   Jawablah: <i>"Tujuannya agar sistem bengkel ini </i>Scalable<i> (siap membesar). Jika bengkel punya 1.000 pelanggan, data tidak akan berulang dan bertumpuk, sehingga aplikasi tetap berjalan cepat (performa database ringan)."</i>
+
+</body>
+</html>

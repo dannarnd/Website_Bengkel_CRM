@@ -1,0 +1,125 @@
+﻿No,"Kategori / Nama Barang","Harga (Rp)","Stok Saat Ini","Batas Minimum"
+1,"Upertank Avanza",350000,2,3
+2,"Upertank Vios",350000,10,3
+3,"Coolant Prestone Merah 4L",125000,50,5
+4,"Coolant Prestone Hijau 4L",125000,45,5
+5,"Coolant Top1 Merah 1L",35000,100,5
+6,"Coolant Megacools Hijau 1L",25000,120,5
+7,"Air Radiator Biasa (Galon)",15000,80,5
+8,"Upper Tank Avanza/Xenia Lama",150000,15,5
+9,"Upper Tank Avanza/Xenia Baru (Dual VVT-i)",180000,12,5
+10,"Upper Tank Innova Bensin",250000,10,5
+11,"Upper Tank Innova Diesel",275000,8,5
+12,"Upper Tank Honda Jazz GD3/GE8",200000,14,5
+13,"Upper Tank Honda CRV Gen 3",280000,6,5
+14,"Upper Tank Suzuki Ertiga",175000,10,5
+15,"Upper Tank Mitsubishi Xpander",190000,9,5
+16,"Upper Tank Toyota Rush / Terios",160000,11,5
+17,"Lower Tank Avanza/Xenia Lama",150000,12,5
+18,"Lower Tank Innova Bensin",250000,7,5
+19,"Lower Tank Honda Jazz",200000,8,5
+20,"Lower Tank Pajero Sport",300000,5,5
+21,"Lower Tank Toyota Fortuner",300000,6,5
+22,"Tutup Radiator (Radiator Cap) Denso 0.9",85000,30,5
+23,"Tutup Radiator (Radiator Cap) Denso 1.1",85000,25,5
+24,"Motor Fan Radiator Avanza",450000,3,2
+25,"Motor Fan Radiator Innova",600000,4,2
+26,"Thermostat Toyota",250000,15,2
+27,"Thermostat Honda",275000,12,2
+28,"Selang Radiator Atas (Avanza)",75000,20,5
+29,"Selang Radiator Bawah (Avanza)",80000,18,5
+30,"Freon R134a Klea (Per Tabung)",350000,8,2
+31,"Isi Freon AC (Jasa + Freon R134a)",200000,999,0
+32,"Oli Kompresor AC ND8 100ml",75000,40,5
+33,"Filter Kabin (Filter AC) Avanza",65000,35,5
+34,"Filter Kabin (Filter AC) Innova",85000,20,5
+35,"Magnetic Clutch Kompresor Avanza",450000,3,1
+36,"Evaporator AC Depan Avanza",850000,2,1
+37,"Kondensor AC Universal",600000,4,2
+38,"Expansi Valve AC",150000,10,2
+39,"IC Regulator Alternator Denso",250000,15,2
+40,"Carbon Brush (Kul Dinamo) Starter",45000,50,5
+41,"Carbon Brush (Kul Dinamo) Alternator",40000,45,5
+42,"Bendik Dinamo Starter (Avanza)",180000,8,2
+43,"Bendik Dinamo Starter (Innova)",220000,5,2
+44,"Armature Dinamo Starter",350000,3,1
+45,"Bearing Alternator 6202",35000,60,10
+46,"Bearing Alternator 6303",45000,55,10
+47,"Jasa Korok Radiator Mobil Kecil",150000,999,0
+48,"Jasa Korok Radiator Mobil Besar",200000,999,0
+49,"Jasa Las Kuningan / Titik",50000,999,0
+50,"Jasa Las Aluminium / Titik",75000,999,0
+51,"Jasa Ganti Upper/Lower Tank",100000,998,0
+52,"Jasa Servis Kompresor AC",350000,999,0
+53,"Jasa Bongkar Pasang Dinamo Starter",150000,999,0
+54,"Jasa Bongkar Pasang Alternator",150000,999,0
+55,"Upper Tank Avanza/Xenia VVT-i Lama",150000,15,5
+56,"Lower Tank Avanza/Xenia VVT-i Lama",150000,12,5
+57,"Upper Tank Avanza/Xenia Dual VVT-i",180000,12,5
+58,"Lower Tank Avanza/Xenia Dual VVT-i",180000,10,5
+59,"Upper Tank Innova Bensin 2.0",250000,10,5
+60,"Lower Tank Innova Bensin 2.0",250000,7,5
+61,"Upper Tank Innova Diesel 2.5",275000,8,5
+62,"Lower Tank Innova Diesel 2.5",275000,6,5
+63,"Upper Tank Innova Reborn",350000,5,5
+64,"Lower Tank Innova Reborn",350000,5,5
+65,"Upper Tank Fortuner VNT / Hilux",300000,6,5
+66,"Lower Tank Fortuner VNT / Hilux",300000,6,5
+67,"Upper Tank Toyota Agya / Ayla 1.0",130000,15,5
+68,"Lower Tank Toyota Agya / Ayla 1.0",130000,12,5
+69,"Upper Tank Toyota Calya / Sigra 1.2",140000,14,5
+70,"Lower Tank Toyota Calya / Sigra 1.2",140000,11,5
+71,"Upper Tank Toyota Yaris / Vios Lama",220000,8,5
+72,"Lower Tank Toyota Yaris / Vios Lama",220000,7,5
+73,"Upper Tank Toyota Yaris Bakpao",230000,6,5
+74,"Upper Tank Toyota Camry / Altis",350000,4,3
+75,"Lower Tank Toyota Camry / Altis",350000,4,3
+76,"Upper Tank Toyota Alphard / Vellfire",500000,3,2
+77,"Lower Tank Toyota Alphard / Vellfire",500000,3,2
+78,"Upper Tank Kijang Kapsul 1.8",200000,9,5
+79,"Lower Tank Kijang Kapsul 1.8",200000,8,5
+80,"Upper Tank Honda Jazz GD3 (Lama)",200000,14,5
+81,"Lower Tank Honda Jazz GD3 (Lama)",200000,8,5
+82,"Upper Tank Honda Jazz GE8 / GK5",220000,12,5
+83,"Lower Tank Honda Jazz GE8 / GK5",220000,10,5
+84,"Upper Tank Honda Brio / Mobilio / BRV",190000,18,5
+85,"Lower Tank Honda Brio / Mobilio / BRV",190000,15,5
+86,"Upper Tank Honda CRV Gen 2 (RD)",250000,5,3
+87,"Lower Tank Honda CRV Gen 2 (RD)",250000,4,3
+88,"Upper Tank Honda CRV Gen 3 (RE)",280000,6,3
+89,"Lower Tank Honda CRV Gen 3 (RE)",280000,5,3
+90,"Upper Tank Honda HRV 1.5",240000,8,4
+91,"Lower Tank Honda HRV 1.5",240000,7,4
+92,"Upper Tank Honda Civic FD (Batman)",260000,5,3
+93,"Lower Tank Honda Civic FD (Batman)",260000,4,3
+94,"Upper Tank Honda Freed",210000,7,5
+95,"Lower Tank Honda Freed",210000,6,5
+96,"Upper Tank Daihatsu Gran Max / Luxio",180000,20,5
+97,"Lower Tank Daihatsu Gran Max / Luxio",180000,18,5
+98,"Upper Tank Daihatsu Taruna / Feroza",170000,6,5
+99,"Lower Tank Daihatsu Taruna / Feroza",170000,5,5
+100,"Upper Tank Suzuki Carry / Futura",140000,25,5
+101,"Lower Tank Suzuki Carry / Futura",140000,20,5
+102,"Upper Tank Suzuki APV",160000,12,5
+103,"Lower Tank Suzuki APV",160000,10,5
+104,"Upper Tank Suzuki Ertiga Lama",175000,10,5
+105,"Lower Tank Suzuki Ertiga Lama",175000,9,5
+106,"Upper Tank Suzuki SX4 X-Over",190000,4,3
+107,"Upper Tank Suzuki Grand Vitara",240000,3,3
+108,"Lower Tank Mitsubishi Xpander",190000,8,5
+109,"Upper Tank Mitsubishi L300 Diesel",210000,15,5
+110,"Lower Tank Mitsubishi L300 Diesel",210000,12,5
+111,"Upper Tank Mitsubishi Pajero Sport Lama",280000,6,5
+112,"Lower Tank Mitsubishi Pajero Sport Lama",280000,5,5
+113,"Upper Tank Nissan Grand Livina",200000,11,5
+114,"Lower Tank Nissan Grand Livina",200000,9,5
+115,"Upper Tank Nissan March / Datsun GO",150000,10,5
+116,"Lower Tank Nissan March / Datsun GO",150000,8,5
+117,"Upper Tank Nissan X-Trail T30/T31",250000,4,3
+118,"Lower Tank Nissan X-Trail T30/T31",250000,4,3
+119,"Upper Tank Hino Dutro / Toyota Dyna",350000,7,5
+120,"Lower Tank Hino Dutro / Toyota Dyna",350000,7,5
+121,"Upper Tank Isuzu Panther / Elf",280000,8,5
+122,"Lower Tank Isuzu Panther / Elf",280000,7,5
+123,"Selang Radiator Atas Universal",75000,20,5
+124,"Selang Radiator Bawah Universal",80000,18,5

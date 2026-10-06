@@ -1,0 +1,41 @@
+
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+<meta charset='utf-8'>
+<title>Penjelasan Database</title>
+<style>
+body { font-family: 'Arial', sans-serif; font-size: 11pt; line-height: 1.5; }
+h1 { color: #2c3e50; font-size: 16pt; text-align: center; }
+h2 { color: #34495e; font-size: 14pt; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+h3 { color: #16a085; font-size: 12pt; margin-top: 15px; }
+ul { margin-top: 0; margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h1>Dokumentasi Lengkap: Sistem Login (Autentikasi) Smart Workshop</h1><br><br>Pertanyaan tentang <b>Sistem Login dan Keamanan</b> adalah salah satu hal yang paling sering ditanyakan saat presentasi aplikasi. Dokumen ini membedah bagaimana fitur login bengkel kita dirakit dengan sangat aman menggunakan standar industri modern.<br><br>---<br><br><h2>1. Konsep Dasar: Kenapa Pakai "Token"?</h2><br><br>Di sistem web jadul, setelah kita login, server menyimpan data kita di dalam memori yang disebut <i>Session</i>. <br><br>Namun, karena arsitektur aplikasi kita terpisah (Backend Laravel + Frontend Vue), kita menggunakan metode modern bernama <b>Token-Based Authentication</b>. 
+*   <b>Logikanya seperti ini:</b> Saat Anda menginap di hotel (Bengkel), Anda mendaftar di resepsionis (Login). Jika cocok, resepsionis tidak mengikuti Anda ke mana-mana, melainkan memberi Anda sebuah <b>Kartu Kunci Khusus (Token)</b>. 
+*   Setiap kali Anda ingin masuk kamar atau fasilitas hotel (Mengakses Data), Anda cukup menempelkan kartu tersebut. Jika kartu valid, pintu terbuka. Jika tidak, Anda ditolak.<br><br>---<br><br><h2>2. Dapur Pembuatan Kunci (Backend Laravel)</h2><br><br>Bagian ini bertugas mengecek email/password dan membuatkan "Kartu Kunci".<br><br><h3>A. Memeriksa Identitas (<code style="background:#eee;padding:2px;">AuthController.php</code>)</h3>
+Ketika pengguna menekan tombol Login, Vue mengirim email dan password ke file <code style="background:#eee;padding:2px;">AuthController.php</code>.
+*   Sistem mencari pegawai berdasarkan email: <code style="background:#eee;padding:2px;">User::where('email', $request->email)->first();</code>
+*   Sistem mengecek kecocokan password menggunakan algoritma Enkripsi yang tidak bisa dibaca manusia (Hash): <code style="background:#eee;padding:2px;">Hash::check(...)</code>
+*   Jika salah, sistem menolak dan mengembalikan kode <code style="background:#eee;padding:2px;">401 Unauthorized</code>.<br><br><h3>B. Membuat Token (Sanctum)</h3>
+Jika email dan password benar, mesin pembuat kunci otomatis (<b>Laravel Sanctum</b>) akan bekerja.
+*   <b>Kode Inti:</b> <code style="background:#eee;padding:2px;">$token = $user->createToken('auth_token')->plainTextToken;</code>
+*   Token panjang acak (contoh: <code style="background:#eee;padding:2px;">2|L8akjd391nka...</code>) ini kemudian dikirimkan kembali ke Frontend beserta data nama & jabatan pegawai tersebut.<br><br><h3>C. Satpam Rute (<code style="background:#eee;padding:2px;">routes/api.php</code>)</h3>
+Di daftar rute, kita memasang "Satpam" di setiap pintu khusus admin/mekanik.
+*   <b>Kode Inti:</b> <code style="background:#eee;padding:2px;">Route::middleware('auth:sanctum')</code>
+<i>   Artinya: Siapapun (termasuk </i>Hacker*) yang mencoba mengakses data servis atau pelanggan tanpa membawa token ini, akan langsung diblokir oleh Laravel.<br><br>---<br><br><h2>3. Brankas Penyimpanan (Frontend Vue + Pinia)</h2><br><br>Lalu, apa yang dilakukan Frontend setelah menerima Kunci Token dari Laravel?<br><br><h3>A. Menyimpan di Brankas (<code style="background:#eee;padding:2px;">src/stores/auth.js</code>)</h3>
+Kita menggunakan teknologi bernama <b>Pinia</b> (Manajer Keadaan/State) untuk mengatur data yang aktif.
+*   Setelah token dan profil user diterima, Pinia akan menaruh Token tersebut ke dalam brankas browser yang bernama <b><code style="background:#eee;padding:2px;">localStorage</code></b>.
+*   <b>Manfaatnya:</b> Jika pengguna mematikan laptop dan membukanya lagi besok, mereka tidak perlu login ulang! Karena kuncinya masih aman tersimpan di dalam browser (selama belum di-Logout).<br><br><h3>B. Si Kurir Pengantar Pesan (<code style="background:#eee;padding:2px;">src/utils/axios.js</code>)</h3>
+Ini adalah bagian paling cerdas dari sistem kita. Bagaimana caranya setiap kali Vue ingin mengambil data pelanggan, dia menyerahkan kunci tokennya ke Laravel?
+*   Kita memakai fitur bernama <b>Axios Interceptor</b>.
+<i>   <b>Cara Kerjanya:</b> Setiap kali Vue mau mengirim pesan HTTP ke server, si Interceptor akan </i>mencegat* pesan tersebut, berlari ke brankas <code style="background:#eee;padding:2px;">localStorage</code> untuk mengambil Token, lalu <b>menyuntikkan Token itu secara diam-diam</b> ke dalam stempel surat bernama <code style="background:#eee;padding:2px;">Authorization: Bearer <token></code>.
+*   Sehingga, mekanik/admin tidak perlu capek-capek memasukkan kunci berulang kali.<br><br><h3>C. Satpam Halaman (Vue Router Guard)</h3>
+Bagaimana jika ada orang iseng yang belum login, tapi dia mengetik paksa alamat web <code style="background:#eee;padding:2px;">http://localhost/admin/dashboard</code> di address bar browser?
+<i>   Di dalam file <code style="background:#eee;padding:2px;">src/router/index.js</code>, kita memiliki penjaga gawang (</i>Router Guard*).
+<i>   Sesaat sebelum halaman dimuat, Guard akan mengecek: </i>"Apakah orang ini punya Token di dalam localStorage-nya?"*
+<i>   Jika <b>TIDAK</b>, Guard akan langsung "menendang" (</i>Redirect<i>) orang tersebut kembali ke halaman Login secara otomatis.<br><br>---<br><br><h2>Ringkasan Jawaban Sidang (Jika Disuruh Menjelaskan)</h2><br><br></i>"Sistem login kami menggunakan <b>Laravel Sanctum</b> untuk membuat Token Kriptografi. Ketika mekanik login, backend memeriksa Hash Password. Jika cocok, backend memberikan sebuah <b>Bearer Token</b>. Di sisi Frontend (Vue), token ini kami simpan di <b>localStorage</b> menggunakan Pinia. Kemudian, kami menggunakan <b>Axios Interceptor</b> untuk selalu menyelipkan token tersebut secara otomatis setiap kali sistem menarik atau menyimpan data. Jika ada yang memaksa masuk via URL tanpa login, <b>Vue Router Guard</b> akan langsung menendangnya kembali ke halaman login."*
+
+</body>
+</html>

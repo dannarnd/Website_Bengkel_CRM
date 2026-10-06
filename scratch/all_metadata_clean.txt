@@ -1,0 +1,352 @@
+
+==================== [10] Fitur_Chatbot_Dialogflow.pdf ====================
+KOMPUTASI: Jurnal Ilmiah Ilmu Komputer dan Matematika
+Vol.19, No.1, Januari 2022, Hal. 25  37
+P-ISSN: 1693-7554, E-ISSN: 2654-3990
+https://journal.unpak.ac.id/index.php/komputasi
+25
+RANCANG BANGUN FITUR CHATBOT CUSTOMER SERVICE
+MENGGUNAKAN DIALOGFLOW
+Jansen Wiratama1), Samuel Ady Sanjaya2), Victor Ilyas Sugara3)
+1,2) Sistem Informasi, Universitas Multimedia Nusantara, Jl. Scientia Boulevard, Curug
+Sangereng, Kec. Klp. Dua, Kabupaten Tangerang, Banten 15810
+3) Program Studi Ilmu komputer, Fakutlas Matematika dan Ilmu Pengetahuan Alam, Universitas
+Pakuan, Jl. Pakuan, RT.02/RW.06, Tegallega, Kecamatan Bogor Tengah, Kota Bogor, Jawa
+Barat 16129
+Corresponding Author: Jansen.wiratama@umn.ac.id
+Abstrak
+PT Dian Prima Jayaraya memanfaatkan produk aplikasi mereka yang bernama Solo sebagai
+media layanan customer service. Seiring berkembangnya aplikasi Solo membuat fitur pada
+aplikasi tersebut semakin kompleks dan mengakibatkan penggunanya kesulitan saat beraktivitas
+dalam aplikasi. Tim Customer service PT Dian Prima yang berperan untuk membantu dan
+menjawab keluhan pelanggan mengalami kendala karena jumlah pertanyaan yang masuk cukup
+
+==================== [11] Chatbot_Interaktif_Laravel.pdf ====================
+JITET (Jurnal Informatika dan Teknik Elektro Terapan)
+Vol. 12 No. 3S1, pISSN: 2303-0577 eISSN: 2830-7062              http://dx.doi.org/10.23960/jitet.v12i3S1.5202
+3769
+APLIKASI CHATBOT PELAYANAN PUBLIK BERBASIS
+WEBSITE (STUDI KASUS SEKRETARIAT DPRD KOTA
+CIMAHI)
+Fajar Agustian1, Ade Yuliana2*
+1,2 Politeknik TEDC Bandung; Jl. Politeknik Jl. Pesantren No.2, Cibabat, Kec. Cimahi Uatara, Kota
+Cimahi, Jawa Barat 40513; telp (022) 6645951
+Received: 14 Agustus  2024
+Accepted: 5 Oktober 2024
+Published: 12 Oktober 2024
+Keywords:
+Aplikasi Berbasis Web,
+Laravel, Chatbot, Pelayanan
+Publik, DPRD Kota Cimahi,
+Corespondent Email:
+fjragustian111@gmail.com
+Abstrak. Pelayanan publik merupakan aspek yang sangat penting di setiap
+negara. Di Sekretariat DPRD Kota Cimahi, layanan publik meliputi layanan
+
+==================== [12] Sistem_Informasi_Bengkel_Kakella.pdf ====================
+154
+Jurnal Selodang Mayang, Vol.8 No. 2, Agustus 2022
+e-ISSN: 2620-3332
+SELODANG MAYANG
+SISTEM INFORMASI BENGKEL BERBASIS WEB STUDI
+KASUS KAKELLA MOTOR DI TEMBILAHAN
+1Fitri Yunita, 1Bayu Rianto, 1Andilau
+1Universitas Islam Indragiri
+Email: rianto.bayu91@gmail.com
+Abstract
+Kakella Motor Workshop is an individual-owned business that is engaged in services for
+repairing motorcycles and selling spare parts in the form of motorcycle spare parts. This
+Kakella Motor repair business still uses a record-keeping system in managing its business
+processes, such as managing transaction data, service data, goods data, spare parts data and
+others, the old way is also used in transaction processing and customer data to making
+financial reports. This is due to a lack of knowledge related to information technology or not
+being able to optimize the benefits of information technology so that it is still less efficient in
+terms of processing time which requires less efficient time to do it. To overcome these
+problems, researchers try to provide solutions through a new system design, namely by using
+a computer-based information technology. So that it can make it easier to monitor the
+
+==================== [13] Metode_Prototype.pdf ====================
+Paradigma,
+Vol. 23, No. 2, September 2021
+P-ISSN 1410-5063, E-ISSN: 2579-3500
+http://ejournal.bsi.ac.id/ejurnal/index.php/paradigma/issue/archive/
+151
+This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License
+Naskah diterima: 2021-09-01, direvisi: 2021-09-03, disetujui: 2021-09-08
+Akreditasi Ristekdikti,
+No: 30/E/KPT/2019 (Sinta 4)
+DOI: https://doi.org/10.31294/p.v23i2.10998
+Penerapan Metode Prototype Pada Perancangan Sistem Informasi
+Penggajian Karyawan (Persis Gawan) Berbasis Web
+Eka Wulansari Fridayanthie1, Haryanto 2, Tsamarah Tsabitah 3
+1,2,3Universitas Bina Sarana Informatika
+1e-mail: eka.ewf@bsi.ac.id
+2e-mail: haryanto.hyt@bsi.ac.id
+3e-mail: tsamar12182708@bsi.ac.id
+Abstrak  - Pada penelitian ini membahas mengenai penerapan metode prototype pada perancangan sebuah sistem
+informasi penggajian karyawan berbasis website. Adapun study kasus yang digunakan adalah PT Bina Angkasa,
+yaitu perusahaan yang bergerak dibidang pengiriman kargo atau barang melalui perjalanan darat dan laut. Sistem
+
+==================== [14] Sistem_Informasi_Riset_Merkurius.pdf ====================
+Merkurius : Jurnal Riset Sistem Informasi dan Teknik Informatika
+Vol.2, No.5 September 2024
+e-ISSN: 3031-8912; p-ISSN: 3031-8904; Hal 248-261
+DOI: https://doi.org/10.61132/merkurius.v2i5.303
+Available online at: https://journal.arteii.or.id/index.php/Merkurius
+Received Juli 01, 2024; Revised: Juli 14, 2024; Accepted: Juli 28, 2024; Online available: Juli 31, 2024
+Rancang Bangun Sistem Informasi Manajemen Operasional Dilengkapi
+dengan Penjualan Sparepart pada Bengkel MJM
+Richard Soegiarto1*, Soetam Rizky Wicaksono2
+1,2Universitas Ma Chung, Indonesia
+*richardsoegiarto1@gmail.com
+Alamat: Villa Puncak Tidar Blok N no. 1, Doro, Karangwidoro, Kec. Dau,
+Kabupaten Malang, Jawa Timur 65151
+Korespondensi penulis: *richardsoegiarto1@gmail.com
+Abstract. MJM is a leading workshop in Malang that focuses on car repairs and is known for its reliable
+reputation and quality service on Jl. Lake Tondano Raya F5/A26, Sawojajar. These workshops offer a variety of
+services, from engine to car body repairs, which makes manual transactions difficult and time-consuming due to
+increased service and cost complexity. This research aims to simplify transaction and operational processes in
+MJM workshops by developing supporting applications that include recording customer transactions, spare parts
+stock management, monitoring employee attendance, and mechanic payroll. The information technology provided
+
+==================== [15] Sistem_Informasi_Bengkel_Ferdi_Motor.pdf ====================
+Information System Journal (INFOS) | Vol. 5, No. 2, November 2022
+Page | 1
+e-ISSN: 2655-142X , p-ISSN: 2655-190X
+PEMBUATAN SISTEM INFORMASI BENGKEL BERBASIS WEBSITE PADA
+BENGKEL FERDI MOTOR
+Dwi Wahyudi1), Alfie Nur Rahmi2)
+1) Sistem Informasi Universitas AMIKOM Yogyakarta
+2) Sistem Informasi Universitas AMIKOM Yogyakarta
+email : dwi.wahyudi@amikom.ac.id1), alfienurrahmi@amikom.ac.id2)
+Abstraksi
+Bengkel Ferdi Motor berdiri sejak tahun 2020 lokasi yg di pilih di Jl. 1 Desa Bumi Kencana, Seputih Agung,
+Lampung Tengah, Lampung. Ferdi Motor menyediakan Service Motor dan Menjual spearepart motor, namun
+karena permintaan pasar yang banyak membuat bengkel ferdi motor kesulitan dalam mengelola transaksi
+penjualan. Selain itu pemilik bengkel juga kesulitan dalam monitoring aktifitas perusahaan dan pengelolaan stok
+barang, karna sistem yang digunakan masih manual dan tidak transaksi tidak tercatat dengan baik.Sistem informasi
+manajemen dengan menggunakan aplikasi dapat membantu dalam monitoring kegiatan bengkel dan dapat
+mengelola stok persediaan dengan mudah, hal ini dapat memebuat aktifitas karyawan berjalan secara efektif, selain
+itu juga dapat mempermudah dalam memperoleh informasi secara cepat dan akurat sehingga dapat membantu
+dalam pengembangan usaha bengkel ferdi motor.
+Kata Kunci :
+
+==================== [16] Pengujian_Black_Box.pdf ====================
+STORAGE  Jurnal Ilmiah Teknik dan Ilmu Komputer, Vol. 1 No. 2, Mei, 2022, 1 - 8
+e-ISSN: 2828-5344 | DOI: 10.55123
+1
+PENGUJIAN FUNGSIONAL PERANGKAT LUNAK SISTEM INFORMASI
+PERPUSTAKAAN  DENGAN METODE BLACK BOX TESTING
+BAGI PEMULA
+Uminingsih, Muhamad Nur Ichsanudin, Muhammad Yusuf, Suraya
+Jurusan Rekayasa Sistem Komputer(1,2,4), Jurusan Teknik Industri(3), IST AKPRIND Yogyakarta
+Email: umy_bin@yahoo.com
+INFO ARTIKEL
+ABSTRAK
+Riwayat Artikel :
+Diterima : 15 Mei 2022
+Disetujui : 19 Mei 2022
+Sistem Informasi yang dibuat sebelum di gunakan secara formal
+harus melewati pengujian terhadap perangkat lunaknya terlebih
+dahulu. Banyak metode pengujian yaitu white Box Testing dan
+Black Box Testing. Disini di pilih Black Box Testing karena
+untuk pemula yaitu yang tidak mengharuskan menguasai Bahasa
+pemrograman tertentu .Teknik pengujian pada Black Box Testing
+
+==================== [17] Pengujian_Black_Box_Alternatif.pdf ====================
+Jurnal Ilmu Teknik dan Komputer
+Vol. 07. No. 02, Juli 2023: 117-124
+p-ISSN: 2548-740X   e-ISSN: 2621-1491
+Jurnal Teknik dan Komputer, Vol. 07. No. 02, Juli 2023
+117
+JITKOM
+Implementasi Sistem Informasi Seminar Menggunakan
+Metode Prototype
+Imam Maulana Ashari, Ahmad Maulana*
+Teknik Elektro, Universitas Mercu Buana, Jakarta
+*41818110073@student.mercubuana.ac.id
+Article History:
+Received: Jan 21, 2023
+Revised: Aug 13, 2023
+Accepted: Aug 22, 2023
+Published: Sept 25, 2023
+I. PENDAHULUAN
+Pendahuluan berisi latar belakang masalah, tujuan,
+penelitian terkait/ Perkembangan teknologi informasi di Era
+sekarang ini sangat pesat. Dengan kemajuan teknologi
+
+==================== [1] PP_Nomor_7_Tahun_2021.pdf ====================
+LPPM
+Universitas
+Jambi
+Halaman |
+852
+untuk
+memiliki
+merek
+usaha
+dan
+izin
+yang
+terdaftar
+agar
+menghindari
+orang
+lain
+menggunakan
+(Suhardiyah
+et
+
+==================== [2] Transformasi_Bisnis_UMKM_Otomotif.pdf ====================
+Copyright  2025 The Author(s) This article is distributed under a
+Creative Commons Attribution-ShareAlike 4.0 International License.
+326
+Journal Homepage: www.indojurnal.com/index.php/aksikita
+eISSN 3090-1294  & pISSN 3089-8145
+INFO ARTIKEL
+ABSTRAK
+Histori Artikel:
+Bengkel HKU Surabaya Performance, sebuah usaha kecil dan menengah
+(UKM) yang bergerak di bidang jasa perawatan dan perbaikan sepeda motor, di
+daerah Tropodo, menghadapi tantangan dalam memperluas jangkauan pasar dan
+meningkatkan efisiensi operasional. Analisis menunjukkan bahwa model bisnis
+yang diterapkan selama ini bergantung pada kedatangan langsung pelanggan ke
+bengkel, yang membatasi potensi pasar. Melalui observasi dan wawancara
+dengan pemilik bengkel, kami mengusulkan perubahan model bisnis dengan
+pengenalan layanan servis motor keliling berbasis digital melalui sistem
+pemesanan via WhatsApp. Selain itu, pengembangan Standar Operasional
+Prosedur (SOP) untuk layanan keliling juga dianggap penting untuk menjaga
+kualitas pelayanan. Rekomendasi ini diharapkan dapat mengatasi kendala yang
+ada, memperluas pasar, dan meningkatkan daya saing bengkel di pasar yang
+
+==================== [3] Kelemahan_Pencatatan_Manual.pdf ====================
+Remik: Riset dan E-Jurnal Manajemen Informatika Komputer
+Volume 7, Nomor 1, Januari 2023
+http://doi.org/10.33395/remik.v7i1.11963
+e-ISSN : 2541-1330
+p-ISSN : 2541-1332
+This is a Creative Commons License This work is licensed under a Creative Commons
+Attribution-NonCommercial 4.0 International License.
+123
+Rancangan Sistem Informasi Penjualan Suku Cadang
+dan Pelayanan Pada Bengkel Hiba Mobil
+1*Cut Asiana Gemawaty, 2 Yuce Yuliani,
+Universitas Gunadarma
+Depok, Indonesia
+1cut_asiana@staff.gunadarma.ac.id, 2yuce@staff.gunadarma.ac.id
+*Penulis Korespondensi
+Diajukan
+: 04/12/2022
+Diterima
+: 23/12/2022
+Dipublikasi
+
+==================== [4] Sistem_Informasi_Manajemen_Bengkel.pdf ====================
+Jurnal Sosial dan Teknologi (SOSTECH)
+Volume 5, Number 9, September 2025
+p-ISSN 2774-5147 ; e-ISSN 2774-5155
+3717
+Jurnal Sosial dan Teknologi (SOSTECH)
+Rancang Bangun Sistem Informasi Manajemen Bengkel Berbasis
+Website Pada Bengkel Ahass Honda Engine Service di Aceh Timur
+Muhammad Fajrul Fatahillah*, Baihaqi
+Universitas Islam Negeri Ar-Raniry, Indonesia
+Email: 210212054@student.ar-raniry.ac.id*
+Abstrak
+Di era digital saat ini, proses pengelolaan bengkel secara manual sering kali menimbulkan
+ketidaktepatan data, keterlambatan layanan, dan inefisiensi operasional. Penelitian ini bertujuan
+untuk merancang dan mengembangkan Sistem Informasi Manajemen Bengkel berbasis web
+(SIMaBeS) pada Bengkel AHASS Honda Engine Service di Aceh Timur. Penelitian ini
+merupakan penelitian pengembangan sistem informasi (software development) yang bertujuan
+untuk merancang dan membangun sebuah aplikasi manajemen bengkel berbasis website. Sistem
+ini dikembangkan menggunakan model Waterfall, yang mencakup tahapan analisis kebutuhan,
+perancangan sistem dengan diagram UML, implementasi menggunakan PHP dan MySQL, serta
+pengujian dengan metode Black Box. Sistem yang dihasilkan mencakup fitur pengelolaan data
+
+==================== [5] Model_Prototipe_Penjualan_Sparepart.pdf ====================
+JUSTIAN, Jurnal Sistem Informasi Akuntansi
+63
+Vol. 02, No. 01, Maret 2021, pp. 63~71
+ISSN: 2721-7523
+https://ejournal.bsi.ac.id/ejurnal/index.php/justian
+Impelementasi Model Prototipe Dalam Pembuatan Sistem Informasi
+Penjualan Sparepart Sepeda Motor
+Yoki Firmansyah1, Reza Maulana2, Dessy Oktavia Hutagalung3
+Info Artikel
+ABSTRACT
+Diterima   Desember, 18, 2020
+Revisi       Januari, 18, 2021
+Terbit        Maret, 30, 2021
+The prototype model is a model that can be used to design and create
+information systems, where this model is a rapid development and testing of a
+working model (prototype) of a new information system through a process of
+interaction and repetition, there are several stages in the first prototype model.
+listening to customers, building and refining mockups and viewing and testing
+mockups. In this paper, the information system that will be built using a
+prototype model is an information system for the sale of spare parts on the PD.
+
+==================== [6] Penerapan_ECRM_Karya_Servis.pdf ====================
+JITET (Jurnal Informatika dan Teknik Elektro Terapan)
+Vol. 12 No. 2, pISSN: 2303-0577 eISSN: 2830-7062                http://dx.doi.org/10.23960/jitet.v12i2.4259
+1500
+RANCANG BANGUN APLIKASI SISTEM INFORMASI
+INVENTARIS BERBASIS WEBSITE
+Chandra Christian1*, Apriade Voutama2
+1,2 Universitas Singaperbangsa Karawang, Jl. HS. Ronggo Waluyo, Puserjaya, Telukjambe
+Timur,Karawang, Jawa Barat, 41361.
+Riwayat artikel:
+Received: 27  Maret  2024
+Accepted: 30 Maret 2024
+Published: 2 April  2024
+Keywords:
+Inventaris, Laravel, Blackbox
+Testing
+Corespondent Email:
+chandrademam@gmail.com
+Abstrak. Penggunaan layanan sistem informasi berbasis website telah banyak
+digunakan oleh berbagai sektor bisnis dalam beberapa tahun kedepan, hal ini
+disebabkan oleh meningkatnya akses internet dan juga adanya berbagai
+
+==================== [7] Evaluasi_Waktu_Layanan_Tracking.pdf ====================
+Jurnal Teknologi Dan Sistem Informasi Bisnis
+Vol. 6 No. 4 Oktober 2024 Hal. 806-812
+http://jurnal.unidha.ac.id/index.php/jteksis
+E-ISSN : 2655-8238
+P-ISSN : 2964-2132
+Jurnal Teknologi Dan Sistem Informasi Bisnis  JTEKSIS Vol.06 No.4 Oktober 2024                                                                    806
+Perancangan Sistem Informasi Tracking dan Monitoring Posisi Barang
+Menggunakan Metode Waterfall
+Caroline Christine Putri Tolampia, Evi Mariab
+aSistem Informasi, Fakultas Teknologi Informasi, Universitas Kristen Satya Wacana, 682020109@student.uksw.edu
+bSistem Informasi, Fakultas Teknologi Informasi, Universitas Kristen Satya Wacana, evi.maria@uksw.edu
+Submitted: 22-08-2024, Reviewed: 05-09-2024, Accepted 07-10-2024
+https://doi.org/10.47233/jteksis.v6i4.1616
+Abstract
+Information systems and information technology are essential to support a business or organization's operational and
+management activities. PT Vale Indonesia, one of Indonesia's largest nickel mining companies, is experiencing problems in
+the SCM (Supply Chain Management) Department, especially in the Shipping & Traffic Section, in tracking and monitoring
+the current location/position of goods. The method currently used is considered less efficient. This research aims to design
+an information system for tracking and monitoring the position of goods at PT Vale Indonesia. The design was carried out
+using the waterfall method, a system development method carried out sequentially from one phase to the next. The result of
+
+==================== [8] Sistem_Informasi_Layanan_Servis.pdf ====================
+Journal of Computer Science and Technology
+JCS-TECH Vol.5, No.2, November 2025, PP. 102-109
+e-ISSN 2808-9677, p-ISSN 2809-1140
+JCS-TECH: | Journal of Computer Science and Technology |
+102
+SISTEM INFORMASI LAYANAN SERVIS PADA BENGKEL
+MOBIL BERKAH JAYA BERBASIS WEB
+Ahmad Jaenal Aripin1, Febrina2, Stefan Setiadi Dwitama Putra3, Hidayat4*
+1,2,3Prodi Teknik Informatika, 4Prodi Teknik Komputer, Universitas Komputer Indonesia, Bandung
+1ahmad.10121167@mahasiswa.unikom.ac.id, 2febrina.10121184@mahasiswa.unikom.ac.id,
+3stefan.10121204@mahasiswa.unikom.ac.id, 4hidayat@email.unikom.ac.id
+Abstrak
+Perkembangan teknologi informasi telah mendorong transformasi digital di berbagai sektor,
+termasuk layanan bengkel otomotif. Bengkel Berkah Jaya masih menjalankan proses bisnis secara manual
+yang menyebabkan inefisiensi, kesalahan pencatatan, dan keterbatasan layanan bagi pelanggan.
+Penelitian ini bertujuan untuk mengembangkan sistem informasi layanan bengkel berbasis web guna
+mengotomatisasi proses layanan, mempermudah akses informasi, serta meningkatkan efisiensi
+operasional dan kepuasan pelanggan. Pengembangan sistem dilakukan dengan metode Waterfall melalui
+tahapan analisis kebutuhan, perancangan sistem menggunakan UML, implementasi dengan Laravel dan
+MySQL, pengujian, penerapan, dan pemeliharaan sistem. Hasil penelitian menunjukkan bahwa seluruh

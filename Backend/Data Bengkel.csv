@@ -1,0 +1,226 @@
+﻿DATA KATALOG SUKU CADANG BENGKEL ;;;;;
+;;;;;
+;;;;;
+;;;;;
+No;Kode Barang;Kategori / Nama Barang;Harga (Rp);Stok Saat Ini;Batas Minimum
+KATEGORI: Radiator Upper Tank (RUT);;;;;
+1;RUT001;Upper Tank Avanza/Xenia VVT-i Lama;150.000;15;5
+2;RUT002;Upper Tank Avanza/Xenia Dual VVT-i;180.000;12;5
+3;RUT003;Upper Tank Innova Bensin 2.0;250.000;10;5
+4;RUT004;Upper Tank Innova Diesel 2.5;275.000;8;5
+5;RUT005;Upper Tank Innova Reborn;350.000;5;5
+6;RUT006;Upper Tank Fortuner VNT / Hilux;300.000;6;5
+7;RUT007;Upper Tank Agya / Ayla 1.0;130.000;15;5
+8;RUT008;Upper Tank Calya / Sigra 1.2;140.000;14;5
+9;RUT009;Upper Tank Yaris / Vios Lama;220.000;8;5
+10;RUT010;Upper Tank Yaris Bakpao;230.000;6;5
+11;RUT011;Upper Tank Camry / Altis;350.000;4;3
+12;RUT012;Upper Tank Alphard / Vellfire;500.000;3;2
+13;RUT013;Upper Tank Kijang Kapsul 1.8;200.000;9;5
+14;RUT014;Upper Tank Rush / Terios Lama;180.000;11;5
+15;RUT015;Upper Tank All New Rush / Terios;210.000;8;5
+16;RUT016;Upper Tank Sienta;260.000;4;2
+17;RUT017;Upper Tank Kijang Super/Grand;190.000;3;2
+18;RUH001;Upper Tank Jazz GD3 (Lama);200.000;14;5
+19;RUH002;Upper Tank Jazz GE8 / GK5;220.000;12;5
+20;RUH003;Upper Tank Brio / Mobilio / BRV;190.000;18;5
+21;RUH004;Upper Tank CRV Gen 2 ;250.000;5;3
+22;RUH005;Upper Tank CRV Gen 3 ;280.000;6;3
+23;RUH006;Upper Tank CRV Gen 4 ;300.000;4;2
+24;RUH007;Upper Tank HRV 1.5;240.000;8;4
+25;RUH008;Upper Tank Civic FD (Batman);260.000;5;3
+26;RUH009;Upper Tank Freed;210.000;7;5
+27;RUH010;Upper Tank City GD8;210.000;4;2
+28;RUH011;Upper Tank Accord CP2;320.000;2;2
+29;RUD001;Upper Tank Gran Max / Luxio;180.000;20;5
+30;RUD002;Upper Tank Taruna / Feroza;170.000;6;5
+31;RUD003;Upper Tank Sirion;190.000;5;2
+32;RUD004;Upper Tank Xenia 1.0 (Lama);140.000;7;3
+33;RUD005;Upper Tank Taft / Rocky Lama;220.000;3;2
+34;RUS001;Upper Tank Carry / Futura;140.000;25;5
+35;RUS002;Upper Tank APV;160.000;12;5
+36;RUS003;Upper Tank Ertiga Lama;175.000;10;5
+37;RUS004;Upper Tank All New Ertiga;195.000;8;5
+38;RUS005;Upper Tank SX4 X-Over;190.000;4;3
+39;RUS006;Upper Tank Grand Vitara;240.000;3;3
+40;RUS007;Upper Tank Ignis;180.000;6;3
+41;RUS008;Upper Tank Baleno / Aerio;185.000;5;2
+42;RUM001;Upper Tank Xpander;190.000;9;5
+43;RUM002;Upper Tank L300 Diesel;210.000;15;5
+44;RUM003;Upper Tank Pajero Sport Lama;280.000;6;5
+45;RUM004;Upper Tank All New Pajero;320.000;5;3
+46;RUM005;Upper Tank Outlander Sport;260.000;3;2
+47;RUM006;Upper Tank Triton Double Cabin;290.000;4;2
+48;RUM007;Upper Tank Mirage;175.000;5;2
+49;RUN001;Upper Tank Grand Livina;200.000;11;5
+50;RUN002;Upper Tank March / Datsun GO;150.000;10;5
+51;RUN003;Upper Tank X-Trail T30;250.000;4;3
+52;RUN004;Upper Tank X-Trail T31;270.000;4;3
+53;RUN005;Upper Tank Serena C24;240.000;3;2
+54;RUN006;Upper Tank Serena C26;280.000;3;2
+55;RUN007;Upper Tank Evalia;210.000;5;2
+56;RUO001;Upper Tank Wuling Confero;200.000;6;2
+57;RUO002;Upper Tank Wuling Almaz;300.000;3;2
+58;RUO003;Upper Tank Mazda 2;250.000;4;2
+59;RUO004;Upper Tank Ford Fiesta;260.000;3;2
+60;RUO005;Upper Tank Hino Dutro / Toyota Dyna;350.000;7;5
+61;RUO006;Upper Tank Isuzu Panther / Elf;280.000;8;5
+KATEGORI: Radiator Lower Tank (RLT);;;;;
+62;RLT001;Lower Tank Avanza/Xenia VVT-i Lama;150.000;12;5
+63;RLT002;Lower Tank Avanza/Xenia Dual VVT-i;180.000;10;5
+64;RLT003;Lower Tank Innova Bensin 2.0;250.000;7;5
+65;RLT004;Lower Tank Innova Diesel 2.5;275.000;6;5
+66;RLT005;Lower Tank Fortuner VNT / Hilux;300.000;6;5
+67;RLT006;Lower Tank Agya / Ayla 1.0;130.000;10;5
+68;RLT007;Lower Tank Rush / Terios;180.000;9;5
+69;RLH001;Lower Tank Jazz GD3 (Lama);200.000;8;5
+70;RLH002;Lower Tank Brio / Mobilio / BRV;190.000;15;5
+71;RLH003;Lower Tank CRV Gen 3;280.000;5;3
+72;RLH004;Lower Tank HRV 1.5;240.000;6;3
+73;RLD001;Lower Tank Gran Max / Luxio;180.000;18;5
+74;RLD002;Lower Tank Taruna / Feroza;170.000;5;2
+75;RLS001;Lower Tank Carry / Futura;140.000;20;5
+76;RLS002;Lower Tank APV;160.000;8;4
+77;RLS003;Lower Tank Ertiga;175.000;7;4
+78;RLM001;Lower Tank Xpander;190.000;8;5
+79;RLM002;Lower Tank L300 Diesel;210.000;12;5
+80;RLM003;Lower Tank Pajero Sport;280.000;4;2
+81;RLN001;Lower Tank Grand Livina;200.000;9;5
+82;RLN002;Lower Tank March / Datsun GO;150.000;7;3
+KATEGORI: Sarang Radiator / Radiator Core (RCA);;;;;
+83;RCA001;Core Radiator Avanza Manual 1ply;600.000;5;2
+84;RCA002;Core Radiator Innova Bensin Manual;850.000;3;1
+85;RCA003;Core Radiator L300 Diesel Kuningan;1.200.000;4;2
+86;RCA004;Core Radiator Panther Kuningan;1.100.000;3;1
+87;RCA005;Core Radiator Grand Livina Matic;750.000;2;1
+88;RCA006;Core Radiator Futura / Carry;550.000;6;2
+KATEGORI: Radiator Lainnya / Aksesoris (ROT);;;;;
+89;ROU001;Tutup Radiator (Radiator Cap) Denso 0.9;85.000;40;10
+90;ROU002;Tutup Radiator (Radiator Cap) Denso 1.1;85.000;35;10
+91;ROU003;Selang Radiator Atas Universal (Meteran);75.000;50;10
+92;ROU004;Selang Radiator Bawah Universal;80.000;45;10
+93;ROU005;Klem Selang Radiator Stainless 2 inch;15.000;100;20
+94;ROU006;Klem Selang Radiator Stainless 1.5 inch;12.000;100;20
+95;ROT001;Motor Fan Radiator Avanza Original;450.000;8;3
+96;ROT002;Motor Fan Radiator Innova Original;600.000;5;2
+97;ROH001;Motor Fan Radiator Brio / Mobilio;550.000;6;2
+98;ROH002;Motor Fan Radiator CRV;750.000;3;1
+99;ROT003;Thermostat Toyota Avanza / Rush;250.000;15;4
+100;ROH003;Thermostat Honda Jazz / Brio;275.000;12;4
+101;ROS001;Thermostat Suzuki Ertiga;220.000;8;3
+KATEGORI: Suku Cadang AC & Pendingin Ruang (APT);;;;;
+102;APU001;Freon R134a Klea (Per Tabung);350.000;20;5
+103;APU002;Freon R134a Bailian (Per Tabung);280.000;15;5
+104;APU003;Oli Kompresor AC ND8 100ml;75.000;50;10
+105;APU004;Oli Kompresor AC ND9 100ml;85.000;30;5
+106;APU005;Kondensor AC Universal;600.000;10;3
+107;APU006;Magnetic Clutch Kompresor AC Universal;450.000;15;4
+108;APU007;Expansi Valve AC Denso;250.000;20;5
+109;APU008;Relay AC 4 Kaki Denso;35.000;100;20
+110;APU009;Relay AC 5 Kaki Denso;45.000;80;20
+111;APU010;Drier / Filter Kondensor;125.000;25;5
+112;APT001;Filter Kabin (Filter AC) Avanza/Xenia;65.000;50;10
+113;APT002;Filter Kabin (Filter AC) Innova/Fortuner;85.000;40;10
+114;APH001;Filter Kabin (Filter AC) Brio/Mobilio;75.000;45;10
+115;APH002;Filter Kabin (Filter AC) HRV/CRV;95.000;30;5
+116;APT003;Evaporator Depan Avanza/Xenia;750.000;5;2
+117;APT004;Evaporator Depan Innova;850.000;4;2
+118;APH003;Evaporator Depan Brio / Mobilio;800.000;4;2
+119;APT005;Kompresor AC Avanza (Assy);1.800.000;2;1
+120;APH004;Kompresor AC CRV (Assy);2.500.000;1;0
+KATEGORI: Dinamo Starter & Komponennya (DST);;;;;
+121;DSU001;Carbon Brush (Kul Dinamo) Starter Universal;45.000;100;20
+122;DSU002;Armature Dinamo Starter Universal;350.000;15;3
+123;DSU003;Switch Starter / Bendik Universal;150.000;25;5
+124;DST001;Dinamo Starter Assy Avanza;950.000;3;1
+125;DST002;Bendik Dinamo Starter Avanza/Xenia;180.000;12;3
+126;DSH001;Dinamo Starter Assy Brio;1.100.000;2;1
+127;DSM001;Dinamo Starter Assy L300;1.250.000;4;1
+128;DSO001;Gigi Nanas (Pinion Gear) Starter Kijang;120.000;15;3
+KATEGORI: Dinamo Alternator & Komponennya (DAL);;;;;
+129;DAU001;IC Regulator Alternator Denso;250.000;30;5
+130;DAU002;Bearing Alternator 6202 NSK;35.000;100;20
+131;DAU003;Bearing Alternator 6303 NSK;45.000;80;20
+132;DAU004;Diode Rectifier (Keteng) Alternator;180.000;20;4
+133;DAU005;Rotor Coil Alternator Universal;400.000;10;2
+134;DAU006;Stator Coil Alternator Universal;450.000;10;2
+135;DAT001;Dinamo Alternator Assy Avanza;1.200.000;4;1
+136;DAT002;Dinamo Alternator Assy Innova Diesel;1.800.000;2;1
+137;DAH001;Dinamo Alternator Assy Jazz/Brio;1.400.000;3;1
+KATEGORI: Cairan & Coolant (CLN);;;;;
+138;CLU001;Coolant Prestone Merah 4L;125.000;80;10
+139;CLU002;Coolant Prestone Hijau 4L;125.000;70;10
+140;CLU003;Coolant Top1 Merah 1L;35.000;150;20
+141;CLU004;Coolant Megacools Hijau 1L;25.000;200;20
+142;CLU005;Air Radiator Biasa (Galon 5L);15.000;100;20
+143;CLT001;Toyota Motor Oil (TMO) Coolant Merah 4L;160.000;40;10
+144;CLH001;Honda Radiator Coolant Type 2 (Biru) 4L;175.000;30;5
+145;CLS001;Suzuki Ecstar Coolant Biru 4L;150.000;25;5
+146;CLU006;Oli Kompresor ND8 (Botol 1 Liter);250.000;10;2
+KATEGORI: Kategori Jasa Servis Utama (JAS);;;;;
+147;JSU001;Isi Freon AC (Jasa + Freon R134a Full);200.000;999;0
+148;JSU002;Tambah Freon AC (Setengah);100.000;999;0
+149;JSU003;Jasa Korok Radiator Mobil Kecil (Agya/Brio/Avanza);150.000;999;0
+150;JSU004;Jasa Korok Radiator Mobil Menengah (Innova/CRV);200.000;999;0
+151;JSU005;Jasa Korok Radiator Mobil Besar / Truk;250.000;999;0
+152;JSU006;Jasa Las Kuningan / Titik;50.000;999;0
+153;JSU007;Jasa Las Aluminium / Titik;75.000;999;0
+154;JSU008;Jasa Ganti Upper/Lower Tank (Termasuk Lem);100.000;999;0
+155;JSU009;Jasa Bongkar Pasang Dinamo Starter;150.000;999;0
+156;JSU010;Jasa Bongkar Pasang Dinamo Alternator;150.000;999;0
+157;JSU011;Jasa Cuci Evaporator AC (Bongkar Dashboard);350.000;999;0
+158;JSU012;Jasa Cuci Evaporator AC (Tanpa Bongkar Dashboard);200.000;999;0
+159;JSU013;Jasa Ganti Bearing Alternator;100.000;999;0
+160;JSU014;Jasa Ganti Carbon Brush Starter;75.000;999;0
+161;JSU015;Flushing AC System (Kuras Total);300.000;999;0
+;;;;;
+📚 PENJELASAN KODE BARANG;;;;;
+;;;;;
+Agar ringkas dan mudah diingat oleh kasir/mekanik, kode dipadatkan menjadi persis 6 karakter dengan rumus: [1 Huruf Jenis] + [1 Huruf Kategori] + [1 Huruf Merk] + [3 Angka Urutan].;;;;;
+;;;;;
+1. HURUF PERTAMA (Jenis Barang);;;;;
+R;Radiator;;;;
+A;AC;;;;
+D;Dinamo;;;;
+C;Cairan (Coolant/Oli);;;;
+J;Jasa / Ongkos Kerja;;;;
+2. HURUF KEDUA (Sub-Kategori);;;;;
+U;Upper Tank;;;;
+L;Lower Tank;;;;
+C;Core (Sarang Radiator);;;;
+O;Lainnya (Others / Aksesoris / Tutup / Relay);;;;
+P;Parts AC (Filter, Freon, Evaporator);;;;
+S;Starter (Dinamo Starter & Komponen);;;;
+A;Alternator (Dinamo Ampere & Komponen);;;;
+3. HURUF KETIGA (Merk Mobil / Peruntukan);;;;;
+T;Toyota;;;;
+H;Honda;;;;
+D;Daihatsu;;;;
+M;Mitsubishi;;;;
+N;Nissan / Datsun;;;;
+S;Suzuki;;;;
+O;Others (Mazda, Ford, Wuling, Truk);;;;
+U;Universal (Cocok untuk semua merk mobil);;;;
+;;;;;
+;;;;;
+;;;;;
+;;;;;
+❓ BAGAIMANA CARA MENGINPUT JIKA ADA BARANG BARU? (SOP BENGKEL);;;;;
+;;;;;
+Jika besok bengkel menerima stok barang yang sama sekali baru (belum ada di sistem), begini cara mekanik membuat kodenya:;;;;;
+;;;;;
+"Contoh Kasus 1: Bengkel baru saja beli ""Upper Tank untuk Mobil Honda Civic"".";;;;;
+;;;;;
+1. Jenisnya apa? Radiator = R;;;;;
+2. Sub-kategorinya apa? Upper Tank = U;;;;;
+3. Untuk mobil apa? Honda = H;;;;;
+4. Cek nomor urut terakhir Honda Upper Tank (Misal terakhir RUH011), maka ini jadi 012;;;;;
+Kode yang diketik ke sistem: RUH012;;;;;
+;;;;;
+"Contoh Kasus 2: Bengkel membeli cairan ""Pembersih Kaca (Wiper Fluid)"" yang bisa dipakai semua mobil.";;;;;
+;;;;;
+1. Jenisnya apa? Cairan = C;;;;;
+2. Sub-kategorinya apa? Liquid/Lainnya = L;;;;;
+3. Untuk mobil apa? Semua Mobil (Universal) = U;;;;;
+4. Urutan berikutnya = 007;;;;;
+Kode yang diketik ke sistem: CLU007;;;;;
