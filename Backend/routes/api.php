@@ -40,6 +40,8 @@ Route::middleware('auth:sanctum')->group(function () {
     
     Route::get('/distributor', [App\Http\Controllers\Api\DistributorController::class, 'index']);
     Route::post('/distributor', [App\Http\Controllers\Api\DistributorController::class, 'store']);
+    Route::put('/distributor/{id}', [App\Http\Controllers\Api\DistributorController::class, 'update']);
+    Route::delete('/distributor/{id}', [App\Http\Controllers\Api\DistributorController::class, 'destroy']);
     
     Route::get('/penjualan', [App\Http\Controllers\Api\PenjualanController::class, 'index']);
     Route::post('/penjualan', [App\Http\Controllers\Api\PenjualanController::class, 'store']);

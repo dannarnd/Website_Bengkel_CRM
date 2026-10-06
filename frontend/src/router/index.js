@@ -41,6 +41,7 @@ const routes = [
             { path: 'chatbot-rule', name: 'ChatbotRule', component: ChatbotRule },
             { path: 'pelanggan', name: 'PelangganManage', component: () => import('../views/admin/PelangganManage.vue') },
             { path: 'kendaraan', name: 'KendaraanManage', component: () => import('../views/admin/KendaraanManage.vue') },
+            { path: 'distributor', name: 'DistributorManage', component: () => import('../views/admin/DistributorManage.vue') },
             { path: 'users', name: 'KaryawanManage', component: () => import('../views/admin/KaryawanManage.vue') },
         ]
     }

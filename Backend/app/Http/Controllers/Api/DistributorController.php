@@ -26,6 +26,24 @@ class DistributorController extends Controller {
         $data = $request->all();
         $data['id_distributor'] = $newId;
         
+        
         return response()->json(Distributor::create($data), 201);
+    }
+    
+    public function update(Request $request, $id) {
+        $distributor = Distributor::findOrFail($id);
+        $request->validate([
+            'nama_distributor' => 'required',
+            'no_hp' => 'required',
+            'alamat' => 'required'
+        ]);
+        $distributor->update($request->all());
+        return response()->json($distributor);
+    }
+    
+    public function destroy($id) {
+        $distributor = Distributor::findOrFail($id);
+        $distributor->delete();
+        return response()->json(['message' => 'Distributor berhasil dihapus']);
     }
 }
