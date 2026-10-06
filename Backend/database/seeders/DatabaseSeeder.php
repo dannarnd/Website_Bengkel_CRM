@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
                 'username' => 'admin',
                 'email' => 'admin@gmail.com',
                 'password' => Hash::make('password'),
-                'jabatan' => 'Admin',
+                'jabatan' => 'admin',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
                 'username' => 'budi',
                 'email' => 'budi@gmail.com',
                 'password' => Hash::make('password'),
-                'jabatan' => 'Mekanik',
+                'jabatan' => 'mekanik',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             [
                 'id_pelanggan' => 'P001',
                 'nama_pelanggan' => 'Dannarnd',
-                'nomor_hp' => '081234567890',
+                'nomor_hp' => '081234564546', // HP ends in 4546 (from screenshot)
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
             [
                 'id_kendaraan' => 'M001',
                 'id_pelanggan' => 'P001',
-                'nomor_polisi' => 'BL0987AAZ',
+                'nomor_polisi' => 'BL1234AD', // from screenshot
                 'merk_mobil' => 'Toyota Avanza',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -109,9 +109,46 @@ class DatabaseSeeder extends Seeder
 
         // Chatbot Rules
         DB::table('chatbot_rule')->insert([
-            ['keyword' => 'buka', 'action_type' => 'text', 'response_text' => 'Bengkel buka dari jam 08.00 hingga 17.00 setiap hari kerja.'],
-            ['keyword' => 'lokasi', 'action_type' => 'text', 'response_text' => 'Lokasi bengkel kami di Jalan Lorong Himalaya, Banda Aceh.'],
-            ['keyword' => 'status', 'action_type' => 'status_check', 'response_text' => 'Memeriksa status...'],
+            ['keyword' => 'buka', 'action_type' => 'text', 'response_text' => 'Bengkel Doles Radiator buka dari jam 08.00 hingga 18.00 setiap hari Senin-Sabtu.'],
+            ['keyword' => 'lokasi', 'action_type' => 'text', 'response_text' => 'Lokasi bengkel Doles Radiator berada di Jalan Lorong Himalaya, Banda Aceh.'],
+            ['keyword' => 'status', 'action_type' => 'status_check', 'response_text' => 'Memeriksa status perbaikan...'],
+            ['keyword' => 'harga', 'action_type' => 'text', 'response_text' => 'Harga servis bervariasi tergantung jenis kerusakan. Silakan bawa kendaraan Anda untuk estimasi.'],
+            ['keyword' => 'radiator', 'action_type' => 'text', 'response_text' => 'Kami spesialis servis radiator. Bisa korok, tambal, dan ganti upper tank.'],
+            ['keyword' => 'halo', 'action_type' => 'text', 'response_text' => 'Halo! Ada yang bisa kami bantu seputar servis radiator kendaraan Anda?'],
+        ]);
+
+        // Service
+        DB::table('service')->insert([
+            [
+                'id_service' => 'S001',
+                'id_kendaraan' => 'M001',
+                'id_karyawan' => 'K002',
+                'invoice_number' => 'INV-202610-001',
+                'status' => 'Diproses',
+                'total_biaya' => 200000,
+                'catatan' => 'Radiator bocor',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]
+        ]);
+        
+        DB::table('service_detail')->insert([
+            [
+                'id_service' => 'S001',
+                'kode_barang' => 'SP001',
+                'qty' => 1,
+                'subtotal' => 50000,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'id_service' => 'S001',
+                'kode_barang' => 'SP002',
+                'qty' => 1,
+                'subtotal' => 150000,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]
         ]);
     }
 }
