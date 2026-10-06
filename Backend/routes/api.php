@@ -26,12 +26,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('karyawan', KaryawanController::class);
     Route::apiResource('pelanggan', PelangganController::class);
     Route::apiResource('kendaraan', KendaraanController::class);
+    Route::get('/sparepart/next-code/{prefix}', [SparepartController::class, 'generateNextCode']);
     Route::apiResource('sparepart', SparepartController::class);
     
     Route::get('/service', [ServiceController::class, 'index']);
     Route::get('/service/{id}', [ServiceController::class, 'show']);
     Route::post('/service', [ServiceController::class, 'store']);
     Route::put('/service/{id}/status', [ServiceController::class, 'updateStatus']);
+    Route::delete('/service/{id}', [ServiceController::class, 'destroy']);
     
     Route::get('/pembelian', [PembelianController::class, 'index']);
     Route::post('/pembelian', [PembelianController::class, 'store']);

@@ -20,7 +20,7 @@
             <div class="space-y-2">
               <label class="text-sm font-semibold text-slate-700">Pilih Kendaraan (Plat Nomor)</label>
               <SearchableSelect 
-                v-model="form.nomor_polisi" 
+                v-model="form.id_kendaraan" 
                 :options="kendaraanOptions" 
                 placeholder="Ketik Plat Nomor Kendaraan..." 
               />
@@ -34,7 +34,7 @@
           <h2 class="text-lg font-bold text-slate-800 border-b border-slate-100 pb-2 mb-4">Detail Servis</h2>
           <div class="space-y-2">
             <label class="text-sm font-semibold text-slate-700">Keluhan Kendaraan</label>
-            <textarea v-model="form.keluhan" rows="4"
+            <textarea v-model="form.catatan" rows="4"
               placeholder="Mesin cepat panas saat macet, air radiator sering berkurang..." required
               class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none transition-all"></textarea>
           </div>
@@ -71,14 +71,14 @@ const isSubmitting = ref(false);
 const kendaraans = ref([]);
 
 const form = reactive({
-  nomor_polisi: '',
-  keluhan: '',
+  id_kendaraan: '',
+  catatan: '',
 });
 
 const kendaraanOptions = computed(() => {
   return kendaraans.value.map(k => ({
-    label: `${k.nomor_polisi} - ${k.model} (Milik: ${k.pelanggan?.nama})`,
-    value: k.nomor_polisi
+    label: `${k.nomor_polisi} - ${k.merk_mobil} (Milik: ${k.pelanggan?.nama_pelanggan})`,
+    value: k.id_kendaraan
   }));
 });
 
@@ -98,8 +98,8 @@ onMounted(() => {
 onActivated(() => {
   fetchKendaraan();
   // Reset form ketika komponen diaktifkan (agar tidak menempel data servis sebelumnya akibat keep-alive)
-  form.nomor_polisi = '';
-  form.keluhan = '';
+  form.id_kendaraan = '';
+  form.catatan = '';
   isSubmitting.value = false;
 });
 

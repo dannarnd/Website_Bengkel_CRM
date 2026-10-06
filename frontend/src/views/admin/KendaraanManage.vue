@@ -32,15 +32,15 @@
             <tr v-else-if="kendaraans.length === 0">
               <td colspan="4" class="px-6 py-8 text-center text-slate-500">Belum ada data kendaraan.</td>
             </tr>
-            <tr v-for="k in kendaraans" :key="k.nomor_polisi" class="hover:bg-slate-50 transition-colors">
+            <tr v-for="k in kendaraans" :key="k.id_kendaraan" class="hover:bg-slate-50 transition-colors">
               <td class="px-6 py-4 font-bold text-slate-800">{{ k.nomor_polisi }}</td>
-              <td class="px-6 py-4 text-slate-600">{{ k.model }}</td>
+              <td class="px-6 py-4 text-slate-600">{{ k.merk_mobil }}</td>
               <td class="px-6 py-4 text-slate-600">{{ k.pelanggan?.nama }}</td>
               <td class="px-6 py-4 text-right space-x-2">
                 <button @click="openForm(k)" class="text-teal-500 hover:text-teal-700 bg-teal-50 hover:bg-teal-100 p-2 rounded-lg transition-colors">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                 </button>
-                <button @click="deleteData(k.nomor_polisi)" class="text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition-colors">
+                <button @click="deleteData(k.id_kendaraan)" class="text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition-colors">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                 </button>
               </td>
@@ -66,7 +66,7 @@
           </div>
           <div class="space-y-1">
             <label class="text-sm font-semibold text-slate-700">Model Mobil</label>
-            <input v-model="form.model" type="text" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none" placeholder="Toyota Avanza">
+            <input v-model="form.merk_mobil" type="text" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none" placeholder="Toyota Avanza">
           </div>
           <div class="space-y-1">
             <label class="text-sm font-semibold text-slate-700">Pemilik (Pelanggan)</label>
@@ -101,17 +101,18 @@ const isLoading = ref(true);
 const isFormOpen = ref(false);
 const isSubmitting = ref(false);
 const isEdit = ref(false);
+const editId = ref(null);
 
 const form = reactive({
   nomor_polisi: '',
-  model: '',
+  merk_mobil: '',
   id_pelanggan: ''
 });
 
 const pelangganOptions = computed(() => {
   return pelanggans.value.map(p => ({
     label: `${p.nama} (${p.nomor_hp})`,
-    value: p.id
+    value: p.id_pelanggan
   }));
 });
 
@@ -132,13 +133,15 @@ const fetchData = async () => {
 const openForm = (data = null) => {
   if (data) {
     isEdit.value = true;
+    editId.value = data.id_kendaraan;
     form.nomor_polisi = data.nomor_polisi;
-    form.model = data.model;
+    form.merk_mobil = data.merk_mobil;
     form.id_pelanggan = data.id_pelanggan;
   } else {
     isEdit.value = false;
+    editId.value = null;
     form.nomor_polisi = '';
-    form.model = '';
+    form.merk_mobil = '';
     form.id_pelanggan = '';
   }
   isFormOpen.value = true;
@@ -150,7 +153,7 @@ const submitForm = async () => {
   isSubmitting.value = true;
   try {
     if (isEdit.value) {
-      await api.put(`/kendaraan/${form.nomor_polisi}`, form);
+      await api.put(`/kendaraan/${editId.value}`, form);
     } else {
       await api.post('/kendaraan', form);
     }

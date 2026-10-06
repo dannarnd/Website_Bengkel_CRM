@@ -18,17 +18,23 @@ class ServiceController extends Controller {
     public function store(Request $request) {
         $request->validate([
             'id_kendaraan' => 'required',
-            'id_karyawan' => 'required',
-            'invoice_number' => 'required|unique:service',
             'spareparts' => 'array'
         ]);
+
+        $id_karyawan = auth()->user()->id_karyawan ?? 'K001';
+        $invoice_number = 'INV-' . date('Ym') . '-' . str_pad(rand(1, 9999), 4, '0', STR_PAD_LEFT);
+
+        // Jika invoice_number bentrok (sangat kecil kemungkinannya), loop atau gunakan uniqid
+        while(Service::where('invoice_number', $invoice_number)->exists()) {
+            $invoice_number = 'INV-' . date('Ym') . '-' . str_pad(rand(1, 9999), 4, '0', STR_PAD_LEFT);
+        }
 
         DB::beginTransaction();
         try {
             $service = Service::create([
                 'id_kendaraan' => $request->id_kendaraan,
-                'id_karyawan' => $request->id_karyawan,
-                'invoice_number' => $request->invoice_number,
+                'id_karyawan' => $id_karyawan,
+                'invoice_number' => $invoice_number,
                 'status' => 'Menunggu',
                 'total_biaya' => 0,
                 'catatan' => $request->catatan
@@ -87,5 +93,24 @@ class ServiceController extends Controller {
         }
         
         return response()->json($service);
+    }
+    
+    public function destroy($id) {
+        $service = Service::findOrFail($id);
+        
+        DB::beginTransaction();
+        try {
+            // Hapus relasi (contoh: warranty, photos, details) yang cascade nya mungkin belum diset
+            if($service->warranty) $service->warranty()->delete();
+            $service->photos()->delete();
+            $service->details()->delete();
+            
+            $service->delete();
+            DB::commit();
+            return response()->json(['message' => 'Servis berhasil dihapus']);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }

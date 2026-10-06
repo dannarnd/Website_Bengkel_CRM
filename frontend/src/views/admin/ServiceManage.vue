@@ -6,7 +6,7 @@
     <div class="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
       <div>
         <div class="flex flex-wrap items-center gap-3 mb-2">
-          <h1 class="text-2xl font-bold text-slate-800">Ruang Kerja: {{ service.nomor_polisi }} <span class="text-lg text-slate-500 font-normal">({{ service.kendaraan?.model }})</span></h1>
+          <h1 class="text-2xl font-bold text-slate-800">Ruang Kerja: {{ service.kendaraan?.nomor_polisi }} <span class="text-lg text-slate-500 font-normal">({{ service.kendaraan?.merk_mobil }})</span></h1>
           <span :class="statusClass(service.status)">{{ service.status }}</span>
           
           <!-- Tombol Kontrol Status Manual -->
@@ -15,7 +15,7 @@
             <button @click="updateStatus('Dikerjakan')" :disabled="isChangingStatus" :class="['px-3 py-1 text-xs font-bold rounded-md transition-colors', service.status === 'Dikerjakan' ? 'bg-white shadow-sm text-blue-700 border border-slate-200' : 'text-slate-500 hover:text-slate-700']">Dikerjakan</button>
           </div>
         </div>
-        <p class="text-sm text-slate-500">Pemilik: <span class="font-bold text-slate-700">{{ service.kendaraan?.pelanggan?.nama }}</span> | HP: {{ service.kendaraan?.pelanggan?.nomor_hp }}</p>
+        <p class="text-sm text-slate-500">Pemilik: <span class="font-bold text-slate-700">{{ service.kendaraan?.pelanggan?.nama_pelanggan }}</span> | HP: {{ service.kendaraan?.pelanggan?.nomor_hp }}</p>
       </div>
       <div class="text-left md:text-right mt-2 md:mt-0 border-t md:border-0 border-slate-100 pt-4 md:pt-0">
         <p class="text-xs text-slate-500 uppercase font-bold tracking-wider mb-1">Total Biaya Servis</p>
@@ -35,7 +35,7 @@
         <!-- Keluhan Box -->
         <div class="bg-amber-50 p-6 rounded-2xl border border-amber-100">
           <h3 class="text-xs font-bold text-amber-800 uppercase tracking-wider mb-2">Keluhan Kendaraan</h3>
-          <p class="text-amber-900 text-sm">{{ service.keluhan }}</p>
+          <p class="text-amber-900 text-sm">{{ service.catatan }}</p>
         </div>
 
         <!-- Catatan Riwayat Sistem (Jika Ada) -->
@@ -182,7 +182,7 @@
             </div>
             <div>
               <h3 class="font-bold text-green-900 text-lg">Servis Telah Selesai</h3>
-              <p class="text-green-700 text-sm">Diselesaikan pada {{ service.tanggal_selesai }}</p>
+              <p class="text-green-700 text-sm">Diselesaikan pada {{ new Date(service.updated_at).toLocaleDateString('id-ID') }}</p>
             </div>
           </div>
 
