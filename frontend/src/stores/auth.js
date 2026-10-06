@@ -15,7 +15,7 @@ export const useAuthStore = defineStore('auth', {
                 // Laravel Sanctum membutuhkan CSRF cookie sebelum login untuk keamanan SPA stateful, 
                 // namun karena kita menggunakan Bearer token stateless API, kita langsung tembak endpoint login.
                 const response = await api.post('/login', credentials);
-                this.token = response.data.access_token;
+                this.token = response.data.token;
                 this.user = response.data.user;
                 localStorage.setItem('auth_token', this.token);
                 return { success: true };
@@ -37,7 +37,7 @@ export const useAuthStore = defineStore('auth', {
         async fetchUser() {
             if (!this.token) return;
             try {
-                const response = await api.get('/user');
+                const response = await api.get('/me');
                 this.user = response.data;
             } catch (error) {
                 this.logout();

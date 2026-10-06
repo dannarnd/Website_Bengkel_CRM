@@ -147,7 +147,7 @@ const sendMessage = async () => {
     // Tambahkan pesan balasan bot ke chat, beserta array options (jika ada)
     messages.value.push({ 
       isUser: false, 
-      text: response.data.message,
+      text: response.data.reply,
       options: response.data.options || []
     });
   } catch (error) {
