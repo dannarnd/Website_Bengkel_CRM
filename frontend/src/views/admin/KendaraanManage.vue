@@ -71,7 +71,7 @@
           <div class="space-y-1">
             <label class="text-sm font-semibold text-slate-700">Pemilik (Pelanggan)</label>
             <SearchableSelect 
-              v-model="form.pelanggan_id" 
+              v-model="form.id_pelanggan" 
               :options="pelangganOptions" 
               placeholder="Ketik Nama atau No HP..." 
             />
@@ -105,7 +105,7 @@ const isEdit = ref(false);
 const form = reactive({
   nomor_polisi: '',
   model: '',
-  pelanggan_id: ''
+  id_pelanggan: ''
 });
 
 const pelangganOptions = computed(() => {
@@ -134,12 +134,12 @@ const openForm = (data = null) => {
     isEdit.value = true;
     form.nomor_polisi = data.nomor_polisi;
     form.model = data.model;
-    form.pelanggan_id = data.pelanggan_id;
+    form.id_pelanggan = data.id_pelanggan;
   } else {
     isEdit.value = false;
     form.nomor_polisi = '';
     form.model = '';
-    form.pelanggan_id = '';
+    form.id_pelanggan = '';
   }
   isFormOpen.value = true;
 };

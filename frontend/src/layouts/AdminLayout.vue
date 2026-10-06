@@ -83,7 +83,7 @@
           <span class="text-sm tracking-wide">Mutasi Stok</span>
         </router-link>
 
-        <template v-if="authStore.user?.role === 'admin'">
+        <template v-if="authStore.user?.jabatan === 'admin'">
           <p class="px-4 text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-4 mt-8">Sistem</p>
 
           <router-link @click="isSidebarOpen = false" to="/admin/chatbot-rule"
@@ -113,7 +113,7 @@
             </div>
             <div class="overflow-hidden">
               <p class="text-sm font-bold text-slate-800 truncate tracking-wide" :title="authStore.user?.name">{{ authStore.user?.name || 'Loading...' }}</p>
-              <p class="text-[10px] text-indigo-600 uppercase tracking-widest font-bold truncate mt-0.5">{{ authStore.user?.role || 'user' }}</p>
+              <p class="text-[10px] text-indigo-600 uppercase tracking-widest font-bold truncate mt-0.5">{{ authStore.user?.jabatan || 'user' }}</p>
             </div>
           </div>
           <button @click="handleLogout" class="text-slate-400 hover:text-red-500 p-2 rounded-xl transition-all hover:bg-red-50 shrink-0" title="Logout">

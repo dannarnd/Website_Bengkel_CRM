@@ -95,7 +95,7 @@
                   <option v-for="sp in spareparts" :key="sp.id" :value="`[${sp.kode_barang}] ${sp.nama_barang}`">Stok
                     saat ini: {{ sp.stok_sekarang }}</option>
                 </datalist>
-                <p v-if="item.sparepart_id" class="text-[10px] text-teal-600 font-bold mt-1 flex items-center gap-1">
+                <p v-if="item.kode_barang" class="text-[10px] text-teal-600 font-bold mt-1 flex items-center gap-1">
                   <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
@@ -167,7 +167,7 @@
             <option v-for="sp in spareparts" :key="sp.id" :value="`[${sp.kode_barang}] ${sp.nama_barang}`">Stok saat
               ini: {{ sp.stok_sekarang }}</option>
           </datalist>
-          <p v-if="formKeluar.sparepart_id" class="text-xs text-red-600 font-bold mt-2 flex items-center gap-1">
+          <p v-if="formKeluar.kode_barang" class="text-xs text-red-600 font-bold mt-2 flex items-center gap-1">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
             </svg>
@@ -365,12 +365,12 @@ const searchKeluar = ref('');
 const onSelectMasuk = (index) => {
   const item = formMasuk.items[index];
   const selected = spareparts.value.find(sp => `[${sp.kode_barang}] ${sp.nama_barang}` === item.searchMasuk);
-  item.sparepart_id = selected ? selected.id : '';
+  item.kode_barang = selected ? selected.id : '';
 };
 
 const onSelectKeluar = () => {
   const selected = spareparts.value.find(sp => `[${sp.kode_barang}] ${sp.nama_barang}` === searchKeluar.value);
-  formKeluar.sparepart_id = selected ? selected.id : '';
+  formKeluar.kode_barang = selected ? selected.id : '';
 };
 
 const filteredHistories = computed(() => {
@@ -524,14 +524,14 @@ const exportPDF = async () => {
 
 const formMasuk = reactive({
   items: [
-    { sparepart_id: '', qty: 1, harga_modal: '', searchMasuk: '' }
+    { kode_barang: '', qty: 1, harga_modal: '', searchMasuk: '' }
   ],
   keterangan: '',
   bukti_foto: null
 });
 
 const addItem = () => {
-  formMasuk.items.push({ sparepart_id: '', qty: 1, harga_modal: '', searchMasuk: '' });
+  formMasuk.items.push({ kode_barang: '', qty: 1, harga_modal: '', searchMasuk: '' });
 };
 
 const removeItem = (index) => {
@@ -548,7 +548,7 @@ const viewPhoto = (path) => {
 };
 
 const formKeluar = reactive({
-  sparepart_id: '',
+  kode_barang: '',
   qty: 1,
   keterangan: ''
 });
@@ -612,7 +612,7 @@ const submitAdjustment = async (type) => {
       payload = new FormData();
       // Prepare items as JSON string, excluding searchMasuk to keep it clean
       const itemsToSubmit = formMasuk.items.map(i => ({
-        sparepart_id: i.sparepart_id,
+        kode_barang: i.kode_barang,
         qty: i.qty,
         harga_modal: i.harga_modal
       }));
@@ -631,7 +631,7 @@ const submitAdjustment = async (type) => {
     if (isMasuk) {
       isSuccessMasuk.value = true;
       alertMessageMasuk.value = res.data.message;
-      formMasuk.items = [{ sparepart_id: '', qty: 1, harga_modal: '', searchMasuk: '' }];
+      formMasuk.items = [{ kode_barang: '', qty: 1, harga_modal: '', searchMasuk: '' }];
       formMasuk.keterangan = '';
       formMasuk.bukti_foto = null;
       // Reset input file via DOM is a bit tricky, but this helps the logic reset
@@ -642,7 +642,7 @@ const submitAdjustment = async (type) => {
       let msg = res.data.message;
       if (res.data.alert) msg += " " + res.data.alert;
       alertMessageKeluar.value = msg;
-      formKeluar.sparepart_id = '';
+      formKeluar.kode_barang = '';
       formKeluar.qty = 1;
       formKeluar.keterangan = '';
       searchKeluar.value = '';

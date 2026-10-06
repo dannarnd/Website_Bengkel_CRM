@@ -1,42 +1,45 @@
 <?php
-
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
 {
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            if (empty($model->id_service)) {
+                $latest = self::orderBy('id_service', 'desc')->first();
+                if (!$latest) {
+                    $model->id_service = 'S001';
+                } else {
+                    $number = intval(substr($latest->id_service, 1)) + 1;
+                    $model->id_service = 'S' . str_pad($number, 3, '0', STR_PAD_LEFT);
+                }
+            }
+        });
+    }
+
     protected $table = 'service';
-    
-    protected $guarded = ['id'];
+    protected $primaryKey = 'id_service';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
-    // Nota Service ini milik siapa (Relasi N:1 ke Pelanggan)
-    public function kendaraan()
-    {
-        return $this->belongsTo(Kendaraan::class, 'nomor_polisi', 'nomor_polisi');
+    protected $fillable = ['id_service', 'id_kendaraan', 'id_karyawan', 'invoice_number', 'status', 'total_biaya', 'catatan'];
+
+    public function kendaraan() {
+        return $this->belongsTo(Kendaraan::class, 'id_kendaraan', 'id_kendaraan');
     }
-
-    // Nota Service ini dikerjakan oleh siapa (Relasi N:1 ke User/Mekanik)
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+    public function karyawan() {
+        return $this->belongsTo(Karyawan::class, 'id_karyawan', 'id_karyawan');
     }
-
-    // Nota Service ini menghabiskan barang apa saja (Relasi 1:N ke ServiceDetail)
-    public function serviceDetails()
-    {
-        return $this->hasMany(ServiceDetail::class);
+    public function details() {
+        return $this->hasMany(ServiceDetail::class, 'id_service', 'id_service');
     }
-
-    // Nota Service ini punya foto bukti apa saja (Relasi 1:1 ke ServicePhoto)
-    public function servicePhoto()
-    {
-        return $this->hasOne(ServicePhoto::class);
+    public function photos() {
+        return $this->hasMany(ServicePhoto::class, 'id_service', 'id_service');
     }
-
-    // Nota Service ini punya garansi apa (Relasi 1:1 ke Warranty)
-    public function warranty()
-    {
-        return $this->hasOne(Warranty::class);
+    public function warranty() {
+        return $this->hasOne(Warranty::class, 'id_service', 'id_service');
     }
 }

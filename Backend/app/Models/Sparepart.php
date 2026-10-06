@@ -1,24 +1,13 @@
 <?php
-
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Sparepart extends Model
 {
     protected $table = 'sparepart';
-    
-    protected $guarded = ['id'];
+    protected $primaryKey = 'kode_barang';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
-    // Relasi ke ServiceDetail: Satu jenis sparepart bisa tercatat di banyak rincian servis
-    public function serviceDetails()
-    {
-        return $this->hasMany(ServiceDetail::class);
-    }
-
-    // Relasi ke StockAdjustment: Satu sparepart memiliki banyak riwayat keluar/masuk
-    public function stockAdjustments()
-    {
-        return $this->hasMany(StockAdjustment::class);
-    }
+    protected $fillable = ['kode_barang', 'nama_barang', 'harga', 'stok', 'batas_minimum'];
 }

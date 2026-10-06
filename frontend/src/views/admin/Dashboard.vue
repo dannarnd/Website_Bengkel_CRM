@@ -76,7 +76,7 @@
                 </div>
               </td>
             </tr>
-            <tr v-for="item in stats.critical_stok" :key="item.id" class="hover:bg-slate-50 transition-colors">
+            <tr v-for="item in stats.critical_stok" :key="item.id_pelanggan_pelanggan" class="hover:bg-slate-50 transition-colors">
               <td class="px-6 py-5 whitespace-nowrap text-sm font-bold text-slate-800">{{ item.nama_barang }}</td>
               <td class="px-6 py-5 whitespace-nowrap text-sm text-red-600 font-bold">
                 <span class="flex items-center gap-1.5">

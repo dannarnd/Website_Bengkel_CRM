@@ -1,24 +1,15 @@
 <?php
-
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Model;
 
 class ServiceDetail extends Model
 {
     protected $table = 'service_detail';
-    
-    protected $guarded = ['id'];
+    protected $primaryKey = 'id_service_detail';
 
-    // Rincian ini milik nota servis yang mana
-    public function service()
-    {
-        return $this->belongsTo(Service::class);
-    }
+    protected $fillable = ['id_service', 'kode_barang', 'qty', 'subtotal'];
 
-    // Rincian ini memakai sparepart apa
-    public function sparepart()
-    {
-        return $this->belongsTo(Sparepart::class);
+    public function sparepart() {
+        return $this->belongsTo(Sparepart::class, 'kode_barang', 'kode_barang');
     }
 }

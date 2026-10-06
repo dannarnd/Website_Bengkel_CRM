@@ -322,7 +322,7 @@ const isAddingSp = ref(false);
 const sparepartOptions = computed(() => {
   return sparepartsList.value.map(sp => ({
     label: `[${sp.kode_barang}] ${sp.nama_barang} - Sisa: ${sp.stok_sekarang} (Rp${parseInt(sp.harga).toLocaleString('id-ID')})`,
-    value: sp.id
+    value: sp.kode_barang
   }));
 });
 
@@ -408,7 +408,7 @@ const addSparepart = async () => {
   isAddingSp.value = true;
   try {
     await api.post(`/service/${route.params.id}/sparepart`, {
-      sparepart_id: sparepartForm.id,
+      kode_barang: sparepartForm.id,
       qty: sparepartForm.qty
     });
     sparepartForm.id = '';

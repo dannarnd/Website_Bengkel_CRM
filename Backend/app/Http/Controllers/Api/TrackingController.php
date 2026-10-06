@@ -1,46 +1,43 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Service;
 use App\Models\Kendaraan;
-use App\Models\Pelanggan;
+use App\Models\Service;
 
-class TrackingController extends Controller
-{
-    public function trackService(Request $request)
-    {
+class TrackingController extends Controller {
+    public function track(Request $request) {
         $request->validate([
-            'nomor_polisi' => 'required|string',
-            'nomor_hp' => 'required|string', // 4 digit terakhir
+            'nomor_polisi' => 'required',
+            'nomor_hp' => 'required'
         ]);
-
-        // Bersihkan spasi dan jadikan huruf besar agar pencarian akurat
-        $nomor_polisi = str_replace(' ', '', strtoupper($request->nomor_polisi));
         
-        // Cari kendaraan berdasarkan plat nomor, dan pastikan pemiliknya memiliki akhiran no hp yang cocok
-        $kendaraan = Kendaraan::whereRaw("REPLACE(UPPER(nomor_polisi), ' ', '') = ?", [$nomor_polisi])
-            ->whereHas('pelanggan', function($query) use ($request) {
-                $query->where('nomor_hp', 'LIKE', '%' . $request->nomor_hp);
-            })
-            ->first();
-
+        $nopol = strtoupper($request->nomor_polisi);
+        $nohp = $request->nomor_hp;
+        
+        $kendaraan = Kendaraan::with('pelanggan')->where('nomor_polisi', $nopol)->first();
         if (!$kendaraan) {
-            return response()->json(['message' => 'Data kendaraan tidak ditemukan atau 4 digit Nomor HP tidak cocok.'], 404);
+            return response()->json(['message' => 'Kendaraan tidak ditemukan'], 404);
         }
-
-        // Ambil riwayat servis terbaru untuk kendaraan ini
-        $service = Service::where('nomor_polisi', $kendaraan->nomor_polisi)
-            ->with(['kendaraan.pelanggan', 'serviceDetails.sparepart', 'servicePhoto', 'warranty'])
-            ->latest()
+        
+        $hp_pelanggan = $kendaraan->pelanggan->nomor_hp;
+        if (substr($hp_pelanggan, -4) !== $nohp) {
+            return response()->json(['message' => '4 digit terakhir nomor HP tidak cocok'], 401);
+        }
+        
+        $service = Service::with(['details.sparepart', 'photos', 'warranty'])
+            ->where('id_kendaraan', $kendaraan->id_kendaraan)
+            ->orderBy('created_at', 'desc')
             ->first();
-
+            
         if (!$service) {
-            return response()->json(['message' => 'Belum ada riwayat servis untuk kendaraan ini.'], 404);
+            return response()->json(['message' => 'Tidak ada riwayat servis'], 404);
         }
-
-        return response()->json(['status' => 'success', 'data' => $service]);
+        
+        return response()->json([
+            'pelanggan' => $kendaraan->pelanggan,
+            'kendaraan' => $kendaraan,
+            'service' => $service
+        ]);
     }
 }

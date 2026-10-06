@@ -51,7 +51,7 @@
             <tr v-else-if="filteredItems.length === 0">
               <td colspan="6" class="px-6 py-8 text-center text-slate-500">Barang tidak ditemukan.</td>
             </tr>
-            <tr v-for="item in filteredItems" :key="item.id" class="hover:bg-slate-50">
+            <tr v-for="item in filteredItems" :key="item.kode_barang_pelanggan" class="hover:bg-slate-50">
               <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-teal-600">{{ item.kode_barang }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-800">{{ item.nama_barang }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">Rp{{
@@ -65,7 +65,7 @@
               <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{{ item.batas_minimum }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <button @click="openEditModal(item)" class="text-teal-600 hover:text-teal-900 mr-3">Edit</button>
-                <button @click="deleteItem(item.id)" class="text-red-600 hover:text-red-900">Hapus</button>
+                <button @click="deleteItem(item.kode_barang_pelanggan)" class="text-red-600 hover:text-red-900">Hapus</button>
               </td>
             </tr>
           </tbody>
@@ -465,7 +465,7 @@ const exportPDF = () => {
 
 const openEditModal = (item) => {
   isEdit.value = true;
-  editId.value = item.id;
+  editId.value = item.kode_barang_pelanggan;
   form.kode_barang = item.kode_barang;
   form.nama_barang = item.nama_barang;
   form.harga = item.harga;

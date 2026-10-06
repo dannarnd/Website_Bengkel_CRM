@@ -27,7 +27,7 @@
             <tr v-else-if="items.length === 0">
               <td colspan="4" class="px-6 py-8 text-center text-slate-500">Belum ada aturan chatbot.</td>
             </tr>
-            <tr v-for="item in items" :key="item.id" class="hover:bg-slate-50">
+            <tr v-for="item in items" :key="item.id_pelanggan_pelanggan" class="hover:bg-slate-50">
               <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-teal-700 bg-teal-50/50">"{{ item.keyword }}"</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm">
                 <span class="px-2 py-1 bg-slate-100 text-slate-700 rounded font-mono text-xs">{{ item.action_type }}</span>
@@ -35,7 +35,7 @@
               <td class="px-6 py-4 text-sm text-slate-600 max-w-md truncate">{{ item.respons_teks || '-' }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <button @click="openEditModal(item)" class="text-teal-600 hover:text-teal-900 mr-3">Edit</button>
-                <button @click="deleteItem(item.id)" class="text-red-600 hover:text-red-900">Hapus</button>
+                <button @click="deleteItem(item.id_pelanggan_pelanggan)" class="text-red-600 hover:text-red-900">Hapus</button>
               </td>
             </tr>
           </tbody>
@@ -131,7 +131,7 @@ const openAddModal = () => {
 
 const openEditModal = (item) => {
   isEdit.value = true;
-  editId.value = item.id;
+  editId.value = item.id_pelanggan_pelanggan;
   form.keyword = item.keyword;
   form.action_type = item.action_type;
   form.respons_teks = item.respons_teks || '';

@@ -44,7 +44,7 @@
             <tr v-else-if="filteredServices.length === 0">
               <td colspan="5" class="px-6 py-10 text-center text-slate-500 font-medium">Servis tidak ditemukan.</td>
             </tr>
-            <tr v-for="item in filteredServices" :key="item.id" class="hover:bg-slate-50/80 transition-colors group">
+            <tr v-for="item in filteredServices" :key="item.id_service_pelanggan" class="hover:bg-slate-50/80 transition-colors group">
               <td class="px-6 py-5 whitespace-nowrap text-sm text-slate-500 font-medium">{{ item.tanggal_masuk }}</td>
               <td class="px-6 py-5 whitespace-nowrap">
                 <div class="font-bold text-slate-800 text-base">{{ item.kendaraan?.pelanggan?.nama }}</div>
@@ -58,11 +58,11 @@
               </td>
               <td class="px-6 py-5 whitespace-nowrap text-right text-sm font-medium">
                 <div class="flex items-center justify-end gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
-                  <router-link :to="`/admin/service/${item.id}`" class="inline-flex items-center gap-1.5 text-indigo-700 hover:text-white bg-indigo-50 hover:bg-indigo-600 border border-indigo-100 px-3 py-1.5 rounded-lg transition-all text-xs font-bold tracking-wide shadow-sm">
+                  <router-link :to="`/admin/service/${item.id_service_pelanggan}`" class="inline-flex items-center gap-1.5 text-indigo-700 hover:text-white bg-indigo-50 hover:bg-indigo-600 border border-indigo-100 px-3 py-1.5 rounded-lg transition-all text-xs font-bold tracking-wide shadow-sm">
                     Kelola
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
                   </router-link>
-                  <button @click="deleteService(item.id)" class="inline-flex items-center gap-1 text-red-600 hover:text-white bg-red-50 hover:bg-red-600 border border-red-100 px-3 py-1.5 rounded-lg transition-all text-xs font-bold tracking-wide shadow-sm">
+                  <button @click="deleteService(item.id_service_pelanggan)" class="inline-flex items-center gap-1 text-red-600 hover:text-white bg-red-50 hover:bg-red-600 border border-red-100 px-3 py-1.5 rounded-lg transition-all text-xs font-bold tracking-wide shadow-sm">
                     Hapus
                   </button>
                 </div>

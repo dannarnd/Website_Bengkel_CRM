@@ -32,7 +32,7 @@
             <tr v-else-if="users.length === 0">
               <td colspan="4" class="px-6 py-8 text-center text-slate-500">Belum ada data pegawai.</td>
             </tr>
-            <tr v-for="user in users" :key="user.id" class="hover:bg-slate-50 transition-colors">
+            <tr v-for="user in users" :key="user.id_karyawan" class="hover:bg-slate-50 transition-colors">
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center gap-3">
                   <div class="w-8 h-8 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center font-bold text-sm">
@@ -43,14 +43,14 @@
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 font-mono">{{ user.username || user.email }}</td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <span v-if="user.role === 'admin'" class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-bold">Admin</span>
+                <span v-if="user.jabatan === 'admin'" class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-bold">Admin</span>
                 <span v-else class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold">Mekanik</span>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm">
                 <button @click="openForm(user)" class="text-teal-500 hover:text-teal-700 transition-colors bg-teal-50 hover:bg-teal-100 p-2 rounded-lg mr-2">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                 </button>
-                <button v-if="authStore.user?.id !== user.id" @click="confirmDelete(user)" class="text-red-500 hover:text-red-700 transition-colors bg-red-50 hover:bg-red-100 p-2 rounded-lg">
+                <button v-if="authStore.user?.id_karyawan !== user.id_karyawan" @click="confirmDelete(user)" class="text-red-500 hover:text-red-700 transition-colors bg-red-50 hover:bg-red-100 p-2 rounded-lg">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                 </button>
                 <span v-else class="text-xs text-slate-400 italic ml-2">Akun Anda</span>
@@ -103,11 +103,11 @@
             <label class="text-sm font-semibold text-slate-700">Jabatan</label>
             <div class="flex gap-4">
               <label class="flex items-center gap-2 cursor-pointer">
-                <input type="radio" v-model="form.role" value="mekanik" class="w-4 h-4 text-teal-600 focus:ring-teal-500 border-slate-300">
+                <input type="radio" v-model="form.jabatan" value="mekanik" class="w-4 h-4 text-teal-600 focus:ring-teal-500 border-slate-300">
                 <span class="text-sm font-medium text-slate-700">Mekanik</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
-                <input type="radio" v-model="form.role" value="admin" class="w-4 h-4 text-purple-600 focus:ring-purple-500 border-slate-300">
+                <input type="radio" v-model="form.jabatan" value="admin" class="w-4 h-4 text-purple-600 focus:ring-purple-500 border-slate-300">
                 <span class="text-sm font-medium text-slate-700">Admin</span>
               </label>
             </div>
@@ -153,7 +153,7 @@ const form = reactive({
 const fetchUsers = async () => {
   try {
     isLoading.value = true;
-    const response = await api.get('/users');
+    const response = await api.get('/karyawan');
     users.value = response.data;
   } catch (error) {
     console.error('Failed to fetch users', error);
@@ -165,18 +165,18 @@ const fetchUsers = async () => {
 const openForm = (user = null) => {
   errorMessage.value = '';
   showFormPassword.value = false;
-  if (user && user.id) {
-    editId.value = user.id;
+  if (user && user.id_karyawan) {
+    editId.value = user.id_karyawan;
     form.name = user.name;
     form.username = user.username || '';
     form.password = '';
-    form.role = user.role;
+    form.jabatan = user.jabatan;
   } else {
     editId.value = null;
     form.name = '';
     form.username = '';
     form.password = '';
-    form.role = 'mekanik';
+    form.jabatan = 'mekanik';
   }
   isFormOpen.value = true;
 };
@@ -190,9 +190,9 @@ const submitForm = async () => {
     isSubmitting.value = true;
     errorMessage.value = '';
     if (editId.value) {
-      await api.put(`/users/${editId.value}`, form);
+      await api.put(`/karyawan/${editId.value}`, form);
     } else {
-      await api.post('/users', form);
+      await api.post('/karyawan', form);
     }
     closeForm();
     await fetchUsers(); // Refresh tabel
@@ -215,7 +215,7 @@ const confirmDelete = async (user) => {
       cancelButtonText: 'Batal'
     }).then(result => result.isConfirmed)) {
     try {
-      await api.delete(`/users/${user.id}`);
+      await api.delete(`/karyawan/${user.id_karyawan}`);
       await fetchUsers();
     } catch (error) {
       alert(error.response?.data?.message || 'Gagal menghapus pegawai.');
