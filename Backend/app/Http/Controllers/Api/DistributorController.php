@@ -11,8 +11,8 @@ class DistributorController extends Controller {
     public function store(Request $request) {
         $request->validate([
             'nama_distributor' => 'required',
-            'no_hp' => 'required',
-            'alamat' => 'required'
+            'no_hp' => 'nullable',
+            'alamat' => 'nullable'
         ]);
         
         $last = Distributor::orderBy('id_distributor', 'desc')->first();
@@ -25,7 +25,8 @@ class DistributorController extends Controller {
         
         $data = $request->all();
         $data['id_distributor'] = $newId;
-        
+        $data['no_hp'] = $request->no_hp ?? '-';
+        $data['alamat'] = $request->alamat ?? '-';
         
         return response()->json(Distributor::create($data), 201);
     }
@@ -34,10 +35,14 @@ class DistributorController extends Controller {
         $distributor = Distributor::findOrFail($id);
         $request->validate([
             'nama_distributor' => 'required',
-            'no_hp' => 'required',
-            'alamat' => 'required'
+            'no_hp' => 'nullable',
+            'alamat' => 'nullable'
         ]);
-        $distributor->update($request->all());
+        $data = $request->all();
+        if(empty($data['no_hp'])) $data['no_hp'] = '-';
+        if(empty($data['alamat'])) $data['alamat'] = '-';
+        
+        $distributor->update($data);
         return response()->json($distributor);
     }
     

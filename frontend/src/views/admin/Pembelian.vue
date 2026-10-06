@@ -125,7 +125,13 @@
           </button>
         </div>
         <div>
-          <label class="block text-sm font-semibold text-slate-700 mb-2">Distributor / Supplier</label>
+          <div class="flex items-center justify-between mb-2">
+            <label class="block text-sm font-semibold text-slate-700">Distributor / Supplier</label>
+            <button type="button" @click="isDistributorModalOpen = true" class="text-xs font-bold text-teal-600 hover:text-teal-700 bg-teal-50 hover:bg-teal-100 px-3 py-1 rounded-full transition-colors flex items-center gap-1">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+              Distributor Baru
+            </button>
+          </div>
           <select v-model="formMasuk.id_distributor" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none text-sm">
             <option value="" disabled>Pilih Distributor...</option>
             <option v-for="d in distributors" :key="d.id_distributor" :value="d.id_distributor">
@@ -332,6 +338,70 @@
         </div>
       </div>
     </div>
+    
+    <!-- Modal Tambah Distributor Cepat -->
+    <div v-if="isDistributorModalOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
+      <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-fade-in-up">
+        <div class="p-4 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
+          <h2 class="font-bold text-slate-800">Tambah Distributor Baru</h2>
+          <button @click="isDistributorModalOpen = false" class="text-slate-400 hover:text-slate-600 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+        <form @submit.prevent="submitDistributor" class="p-6 space-y-4">
+          <div class="space-y-1">
+            <label class="text-sm font-semibold text-slate-700">Nama Distributor</label>
+            <input v-model="formDistributor.nama_distributor" type="text" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none">
+          </div>
+          <div class="space-y-1">
+            <label class="text-sm font-semibold text-slate-700">Nomor HP (Opsional)</label>
+            <input v-model="formDistributor.no_hp" type="text" class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none">
+          </div>
+          <div class="space-y-1">
+            <label class="text-sm font-semibold text-slate-700">Alamat (Opsional)</label>
+            <textarea v-model="formDistributor.alamat" rows="2" class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none"></textarea>
+          </div>
+          <div class="pt-4 flex gap-3">
+            <button type="button" @click="isDistributorModalOpen = false" class="flex-1 py-2 border rounded-xl hover:bg-slate-50 font-medium">Batal</button>
+            <button type="submit" :disabled="isSubmittingDistributor" class="flex-1 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-xl font-medium disabled:opacity-70">
+              {{ isSubmittingDistributor ? 'Menyimpan...' : 'Simpan' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Modal Tambah Distributor Cepat -->
+    <div v-if="isDistributorModalOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
+      <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-fade-in-up">
+        <div class="p-4 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
+          <h2 class="font-bold text-slate-800">Tambah Distributor Baru</h2>
+          <button @click="isDistributorModalOpen = false" class="text-slate-400 hover:text-slate-600 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+        <form @submit.prevent="submitDistributor" class="p-6 space-y-4">
+          <div class="space-y-1">
+            <label class="text-sm font-semibold text-slate-700">Nama Distributor</label>
+            <input v-model="formDistributor.nama_distributor" type="text" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none">
+          </div>
+          <div class="space-y-1">
+            <label class="text-sm font-semibold text-slate-700">Nomor HP (Opsional)</label>
+            <input v-model="formDistributor.no_hp" type="text" class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none">
+          </div>
+          <div class="space-y-1">
+            <label class="text-sm font-semibold text-slate-700">Alamat (Opsional)</label>
+            <textarea v-model="formDistributor.alamat" rows="2" class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none"></textarea>
+          </div>
+          <div class="pt-4 flex gap-3">
+            <button type="button" @click="isDistributorModalOpen = false" class="flex-1 py-2 border rounded-xl hover:bg-slate-50 font-medium">Batal</button>
+            <button type="submit" :disabled="isSubmittingDistributor" class="flex-1 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-xl font-medium disabled:opacity-70">
+              {{ isSubmittingDistributor ? 'Menyimpan...' : 'Simpan' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -521,6 +591,33 @@ const exportPDF = async () => {
 };
 
 const distributors = ref([]);
+
+// Modal Distributor Cepat
+const isDistributorModalOpen = ref(false);
+const isSubmittingDistributor = ref(false);
+const formDistributor = reactive({
+  nama_distributor: '',
+  no_hp: '',
+  alamat: ''
+});
+
+const submitDistributor = async () => {
+  isSubmittingDistributor.value = true;
+  try {
+    const res = await api.post('/distributor', formDistributor);
+    await fetchDistributors();
+    formMasuk.id_distributor = res.data.id_distributor; // Auto select newly added distributor
+    isDistributorModalOpen.value = false;
+    formDistributor.nama_distributor = '';
+    formDistributor.no_hp = '';
+    formDistributor.alamat = '';
+  } catch (err) {
+    alert("Gagal menambahkan distributor!");
+  } finally {
+    isSubmittingDistributor.value = false;
+  }
+};
+
 const formMasuk = reactive({
   id_distributor: '',
   items: [

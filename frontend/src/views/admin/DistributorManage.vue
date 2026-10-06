@@ -67,12 +67,12 @@
             <input v-model="form.nama_distributor" type="text" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none">
           </div>
           <div class="space-y-1">
-            <label class="text-sm font-semibold text-slate-700">Nomor HP</label>
-            <input v-model="form.no_hp" type="text" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none">
+            <label class="text-sm font-semibold text-slate-700">Nomor HP (Opsional)</label>
+            <input v-model="form.no_hp" type="text" class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none">
           </div>
           <div class="space-y-1">
-            <label class="text-sm font-semibold text-slate-700">Alamat</label>
-            <textarea v-model="form.alamat" required rows="3" class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none"></textarea>
+            <label class="text-sm font-semibold text-slate-700">Alamat (Opsional)</label>
+            <textarea v-model="form.alamat" rows="3" class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none"></textarea>
           </div>
           <div class="pt-4 flex gap-3">
             <button type="button" @click="closeForm" class="flex-1 py-2 border rounded-xl hover:bg-slate-50 font-medium">Batal</button>

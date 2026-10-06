@@ -74,10 +74,11 @@
     </div>
 
     <!-- Modal Form -->
-    <div v-if="isModalOpen"
-      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
-      <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden">
-        <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+    <Teleport to="body">
+      <div v-if="isModalOpen"
+        class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
+      <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden flex flex-col max-h-[90vh]">
+        <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50 shrink-0">
           <h3 class="text-lg font-bold text-slate-800">{{ isEdit ? 'Edit Data Barang' : 'Registrasi Master Barang' }}
           </h3>
           <button @click="closeModal" class="text-slate-400 hover:text-slate-600">
@@ -86,7 +87,7 @@
             </svg>
           </button>
         </div>
-        <form @submit.prevent="saveItem" class="p-6 space-y-4 max-h-[75vh] overflow-y-auto">
+        <form @submit.prevent="saveItem" class="p-6 space-y-4 flex-1 overflow-y-auto">
           <!-- Area Kode Barang -->
           <div v-if="!isEdit" class="p-4 bg-teal-50 rounded-xl border border-teal-100 space-y-3 relative">
             <div class="flex justify-between items-center">
@@ -212,6 +213,7 @@
         </form>
       </div>
     </div>
+    </Teleport>
 
     <!-- Info Panduan Kode Modal -->
     <div v-if="isInfoOpen"
@@ -283,9 +285,11 @@
         </div>
       </div>
     </div>
+
     <!-- PDF Preview Modal -->
+    <Teleport to="body">
     <div v-if="isPdfModalOpen"
-      class="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm animate-fade-in-up">
+      class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm animate-fade-in-up">
       <div class="bg-white rounded-2xl shadow-2xl w-full max-w-5xl h-[90vh] overflow-hidden flex flex-col">
         <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-teal-50">
           <h3 class="text-lg font-bold text-teal-900 flex items-center gap-2">
@@ -307,6 +311,7 @@
         </div>
       </div>
     </div>
+    </Teleport>
   </div>
 </template>
 

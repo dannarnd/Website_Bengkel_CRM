@@ -31,14 +31,14 @@
             <tr v-else-if="pelanggans.length === 0">
               <td colspan="3" class="px-6 py-8 text-center text-slate-500">Belum ada data pelanggan.</td>
             </tr>
-            <tr v-for="p in pelanggans" :key="p.id" class="hover:bg-slate-50 transition-colors">
-              <td class="px-6 py-4 font-medium text-slate-800">{{ p.nama }}</td>
+            <tr v-for="p in pelanggans" :key="p.id_pelanggan" class="hover:bg-slate-50 transition-colors">
+              <td class="px-6 py-4 font-medium text-slate-800">{{ p.nama_pelanggan }}</td>
               <td class="px-6 py-4 text-slate-600">{{ p.nomor_hp }}</td>
               <td class="px-6 py-4 text-right space-x-2">
                 <button @click="openForm(p)" class="text-teal-500 hover:text-teal-700 bg-teal-50 hover:bg-teal-100 p-2 rounded-lg transition-colors">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                 </button>
-                <button @click="deleteData(p.id)" class="text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition-colors">
+                <button @click="deleteData(p.id_pelanggan)" class="text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition-colors">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                 </button>
               </td>
@@ -60,7 +60,7 @@
         <form @submit.prevent="submitForm" class="p-6 space-y-4">
           <div class="space-y-1">
             <label class="text-sm font-semibold text-slate-700">Nama Lengkap</label>
-            <input v-model="form.nama" type="text" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none">
+            <input v-model="form.nama_pelanggan" type="text" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 outline-none">
           </div>
           <div class="space-y-1">
             <label class="text-sm font-semibold text-slate-700">Nomor HP / WhatsApp</label>
@@ -90,7 +90,7 @@ const isSubmitting = ref(false);
 const editId = ref(null);
 
 const form = reactive({
-  nama: '',
+  nama_pelanggan: '',
   nomor_hp: ''
 });
 
@@ -108,12 +108,12 @@ const fetchData = async () => {
 
 const openForm = (data = null) => {
   if (data) {
-    editId.value = data.id;
-    form.nama = data.nama;
+    editId.value = data.id_pelanggan;
+    form.nama_pelanggan = data.nama_pelanggan;
     form.nomor_hp = data.nomor_hp;
   } else {
     editId.value = null;
-    form.nama = '';
+    form.nama_pelanggan = '';
     form.nomor_hp = '';
   }
   isFormOpen.value = true;

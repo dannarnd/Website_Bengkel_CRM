@@ -8,7 +8,19 @@ class PelangganController extends Controller {
     public function index() { return Pelanggan::all(); }
     public function store(Request $request) {
         $request->validate(['nama_pelanggan' => 'required', 'nomor_hp' => 'required']);
-        return response()->json(Pelanggan::create($request->all()), 201);
+        
+        $last = Pelanggan::orderBy('id_pelanggan', 'desc')->first();
+        if (!$last) {
+            $newId = 'PL001';
+        } else {
+            $num = (int) substr($last->id_pelanggan, 2);
+            $newId = 'PL' . str_pad($num + 1, 3, '0', STR_PAD_LEFT);
+        }
+        
+        $data = $request->all();
+        $data['id_pelanggan'] = $newId;
+        
+        return response()->json(Pelanggan::create($data), 201);
     }
     public function show($id) { return Pelanggan::findOrFail($id); }
     public function update(Request $request, $id) {
