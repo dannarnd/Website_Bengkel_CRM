@@ -28,6 +28,6 @@ class Karyawan extends Authenticatable
     public $incrementing = false;
     protected $keyType = 'string';
 
-    protected $fillable = ['id_karyawan', 'name', 'username', 'email', 'password', 'jabatan'];
+    protected $fillable = ['id_karyawan', 'name', 'username', 'password', 'jabatan'];
     protected $hidden = ['password', 'remember_token'];
 }

@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class PembelianController extends Controller {
     public function index() {
-        return Pembelian::with(['details.sparepart'])->get();
+        return Pembelian::with(['details.sparepart', 'distributor', 'karyawan'])
+            ->orderBy('tanggal_beli', 'desc')
+            ->get();
     }
     public function store(Request $request) {
         $request->validate([

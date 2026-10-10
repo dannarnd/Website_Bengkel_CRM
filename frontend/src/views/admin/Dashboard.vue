@@ -80,7 +80,7 @@
               <td class="px-6 py-5 whitespace-nowrap text-sm font-bold text-slate-800">{{ item.nama_barang }}</td>
               <td class="px-6 py-5 whitespace-nowrap text-sm text-red-600 font-bold">
                 <span class="flex items-center gap-1.5">
-                  {{ item.stok_sekarang }}
+                  {{ item.stok }}
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path></svg>
                 </span>
               </td>

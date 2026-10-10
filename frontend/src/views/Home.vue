@@ -27,7 +27,7 @@
         </div>
       </nav>
 
-      <div class="flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 relative z-20 mt-10 md:mt-0">
+      <div class="flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 relative z-20 mt-10 md:mt-0 pb-40 md:pb-56">
         <span class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-xs font-bold tracking-widest mb-8">
           <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
           SPESIALIS RADIATOR NO.1 BANDA ACEH
@@ -85,7 +85,7 @@
           <div v-if="result" class="mt-10 bg-slate-50 rounded-3xl p-8 shadow-inner border border-slate-200 transform transition-all animate-fade-in-up">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-slate-200 pb-6 gap-4">
               <div>
-                <h3 class="text-2xl font-extrabold text-slate-900">{{ result.kendaraan.pelanggan.nama }}</h3>
+                <h3 class="text-2xl font-extrabold text-slate-900">{{ result.kendaraan.pelanggan.nama_pelanggan }}</h3>
                 <p class="text-indigo-600 font-mono font-bold mt-1 text-lg tracking-wider bg-indigo-100/50 border border-indigo-100 inline-block px-3 py-1 rounded-lg">{{ result.kendaraan.nomor_polisi }}</p>
               </div>
               <span :class="['px-6 py-2.5 rounded-full text-sm font-bold shadow-sm tracking-wide uppercase', statusColor(result.status)]">
@@ -126,9 +126,9 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                         Status Garansi
                       </p>
-                      <span class="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-indigo-100 text-indigo-700">{{ result.warranty.status_garansi }}</span>
+                      <span class="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-indigo-100 text-indigo-700">{{ result.warranty.status }}</span>
                     </div>
-                    <p class="font-bold text-lg mt-1 text-slate-900">{{ result.warranty.tanggal_berakhir ? 'Berlaku s/d ' + formatDate(result.warranty.tanggal_berakhir) : 'Tidak ada garansi' }}</p>
+                    <p class="font-bold text-lg mt-1 text-slate-900">{{ result.warranty.tanggal_selesai ? 'Berlaku s/d ' + formatDate(result.warranty.tanggal_selesai) : 'Tidak ada garansi' }}</p>
                     <button @click="downloadNota" class="mt-5 w-full bg-indigo-600 text-white hover:bg-indigo-700 font-extrabold py-3 rounded-xl flex items-center justify-center gap-2 transition-transform hover:-translate-y-0.5 shadow-sm">
                       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                       Unduh E-Nota (PDF)
@@ -384,7 +384,7 @@
             E-Nota Servis
           </h3>
           <div class="flex items-center gap-3">
-            <a :href="pdfPreviewUrl" :download="'Nota_Servis_' + result?.nomor_polisi + '.pdf'" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-colors shadow-sm">
+            <a :href="pdfPreviewUrl" :download="'Nota_Servis_' + (result?.kendaraan?.nomor_polisi || result?.nomor_polisi || form.nomor_polisi || 'servis') + '.pdf'" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-colors shadow-sm">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
               Unduh PDF
             </a>
@@ -470,7 +470,7 @@ const trackService = async () => {
 const statusColor = (status) => {
   switch (status) {
     case 'Menunggu': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-    case 'Dikerjakan': return 'bg-blue-100 text-blue-800 border-blue-200';
+    case 'Diproses': return 'bg-blue-100 text-blue-800 border-blue-200';
     case 'Selesai': return 'bg-emerald-100 text-emerald-800 border-emerald-200';
     case 'Batal': return 'bg-red-100 text-red-800 border-red-200';
     default: return 'bg-slate-100 text-slate-700 border-slate-200';

@@ -13,8 +13,6 @@ return new class extends Migration
             $table->string('id_karyawan', 20)->primary();
             $table->string('name', 100);
             $table->string('username', 255)->unique();
-            $table->string('email', 100)->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 255);
             $table->string('jabatan', 255);
             $table->rememberToken();

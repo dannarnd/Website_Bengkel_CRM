@@ -2,60 +2,94 @@
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\PembelianDetail;
-use App\Models\PenjualanDetail;
-use App\Models\ServiceDetail;
+use Illuminate\Support\Facades\DB;
 
 class MutasiController extends Controller {
     public function index() {
-        // Gabungkan Pembelian (Masuk)
-        $pembelian = PembelianDetail::with(['pembelian.karyawan', 'pembelian.distributor', 'sparepart'])->get()->map(function($d) {
-            return [
-                'id' => 'B-' . $d->id_pembelian_detail,
-                'tanggal' => $d->pembelian->tanggal_beli,
-                'user' => ['name' => $d->pembelian->karyawan->name ?? 'Sistem'],
-                'sparepart' => $d->sparepart,
-                'tipe' => 'Masuk',
-                'qty' => $d->qty_masuk,
-                'harga_modal' => $d->harga_beli,
-                'bukti_foto' => null, // Sudah dihapus fiturnya
-                'keterangan' => 'Pembelian dari ' . ($d->pembelian->distributor->nama_distributor ?? 'Distributor')
-            ];
-        });
+        // PEMBELIAN: Barang Masuk (SQL langsung, jauh lebih cepat dari load semua model)
+        $pembelian = DB::table('pembelian_detail as pd')
+            ->join('pembelian as p', 'pd.id_pembelian', '=', 'p.id_pembelian')
+            ->join('sparepart as sp', 'pd.kode_barang', '=', 'sp.kode_barang')
+            ->leftJoin('karyawan as k', 'p.id_karyawan', '=', 'k.id_karyawan')
+            ->leftJoin('distributor as d', 'p.id_distributor', '=', 'd.id_distributor')
+            ->select(
+                DB::raw("CONCAT('B-', pd.id_pembelian_detail) as id"),
+                'p.tanggal_beli as tanggal',
+                'k.name as user_name',
+                'sp.kode_barang',
+                'sp.nama_barang',
+                'sp.harga',
+                DB::raw("'Masuk' as tipe"),
+                'pd.qty_masuk as qty',
+                'pd.harga_beli as harga_modal',
+                DB::raw("CONCAT('Pembelian dari ', COALESCE(d.nama_distributor, 'Distributor')) as keterangan")
+            )
+            ->get();
 
-        // Gabungkan Penjualan Umum (Keluar)
-        $penjualan = PenjualanDetail::with(['penjualan.karyawan', 'sparepart'])->get()->map(function($d) {
-            return [
-                'id' => 'J-' . $d->id_penj_detail,
-                'tanggal' => $d->penjualan->tanggal_penjualan,
-                'user' => ['name' => $d->penjualan->karyawan->name ?? 'Sistem'],
-                'sparepart' => $d->sparepart,
-                'tipe' => 'Keluar',
-                'qty' => $d->qty,
-                'harga_modal' => null, // Sembunyikan harga jual/modal di mutasi
-                'bukti_foto' => null,
-                'keterangan' => 'Penjualan Umum kepada ' . $d->penjualan->nama_pembeli_umum
-            ];
-        });
+        // PENJUALAN: Barang Keluar Umum
+        $penjualan = DB::table('penjualan_detail as pd')
+            ->join('penjualan as p', 'pd.id_penjualan', '=', 'p.id_penjualan')
+            ->join('sparepart as sp', 'pd.kode_barang', '=', 'sp.kode_barang')
+            ->leftJoin('karyawan as k', 'p.id_karyawan', '=', 'k.id_karyawan')
+            ->select(
+                DB::raw("CONCAT('J-', pd.id_penj_detail) as id"),
+                'p.tanggal_penjualan as tanggal',
+                'k.name as user_name',
+                'sp.kode_barang',
+                'sp.nama_barang',
+                'sp.harga',
+                DB::raw("'Keluar' as tipe"),
+                'pd.qty as qty',
+                DB::raw('NULL as harga_modal'),
+                DB::raw("CONCAT('Penjualan Umum kepada ', p.nama_pembeli_umum) as keterangan")
+            )
+            ->get();
 
-        // Gabungkan Service (Keluar)
-        $service = ServiceDetail::with(['service.karyawan', 'service.kendaraan.pelanggan', 'sparepart'])->get()->map(function($d) {
-            return [
-                'id' => 'S-' . $d->id_service_detail,
-                'tanggal' => $d->created_at,
-                'user' => ['name' => $d->service->karyawan->name ?? 'Sistem'],
-                'sparepart' => $d->sparepart,
-                'tipe' => 'Keluar',
-                'qty' => $d->qty,
-                'harga_modal' => null,
-                'bukti_foto' => null,
-                'keterangan' => 'Servis (' . ($d->service->kendaraan->nomor_polisi ?? '-') . ')'
-            ];
-        });
+        // SERVICE: Barang Keluar untuk Servis (Hanya servis yang sudah Selesai/stok dipotong)
+        $service = DB::table('service_detail as sd')
+            ->join('service as s', 'sd.id_service', '=', 's.id_service')
+            ->join('sparepart as sp', 'sd.kode_barang', '=', 'sp.kode_barang')
+            ->leftJoin('karyawan as k', 's.id_karyawan', '=', 'k.id_karyawan')
+            ->leftJoin('kendaraan as kd', 's.id_kendaraan', '=', 'kd.id_kendaraan')
+            ->where('s.status', '=', 'Selesai')
+            ->select(
+                DB::raw("CONCAT('S-', sd.id_service_detail) as id"),
+                'sd.created_at as tanggal',
+                'k.name as user_name',
+                'sp.kode_barang',
+                'sp.nama_barang',
+                'sp.harga',
+                DB::raw("'Keluar' as tipe"),
+                'sd.qty as qty',
+                DB::raw('NULL as harga_modal'),
+                DB::raw("CONCAT('Servis (', COALESCE(kd.nomor_polisi, '-'), ')') as keterangan")
+            )
+            ->get();
 
-        // Merge all and sort by date descending
-        $history = collect()->concat($pembelian)->concat($penjualan)->concat($service)
-            ->sortByDesc('tanggal')->values();
+        // Format seragam
+        $format = function($row, $type) {
+            return [
+                'id'         => $row->id,
+                'tanggal'    => $row->tanggal,
+                'user'       => ['name' => $row->user_name ?? 'Sistem'],
+                'sparepart'  => [
+                    'kode_barang' => $row->kode_barang,
+                    'nama_barang' => $row->nama_barang,
+                    'harga'       => $row->harga,
+                ],
+                'tipe'       => $row->tipe,
+                'qty'        => $row->qty,
+                'harga_modal'=> $row->harga_modal,
+                'keterangan' => $row->keterangan,
+            ];
+        };
+
+        $history = collect()
+            ->concat($pembelian->map(fn($r) => $format($r, 'B')))
+            ->concat($penjualan->map(fn($r) => $format($r, 'J')))
+            ->concat($service->map(fn($r) => $format($r, 'S')))
+            ->sortByDesc('tanggal')
+            ->values();
 
         return response()->json($history);
     }

@@ -25,7 +25,7 @@ class TrackingController extends Controller {
             return response()->json(['message' => '4 digit terakhir nomor HP tidak cocok'], 401);
         }
         
-        $service = Service::with(['details.sparepart', 'photos', 'warranty'])
+        $service = Service::with(['kendaraan.pelanggan', 'details.sparepart', 'photos', 'warranty'])
             ->where('id_kendaraan', $kendaraan->id_kendaraan)
             ->orderBy('created_at', 'desc')
             ->first();
@@ -34,10 +34,32 @@ class TrackingController extends Controller {
             return response()->json(['message' => 'Tidak ada riwayat servis'], 404);
         }
         
+        $service_photo = [
+            'foto_before' => null,
+            'foto_after' => null
+        ];
+        foreach($service->photos as $photo) {
+            if ($photo->tipe_foto === 'Sebelum') $service_photo['foto_before'] = $photo->photo_path;
+            if ($photo->tipe_foto === 'Sesudah') $service_photo['foto_after'] = $photo->photo_path;
+        }
+        $service->setAttribute('service_photo', $service_photo);
+        
+        $catatanParts = explode("\n[", $service->catatan ?? '');
+        $service->setAttribute('keluhan', $catatanParts[0] ?: '-');
+        
+        $publicLogs = [];
+        if (count($catatanParts) > 1) {
+            foreach (array_slice($catatanParts, 1) as $part) {
+                if (str_starts_with($part, 'Klaim Garansi')) {
+                    $publicLogs[] = $part;
+                }
+            }
+        }
+        $service->setAttribute('catatan', !empty($publicLogs) ? '[' . implode("\n[", $publicLogs) : null);
+        $service->setAttribute('tanggal_masuk', $service->created_at);
+        
         return response()->json([
-            'pelanggan' => $kendaraan->pelanggan,
-            'kendaraan' => $kendaraan,
-            'service' => $service
+            'data' => $service
         ]);
     }
 }

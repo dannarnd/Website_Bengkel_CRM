@@ -35,7 +35,7 @@
             <tr v-for="k in kendaraans" :key="k.id_kendaraan" class="hover:bg-slate-50 transition-colors">
               <td class="px-6 py-4 font-bold text-slate-800">{{ k.nomor_polisi }}</td>
               <td class="px-6 py-4 text-slate-600">{{ k.merk_mobil }}</td>
-              <td class="px-6 py-4 text-slate-600">{{ k.pelanggan?.nama }}</td>
+              <td class="px-6 py-4 text-slate-600">{{ k.pelanggan?.nama_pelanggan }}</td>
               <td class="px-6 py-4 text-right space-x-2">
                 <button @click="openForm(k)" class="text-teal-500 hover:text-teal-700 bg-teal-50 hover:bg-teal-100 p-2 rounded-lg transition-colors">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
@@ -111,7 +111,7 @@ const form = reactive({
 
 const pelangganOptions = computed(() => {
   return pelanggans.value.map(p => ({
-    label: `${p.nama} (${p.nomor_hp})`,
+    label: `${p.nama_pelanggan} (${p.nomor_hp})`,
     value: p.id_pelanggan
   }));
 });

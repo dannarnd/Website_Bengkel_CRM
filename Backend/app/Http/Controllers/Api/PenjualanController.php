@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class PenjualanController extends Controller {
     public function index() {
-        return Penjualan::with(['details.sparepart'])->get();
+        return Penjualan::with(['details.sparepart', 'karyawan'])
+            ->orderBy('tanggal_penjualan', 'desc')
+            ->get();
     }
 
     public function store(Request $request) {

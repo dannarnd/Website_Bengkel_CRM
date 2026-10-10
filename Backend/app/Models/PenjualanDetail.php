@@ -12,4 +12,8 @@ class PenjualanDetail extends Model
     public function sparepart() {
         return $this->belongsTo(Sparepart::class, 'kode_barang', 'kode_barang');
     }
+
+    public function penjualan() {
+        return $this->belongsTo(Penjualan::class, 'id_penjualan', 'id_penjualan');
+    }
 }

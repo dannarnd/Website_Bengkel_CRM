@@ -34,6 +34,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/service', [ServiceController::class, 'store']);
     Route::put('/service/{id}/status', [ServiceController::class, 'updateStatus']);
     Route::delete('/service/{id}', [ServiceController::class, 'destroy']);
+    Route::post('/service/{id}/sparepart', [ServiceController::class, 'addSparepart']);
+    Route::delete('/service/{id}/sparepart/{detail_id}', [ServiceController::class, 'removeSparepart']);
+    Route::post('/service/{id}/upload-photos', [ServiceController::class, 'uploadPhotos']);
+    Route::post('/service/{id}/finish', [ServiceController::class, 'finish']);
+    Route::post('/service/{id}/reopen', [ServiceController::class, 'reopen']);
+    Route::post('/service/{id}/claim-warranty', [ServiceController::class, 'claimWarranty']);
+    Route::put('/service/{id}/warranty', [ServiceController::class, 'updateWarranty']);
     
     Route::get('/pembelian', [PembelianController::class, 'index']);
     Route::post('/pembelian', [PembelianController::class, 'store']);

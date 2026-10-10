@@ -99,8 +99,11 @@ const messages = ref([
     isUser: false, 
     text: 'Halo! Saya Asisten Virtual Doles Radiator. Ada yang bisa dibantu?',
     options: [
-      'cek harga oli',
-      'jam buka bengkel',
+      'wa',
+      'jam buka',
+      'alamat',
+      'bocor',
+      'overheat'
     ]
   }
 ]);

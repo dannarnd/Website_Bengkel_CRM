@@ -389,10 +389,16 @@ watch(isManualCode, (newVal) => {
   }
 });
 
-const fetchItems = async () => {
+const fetchItems = async (force = false) => {
+  const lastFetch = items._lastFetch || 0;
+  if (!force && items.value.length > 0 && Date.now() - lastFetch < 30000) {
+    isLoading.value = false;
+    return;
+  }
   try {
     const res = await api.get('/sparepart');
     items.value = res.data;
+    items._lastFetch = Date.now();
   } catch (err) {
     console.error(err);
   } finally {
@@ -499,7 +505,7 @@ const saveItem = async () => {
       await api.post('/sparepart', form);
     }
     closeModal();
-    fetchItems();
+    fetchItems(true); // Force refresh setelah ada perubahan data
   } catch (err) {
     alert("Gagal menyimpan data.");
   } finally {
@@ -520,7 +526,7 @@ const deleteItem = async (id) => {
   }).then(result => result.isConfirmed)) {
     try {
       await api.delete(`/sparepart/${id}`);
-      fetchItems();
+      fetchItems(true); // Force refresh setelah hapus
     } catch (err) {
       alert("Gagal menghapus data.");
     }

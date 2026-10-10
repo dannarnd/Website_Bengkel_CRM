@@ -93,10 +93,17 @@ const filteredServices = computed(() => {
   );
 });
 
-const fetchServices = async () => {
+const fetchServices = async (force = false) => {
+  // Cache 30 detik - tidak perlu fetch ulang jika data masih segar
+  const lastFetch = services._lastFetch || 0;
+  if (!force && services.value.length > 0 && Date.now() - lastFetch < 30000) {
+    isLoading.value = false;
+    return;
+  }
   try {
     const res = await api.get('/service');
     services.value = res.data;
+    services._lastFetch = Date.now();
   } catch (err) {
     console.error(err);
   } finally {
@@ -127,7 +134,7 @@ const deleteService = async (id) => {
 const statusClass = (status) => {
   switch (status) {
     case 'Menunggu': return 'px-3 py-1.5 bg-yellow-100 text-yellow-800 border border-yellow-200 rounded-full text-[11px] uppercase tracking-wider font-extrabold shadow-sm';
-    case 'Dikerjakan': return 'px-3 py-1.5 bg-blue-100 text-blue-800 border border-blue-200 rounded-full text-[11px] uppercase tracking-wider font-extrabold shadow-sm';
+    case 'Diproses': return 'px-3 py-1.5 bg-blue-100 text-blue-800 border border-blue-200 rounded-full text-[11px] uppercase tracking-wider font-extrabold shadow-sm';
     case 'Selesai': return 'px-3 py-1.5 bg-emerald-100 text-emerald-800 border border-emerald-200 rounded-full text-[11px] uppercase tracking-wider font-extrabold shadow-sm';
     default: return 'px-3 py-1.5 bg-slate-100 text-slate-700 border border-slate-200 rounded-full text-[11px] uppercase tracking-wider font-extrabold shadow-sm';
   }
@@ -138,6 +145,7 @@ onMounted(() => {
 });
 
 onActivated(() => {
+  // Cek apakah data sudah ada; hanya refresh jika cache kedaluwarsa (> 30 detik)
   fetchServices();
 });
 </script>

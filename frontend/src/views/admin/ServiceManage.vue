@@ -12,7 +12,7 @@
           <!-- Tombol Kontrol Status Manual -->
           <div v-if="service.status !== 'Selesai'" class="flex flex-wrap bg-slate-100 rounded-lg p-1 border border-slate-200">
             <button @click="updateStatus('Menunggu')" :disabled="isChangingStatus" :class="['px-3 py-1 text-xs font-bold rounded-md transition-colors', service.status === 'Menunggu' ? 'bg-white shadow-sm text-yellow-700 border border-slate-200' : 'text-slate-500 hover:text-slate-700']">Menunggu</button>
-            <button @click="updateStatus('Dikerjakan')" :disabled="isChangingStatus" :class="['px-3 py-1 text-xs font-bold rounded-md transition-colors', service.status === 'Dikerjakan' ? 'bg-white shadow-sm text-blue-700 border border-slate-200' : 'text-slate-500 hover:text-slate-700']">Dikerjakan</button>
+            <button @click="updateStatus('Diproses')" :disabled="isChangingStatus" :class="['px-3 py-1 text-xs font-bold rounded-md transition-colors', service.status === 'Diproses' ? 'bg-white shadow-sm text-blue-700 border border-slate-200' : 'text-slate-500 hover:text-slate-700']">Diproses</button>
           </div>
         </div>
         <p class="text-sm text-slate-500">Pemilik: <span class="font-bold text-slate-700">{{ service.kendaraan?.pelanggan?.nama_pelanggan }}</span> | HP: {{ service.kendaraan?.pelanggan?.nomor_hp }}</p>
@@ -35,13 +35,13 @@
         <!-- Keluhan Box -->
         <div class="bg-amber-50 p-6 rounded-2xl border border-amber-100">
           <h3 class="text-xs font-bold text-amber-800 uppercase tracking-wider mb-2">Keluhan Kendaraan</h3>
-          <p class="text-amber-900 text-sm">{{ service.catatan }}</p>
+          <p class="text-amber-900 text-sm whitespace-pre-line">{{ keluhanText }}</p>
         </div>
 
         <!-- Catatan Riwayat Sistem (Jika Ada) -->
-        <div v-if="service.catatan" class="bg-blue-50 p-6 rounded-2xl border border-blue-100">
+        <div v-if="systemLogText" class="bg-blue-50 p-6 rounded-2xl border border-blue-100">
           <h3 class="text-xs font-bold text-blue-800 uppercase tracking-wider mb-2">Catatan Sistem</h3>
-          <p class="text-blue-900 text-sm whitespace-pre-line">{{ service.catatan }}</p>
+          <p class="text-blue-900 text-sm whitespace-pre-line">{{ systemLogText }}</p>
         </div>
 
         <!-- BAGIAN B: Transparansi Visual (Foto) -->
@@ -121,10 +121,10 @@
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-50">
-                <tr v-if="!service.service_details || service.service_details.length === 0">
+                <tr v-if="!service.details || service.details.length === 0">
                   <td colspan="5" class="px-6 py-8 text-center text-slate-500 text-sm">Belum ada barang/jasa yang ditambahkan.</td>
                 </tr>
-                <tr v-for="detail in service.service_details" :key="detail.id" class="hover:bg-slate-50 transition-colors">
+                <tr v-for="detail in service.details" :key="detail.id_service_detail" class="hover:bg-slate-50 transition-colors">
                   <td class="px-6 py-3 text-sm font-medium text-slate-800">
                     <span class="text-xs text-teal-600 font-mono mr-1">[{{ detail.sparepart?.kode_barang }}]</span>
                     {{ detail.sparepart?.nama_barang }}
@@ -133,7 +133,7 @@
                   <td class="px-6 py-3 text-sm text-right text-slate-600">Rp{{ parseInt(detail.sparepart?.harga).toLocaleString('id-ID') }}</td>
                   <td class="px-6 py-3 text-sm text-right font-bold text-teal-700">Rp{{ parseInt(detail.subtotal).toLocaleString('id-ID') }}</td>
                   <td v-if="service.status !== 'Selesai'" class="px-4 py-3 text-right">
-                    <button @click="removeSparepart(detail.id)" class="text-red-500 hover:text-red-700">
+                    <button @click="removeSparepart(detail.id_service_detail)" class="text-red-500 hover:text-red-700">
                       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                     </button>
                   </td>
@@ -194,7 +194,7 @@
             
             <div v-if="service.warranty" class="mt-4">
               <div v-if="!isEditingWarranty" class="inline-block bg-white border border-green-200 px-4 py-2 rounded-lg text-sm font-bold text-green-700 shadow-sm">
-                🛡️ Garansi {{ service.warranty.status_garansi }} s.d {{ service.warranty.tanggal_berakhir }}
+                🛡️ Garansi {{ service.warranty.status }} s.d {{ service.warranty.tanggal_selesai }}
                 <button @click="openEditWarranty" class="ml-2 text-teal-600 hover:text-teal-800 underline font-normal">Edit</button>
               </div>
               <div v-else class="mt-2 bg-white border border-slate-200 p-4 rounded-xl text-left shadow-sm">
@@ -202,11 +202,11 @@
                 <form @submit.prevent="saveWarranty" class="space-y-3">
                   <div>
                     <label class="text-xs font-semibold text-slate-600">Berakhir Pada:</label>
-                    <input v-model="warrantyForm.tanggal_berakhir" type="date" required class="w-full mt-1 px-3 py-2 border rounded-lg text-sm outline-none focus:border-teal-500">
+                    <input v-model="warrantyForm.tanggal_selesai" type="date" required class="w-full mt-1 px-3 py-2 border rounded-lg text-sm outline-none focus:border-teal-500">
                   </div>
                   <div>
                     <label class="text-xs font-semibold text-slate-600">Status:</label>
-                    <select v-model="warrantyForm.status_garansi" class="w-full mt-1 px-3 py-2 border rounded-lg text-sm outline-none focus:border-teal-500">
+                    <select v-model="warrantyForm.status" class="w-full mt-1 px-3 py-2 border rounded-lg text-sm outline-none focus:border-teal-500">
                       <option value="Aktif">Aktif</option>
                       <option value="Hangus">Hangus</option>
                       <option value="Selesai">Selesai</option>
@@ -220,7 +220,7 @@
               </div>
               
               <!-- Form Klaim Garansi In-Place -->
-              <div v-if="service.warranty.status_garansi === 'Aktif'" class="mt-4 pt-4 border-t border-green-200">
+              <div v-if="['Aktif', 'Diklaim'].includes(service.warranty.status)" class="mt-4 pt-4 border-t border-green-200">
                 <button v-if="!showClaimForm" @click="showClaimForm = true" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-xl shadow-sm transition-all flex justify-center items-center gap-2">
                   Ajukan Klaim Garansi / Revisi
                 </button>
@@ -233,8 +233,8 @@
                       <textarea v-model="claimForm.catatan_klaim" required rows="3" placeholder="Contoh: Busi dibersihkan ulang karena pemasangan kurang pas..." class="w-full mt-1 px-3 py-2 border border-amber-200 rounded-lg text-sm outline-none focus:border-amber-500 bg-white"></textarea>
                     </div>
                     <div>
-                      <label class="text-xs font-semibold text-amber-900">Perpanjang Garansi Sampai:</label>
-                      <input v-model="claimForm.tanggal_garansi_baru" type="date" required class="w-full mt-1 px-3 py-2 border border-amber-200 rounded-lg text-sm outline-none focus:border-amber-500 bg-white">
+                      <label class="text-xs font-semibold text-amber-900">Perpanjang Garansi Sampai (Opsional):</label>
+                      <input v-model="claimForm.tanggal_garansi_baru" type="date" class="w-full mt-1 px-3 py-2 border border-amber-200 rounded-lg text-sm outline-none focus:border-amber-500 bg-white">
                     </div>
                     <div class="flex gap-2 justify-end pt-2">
                       <button type="button" @click="showClaimForm = false" class="px-3 py-1.5 text-xs font-medium text-amber-800 hover:bg-amber-100 rounded-lg transition-colors">Batal</button>
@@ -246,9 +246,6 @@
                   </form>
                 </div>
               </div>
-              <div v-else-if="service.warranty.status_garansi === 'Diklaim'" class="mt-4 p-3 bg-blue-50 text-blue-700 text-sm rounded-lg border border-blue-100 font-medium">
-                ℹ️ Garansi nota ini telah diclaim. Silakan cek catatan sistem untuk melihat nomor nota servis lanjutannya.
-              </div>
             </div>
           </div>
         </div>
@@ -259,28 +256,31 @@
   </div>
 
   <!-- Modal Preview PDF -->
-  <div v-if="isPdfModalOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm animate-fade-in-up">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl h-[85vh] overflow-hidden flex flex-col">
-      <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-indigo-50">
-        <h3 class="text-lg font-bold text-indigo-900 flex items-center gap-2">
-          <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-          Preview Nota Servis
-        </h3>
-        <div class="flex items-center gap-3">
-          <a :href="pdfPreviewUrl" :download="'Nota_Servis_' + service?.nomor_polisi + '.pdf'" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-colors">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-            Download PDF
-          </a>
-          <button @click="isPdfModalOpen = false" class="text-slate-400 hover:text-slate-600 transition-colors bg-white rounded-full p-1 border border-slate-200">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-          </button>
+  <teleport to="body">
+    <div v-if="isPdfModalOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 bg-slate-900/80 backdrop-blur-sm animate-fade-in-up">
+      <div class="bg-white rounded-2xl shadow-2xl w-full max-w-6xl h-[95vh] flex flex-col overflow-hidden">
+        <div class="px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-100 flex justify-between items-center bg-indigo-50">
+          <h3 class="text-base sm:text-lg font-bold text-indigo-900 flex items-center gap-2">
+            <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            Preview Nota Servis
+          </h3>
+          <div class="flex items-center gap-2 sm:gap-3">
+            <a :href="pdfPreviewUrl" :download="'Nota_Servis_' + (service?.kendaraan?.nomor_polisi || service?.nomor_polisi || service?.id_service) + '.pdf'" class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-bold flex items-center gap-2 transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              <span class="hidden sm:inline">Download PDF</span>
+              <span class="sm:hidden">Unduh</span>
+            </a>
+            <button @click="isPdfModalOpen = false" class="text-slate-400 hover:text-slate-600 transition-colors bg-white rounded-full p-1 border border-slate-200">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+          </div>
+        </div>
+        <div class="flex-1 bg-slate-200 h-full w-full">
+          <iframe :src="pdfPreviewUrl" class="w-full h-full border-0" style="min-height: 100%;" title="PDF Preview"></iframe>
         </div>
       </div>
-      <div class="flex-1 p-0 bg-slate-200">
-        <iframe :src="pdfPreviewUrl" class="w-full h-full border-0" title="PDF Preview"></iframe>
-      </div>
     </div>
-  </div>
+  </teleport>
 </div>
 </template>
 
@@ -296,6 +296,21 @@ const route = useRoute();
 const router = useRouter();
 
 const service = ref(null);
+
+const keluhanText = computed(() => {
+  if (!service.value?.catatan) return '-';
+  const parts = service.value.catatan.split('\n[');
+  return parts[0];
+});
+
+const systemLogText = computed(() => {
+  if (!service.value?.catatan) return '';
+  const parts = service.value.catatan.split('\n[');
+  if (parts.length > 1) {
+    return '[' + parts.slice(1).join('\n[');
+  }
+  return '';
+});
 
 const isPdfModalOpen = ref(false);
 const pdfPreviewUrl = ref(null);
@@ -321,7 +336,7 @@ const isAddingSp = ref(false);
 
 const sparepartOptions = computed(() => {
   return sparepartsList.value.map(sp => ({
-    label: `[${sp.kode_barang}] ${sp.nama_barang} - Sisa: ${sp.stok_sekarang} (Rp${parseInt(sp.harga).toLocaleString('id-ID')})`,
+    label: `[${sp.kode_barang}] ${sp.nama_barang} - Sisa: ${sp.stok} (Rp${parseInt(sp.harga).toLocaleString('id-ID')})`,
     value: sp.kode_barang
   }));
 });
@@ -345,13 +360,13 @@ const claimForm = reactive({
 const isEditingWarranty = ref(false);
 const isSavingWarranty = ref(false);
 const warrantyForm = reactive({
-  tanggal_berakhir: '',
-  status_garansi: 'Aktif'
+  tanggal_selesai: '',
+  status: 'Aktif'
 });
 
 const openEditWarranty = () => {
-  warrantyForm.tanggal_berakhir = service.value.warranty.tanggal_berakhir;
-  warrantyForm.status_garansi = service.value.warranty.status_garansi;
+  warrantyForm.tanggal_selesai = service.value.warranty.tanggal_selesai;
+  warrantyForm.status = service.value.warranty.status;
   isEditingWarranty.value = true;
 };
 
@@ -435,10 +450,12 @@ const removeSparepart = async (detailId) => {
       cancelButtonText: 'Batal'
     }).then(result => result.isConfirmed)) {
     try {
-      await api.delete(`/service/${route.params.id}/sparepart/${detailId}`);
+      const res = await api.delete(`/service/${route.params.id}/sparepart/${detailId}`);
+      Swal.fire('Berhasil', res.data.message || 'Item berhasil dihapus.', 'success');
       await fetchData();
+      await fetchSpareparts();
     } catch (err) {
-      alert('Gagal menghapus item.');
+      Swal.fire('Gagal', err.response?.data?.message || 'Gagal menghapus item.', 'error');
     }
   }
 };
@@ -543,7 +560,7 @@ const finishService = async () => {
   }
 };
 
-// Aksi Update Status (Menunggu/Dikerjakan) - Optimistic Update
+// Aksi Update Status (Menunggu/Diproses) - Optimistic Update
 const updateStatus = async (newStatus) => {
   if (service.value.status === 'Selesai') {
     alert('Servis yang sudah selesai tidak dapat diubah statusnya secara langsung. Gunakan fitur Revisi Nota.');
@@ -573,7 +590,7 @@ const updateStatus = async (newStatus) => {
 const reopenService = async () => {
   const confirmed = await Swal.fire({
       title: 'PERINGATAN!',
-      html: 'Membuka kembali nota ini akan:<br><br>1. Mengembalikan stok barang yang terpotong ke gudang secara otomatis.<br>2. Mengubah status servis kembali menjadi "Dikerjakan".<br>3. Menghapus garansi yang sudah terbit.<br><br><b>Apakah Anda yakin ingin meralat nota ini?</b>',
+      html: 'Membuka kembali nota ini akan:<br><br>1. Mengembalikan stok barang yang terpotong ke gudang secara otomatis.<br>2. Mengubah status servis kembali menjadi "Diproses".<br>3. Menghapus garansi yang sudah terbit.<br><br><b>Apakah Anda yakin ingin meralat nota ini?</b>',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#0d9488',
@@ -586,10 +603,11 @@ const reopenService = async () => {
   isReopening.value = true;
   try {
     const res = await api.post(`/service/${route.params.id}/reopen`);
-    alert(res.data.message);
+    Swal.fire('Berhasil', res.data.message, 'success');
     await fetchData();
+    await fetchSpareparts();
   } catch (err) {
-    alert(err.response?.data?.message || 'Gagal merevisi nota.');
+    Swal.fire('Gagal', err.response?.data?.message || 'Gagal merevisi nota.', 'error');
   } finally {
     isReopening.value = false;
   }
@@ -600,12 +618,13 @@ const claimWarranty = async () => {
   isClaiming.value = true;
   try {
     const res = await api.post(`/service/${route.params.id}/claim-warranty`, claimForm);
-    alert(res.data.message);
+    Swal.fire('Berhasil', res.data.message, 'success');
     showClaimForm.value = false;
     claimForm.catatan_klaim = '';
+    claimForm.tanggal_garansi_baru = '';
     await fetchData(); // Refresh data untuk memunculkan catatan baru
   } catch (err) {
-    alert(err.response?.data?.message || 'Gagal mendaftarkan klaim garansi.');
+    Swal.fire('Gagal', err.response?.data?.message || 'Gagal mendaftarkan klaim garansi.', 'error');
   } finally {
     isClaiming.value = false;
   }
@@ -614,7 +633,7 @@ const claimWarranty = async () => {
 const statusClass = (status) => {
   switch (status) {
     case 'Menunggu': return 'px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold shadow-sm';
-    case 'Dikerjakan': return 'px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold shadow-sm';
+    case 'Diproses': return 'px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold shadow-sm';
     case 'Selesai': return 'px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold shadow-sm';
     default: return 'px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-xs font-bold shadow-sm';
   }

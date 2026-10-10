@@ -12,8 +12,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         DB::table('karyawan')->insert([
-            ['id_karyawan' => 'K001', 'name' => 'Admin', 'username' => 'admin', 'email' => 'admin@gmail.com', 'password' => Hash::make('password'), 'jabatan' => 'admin', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['id_karyawan' => 'K002', 'name' => 'Budi Mekanik', 'username' => 'budi', 'email' => 'budi@gmail.com', 'password' => Hash::make('password'), 'jabatan' => 'mekanik', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]
+            ['id_karyawan' => 'K001', 'name' => 'Admin', 'username' => 'admin', 'password' => Hash::make('password'), 'jabatan' => 'admin', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['id_karyawan' => 'K002', 'name' => 'Budi Mekanik', 'username' => 'budi', 'password' => Hash::make('password'), 'jabatan' => 'mekanik', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]
         ]);
 
         DB::table('pelanggan')->insert([
@@ -498,5 +498,52 @@ class DatabaseSeeder extends Seeder
         DB::table('service_detail')->insert([
             ['id_service' => 'S001', 'kode_barang' => 'RUT001', 'qty' => 1, 'subtotal' => 290000, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]
         ]);
+
+        // Tambahkan Distributor Stok Lama
+        DB::table('distributor')->insert([
+            'id_distributor' => 'D000',
+            'nama_distributor' => 'Stok Lama',
+            'no_hp' => '-',
+            'alamat' => 'Sistem Awal',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+
+        // Tambahkan Header Pembelian
+        DB::table('pembelian')->insert([
+            'id_pembelian' => 'PB-AWAL',
+            'id_distributor' => 'D000',
+            'id_karyawan' => 'K001',
+            'tanggal_beli' => Carbon::now()->subDays(1),
+            'total_bayar' => 0,
+            'created_at' => Carbon::now()->subDays(1),
+            'updated_at' => Carbon::now()->subDays(1)
+        ]);
+
+        // Ambil semua sparepart untuk dimasukkan ke detail pembelian
+        $spareparts = DB::table('sparepart')->get();
+        $pembelianDetails = [];
+        $totalBayar = 0;
+        foreach($spareparts as $sp) {
+            if ($sp->stok > 0) {
+                $sub = $sp->harga * $sp->stok;
+                $totalBayar += $sub;
+                $pembelianDetails[] = [
+                    'id_pembelian' => 'PB-AWAL',
+                    'kode_barang' => $sp->kode_barang,
+                    'qty_masuk' => $sp->stok,
+                    'harga_beli' => $sp->harga, // Asumsi harga beli sama dengan harga jual untuk dummy
+                    'subtotal' => $sub,
+                    'created_at' => Carbon::now()->subDays(1),
+                    'updated_at' => Carbon::now()->subDays(1)
+                ];
+            }
+        }
+        
+        DB::table('pembelian')->where('id_pembelian', 'PB-AWAL')->update(['total_bayar' => $totalBayar]);
+
+        foreach (array_chunk($pembelianDetails, 100) as $chunk) {
+            DB::table('pembelian_detail')->insert($chunk);
+        }
     }
 }

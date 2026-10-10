@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 class KaryawanController extends Controller {
     public function index() { return Karyawan::all(); }
     public function store(Request $request) {
-        $request->validate(['name' => 'required', 'username' => 'required|unique:karyawan', 'email' => 'required|email|unique:karyawan', 'password' => 'required', 'jabatan' => 'required']);
+        $request->validate(['name' => 'required', 'username' => 'required|unique:karyawan', 'password' => 'required', 'jabatan' => 'required']);
         $karyawan = new Karyawan($request->all());
         $karyawan->password = Hash::make($request->password);
         $karyawan->save();

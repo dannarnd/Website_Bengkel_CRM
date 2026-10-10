@@ -107,7 +107,7 @@ const submitForm = async () => {
   isSubmitting.value = true;
   try {
     const res = await api.post('/service', form);
-    const newServiceId = res.data.data.id;
+    const newServiceId = res.data.id_service;
     // Redirect langsung ke ruang kerja mekanik
     router.push(`/admin/service/${newServiceId}`);
   } catch (err) {

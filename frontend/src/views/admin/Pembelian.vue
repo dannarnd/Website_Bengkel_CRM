@@ -93,7 +93,7 @@
                   class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none text-sm">
                 <datalist :id="'spareparts_list_masuk_' + index">
                   <option v-for="sp in spareparts" :key="sp.id" :value="`[${sp.kode_barang}] ${sp.nama_barang}`">Stok
-                    saat ini: {{ sp.stok_sekarang }}</option>
+                    saat ini: {{ sp.stok }}</option>
                 </datalist>
                 <p v-if="item.kode_barang" class="text-[10px] text-teal-600 font-bold mt-1 flex items-center gap-1">
                   <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -169,7 +169,7 @@
             class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none">
           <datalist id="spareparts_list_keluar">
             <option v-for="sp in spareparts" :key="sp.id" :value="`[${sp.kode_barang}] ${sp.nama_barang}`">Stok saat
-              ini: {{ sp.stok_sekarang }}</option>
+              ini: {{ sp.stok }}</option>
           </datalist>
           <p v-if="formKeluar.kode_barang" class="text-xs text-red-600 font-bold mt-2 flex items-center gap-1">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -12,4 +12,8 @@ class ServiceDetail extends Model
     public function sparepart() {
         return $this->belongsTo(Sparepart::class, 'kode_barang', 'kode_barang');
     }
+
+    public function service() {
+        return $this->belongsTo(Service::class, 'id_service', 'id_service');
+    }
 }

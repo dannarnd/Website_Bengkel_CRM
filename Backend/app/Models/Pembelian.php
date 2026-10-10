@@ -30,4 +30,12 @@ class Pembelian extends Model
     public function details() {
         return $this->hasMany(PembelianDetail::class, 'id_pembelian', 'id_pembelian');
     }
+
+    public function karyawan() {
+        return $this->belongsTo(Karyawan::class, 'id_karyawan', 'id_karyawan');
+    }
+
+    public function distributor() {
+        return $this->belongsTo(Distributor::class, 'id_distributor', 'id_distributor');
+    }
 }
